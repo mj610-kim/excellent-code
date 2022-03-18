@@ -1,6 +1,9 @@
 public class LocalFileReader implements InputReader {
 
-    public void openFile(String path) {
+    String inputFilePath;
+
+    public LocalFileReader(String inputFilePath) {
+        this.inputFilePath = inputFilePath;
     }
 
     @Override
