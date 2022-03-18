@@ -66,8 +66,8 @@ EmployeeManagementSystem/.idea/**/libraries
 # .idea/artifacts
 # .idea/compilerRepositories.xmr.xml
 # .idea/jal
-# .idea/modules.xml
-# .idea/*.iml
+EmployeeManagementSystem/.idea/modules.xml
+EmployeeManagementSystem/.idea/*.iml
 # .idea/modules
 # *.iml
 # *.ipr
@@ -137,3 +137,5 @@ gradle-app.setting
 # ==================================
 # Custom
 # ==================================
+
+EmployeeManagementSystem/.idea/jarRepositories.xml
