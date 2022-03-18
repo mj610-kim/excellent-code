@@ -1,6 +1,7 @@
 # Code review agent 22-08차 팀 프로젝트
 
 ## Table of contents
+- [개발 환경](#development-environment)
 - [Brach policy](#branch-policy)
 - [Commit message policy](#commit-message-policy)
   - [General rules](#commit-message-general-rules)
@@ -17,6 +18,10 @@
   - [명령어의 형식](#command-format)
 - [제약 사항](#constraints)
 - [입출력](#input-output)
+
+## <a name="development-environment"></a>개발 환경
+
+Java 8을 기준으로 개발한다.
 
 ## <a name="branch-policy"></a>Branch policy
 
