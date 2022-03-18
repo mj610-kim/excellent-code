@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="ExampleTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-18T02:22:55" hostname="DESKTOP-ET45TOB" time="0.025">
+  <properties/>
+  <testcase name="exampleTest()" classname="ExampleTest" time="0.025"/>
+  <system-out><![CDATA[setUp()
+exampleTest()
+tearDown()
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

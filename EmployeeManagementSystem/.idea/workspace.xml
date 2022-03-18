@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0e4e37f-7360-490e-8e34-8e26c06ff167" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/ExampleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/ExampleTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="b0e4e37f-7360-490e-8e34-8e26c06ff167" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -72,7 +70,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Gradle.ExampleTest">
+  <component name="RunManager" selected="Gradle.ExampleTest.exampleTest">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="EmployeeManagementSystem.main" />
@@ -124,13 +122,38 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="ExampleTest.exampleTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;ExampleTest.exampleTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Gradle.EmployeeManagementSystem [assemble]" />
       <item itemvalue="Gradle.ExampleTest" />
+      <item itemvalue="Gradle.ExampleTest.exampleTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ExampleTest.exampleTest" />
         <item itemvalue="Gradle.ExampleTest" />
         <item itemvalue="Application.Main" />
       </list>
