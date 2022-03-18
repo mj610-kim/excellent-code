@@ -18,16 +18,19 @@
 - [제약 사항](#constraints)
 - [입출력](#input-output)
 
-
 ## <a name="branch-policy"></a>Branch policy
 
-Branch policy는 [git-flow](https://nvie.com/posts/a-successful-git-branching-model/) 방식을 따른다.
+Branch policy는 기본적으로 [git-flow](https://nvie.com/posts/a-successful-git-branching-model/) 방식을 따른다.
 
 - `main`: 제품으로 출시될 수 있는 브랜치 (버젼 tag를 지정한다)
 - `develop`: 다음 출시 버젼을 준비하는 브랜치
 - `feature`: 기능을 개발하는 브랜치
-- `release`: 이번 출시 버젼을 준비하는 브랜치
 - `hotfix`: 출시 버젼에서 발생한 버그를 수정하는 브랜치
+
+git-flow와 다른 점은 아래에 명시한다:
+
+### `release` 브랜치는 사용하지 않는다
+Unit test는 `develop` TDD로 브랜치에서 계속 진행하며, integration test 등은 불필요하기 때문에 `release` 브랜치는 브랜치 정책에 불필요하고 복잡도만 증가한다. 그렇기 때문에 `release` 브랜치는 사용하지 않으며, `develop` 브랜치에서 바로 `main` 브랜치로 반영한다.
 
 ## <a name="commit-message-policy"></a>Commit message policy
 
