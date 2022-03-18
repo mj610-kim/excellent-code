@@ -24,7 +24,9 @@ Branch policy는 기본적으로 [git-flow](https://nvie.com/posts/a-successful-
 
 - `main`: 제품으로 출시될 수 있는 브랜치 (버젼 tag를 지정한다)
 - `develop`: 다음 출시 버젼을 준비하는 브랜치
-- `feature`: 기능을 개발하는 브랜치
+- `feature/xxxx`: 기능을 개발하는 브랜치
+- `bugfix/xxxx`: 버그수정을 개발하는 브랜치
+- `refactoring/xxxx`: 리팩토링 작업을 진행하는 브랜치
 - `hotfix`: 출시 버젼에서 발생한 버그를 수정하는 브랜치
 
 git-flow와 다른 점은 아래에 명시한다:
