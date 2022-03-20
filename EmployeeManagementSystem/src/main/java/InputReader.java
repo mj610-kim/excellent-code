@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public interface InputReader {
-    String getNextLine();
+    String getNextLine() throws IOException;
 }

@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 public class LocalFileReader implements InputReader {
 
     String inputFilePath;
@@ -7,7 +9,7 @@ public class LocalFileReader implements InputReader {
     }
 
     @Override
-    public String getNextLine() {
+    public String getNextLine() throws IOException {
         return null;
     }
 
