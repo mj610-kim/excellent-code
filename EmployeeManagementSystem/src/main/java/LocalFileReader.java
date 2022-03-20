@@ -9,6 +9,16 @@ public class LocalFileReader implements InputReader {
     }
 
     @Override
+    public boolean open() {
+        return false;
+    }
+
+    @Override
+    public boolean close() {
+        return false;
+    }
+
+    @Override
     public String getNextLine() throws IOException {
         return null;
     }

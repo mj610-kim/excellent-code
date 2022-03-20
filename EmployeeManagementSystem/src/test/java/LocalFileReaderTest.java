@@ -1,5 +1,7 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -64,7 +66,33 @@ public class LocalFileReaderTest {
     }
 
     @Test
+    public void open() {
+        assertTrue(localFileReaderUnderTest.open());
+    }
+
+    @Test
+    public void open_illegalFilePath() {
+        localFileReaderUnderTest = new LocalFileReader("!@#$%^&*()_+");
+        assertFalse(localFileReaderUnderTest.open());
+    }
+
+    @Test
+    public void close() {
+        localFileReaderUnderTest.open();
+        assertTrue(localFileReaderUnderTest.close());
+    }
+
+    @Test
+    public void close_fileAlreadyClosed() {
+        localFileReaderUnderTest.open();
+        assertTrue(localFileReaderUnderTest.close());
+        assertFalse(localFileReaderUnderTest.close());
+    }
+
+    @Test
     public void getNextLine() throws IOException {
+        localFileReaderUnderTest.open();
+
         for (String line : SAMPLE_INPUT_FILE_LINES) {
             assertEquals(line, localFileReaderUnderTest.getNextLine());
         }
