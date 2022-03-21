@@ -15,24 +15,25 @@ import org.mockito.Mock;
 
 public class OptionHandlerTest {
     @Mock
-    Employee employee1;
+    private Employee employee1;
 
     @Mock
-    Employee employee2;
+    private Employee employee2;
 
     @Mock
-    Employee employee3;
+    private Employee employee3;
 
     @Mock
-    Employee employee4;
+    private Employee employee4;
 
     @Mock
-    Employee employee5;
+    private Employee employee5;
 
     @Mock
-    Employee employee6;
+    private Employee employee6;
 
-    List<Employee> testEmployeeList;
+    private List<Employee> testEmployeeList;
+    static private final OptionHandler optionHandler = new OptionHandler();
 
     @Before
     public void setUp() {
@@ -278,6 +279,23 @@ public class OptionHandlerTest {
         filteredEmployeeList = option2.processOption("", testEmployeeList, "birthday", "30");
 
         assertEquals(testEmployeeList, filteredEmployeeList);
+    }
+
+
+
+    @Test
+    public void OptionHandler_정상_동작_테스트() {
+        List<String> optionString = new ArrayList<String>();
+        optionString.add("-p");
+        optionString.add("-f");
+        optionString.add("");
+
+        List<Employee> filteredEmployeeList = optionHandler.processOptions("DEL", optionString, "name", "KFJ", testEmployeeList);
+        assertEquals(filteredEmployeeList.get(0), testEmployeeList.get(5));
+
+        String resultString = optionHandler.toString();
+        System.out.println(resultString);
+        assertEquals(resultString, "DEL,07843023,SEP KFJ,CL3,010-4838-6717,19820731,ADV\n");
     }
 
 
