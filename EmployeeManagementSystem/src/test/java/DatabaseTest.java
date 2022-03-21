@@ -1,17 +1,18 @@
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
-class DatabaseTest {
-    Database db;
+public class DatabaseTest {
+    private Database db;
+    private List<Employee> employeeList = new ArrayList<>();
 
     @Mock
     Employee mockEmployee1;
@@ -19,9 +20,8 @@ class DatabaseTest {
     @Mock
     Employee mockEmployee2;
 
-    List<Employee> employeeList = new ArrayList<>();
 
-    @BeforeEach
+    @Before
     public void setUp() {
         openMocks(this);
         db = new Database();
@@ -44,28 +44,23 @@ class DatabaseTest {
         employeeList.add(mockEmployee2);
     }
 
-    public void setUpDBData() {
+    @Test
+    public void addTest() {
         db.add(employeeList);
         assertEquals(2, db.getDatabaseSize());
     }
 
     @Test
-    void addTest() {
-        setUpDBData();
-        assertEquals(2, db.getDatabaseSize());
-    }
-
-    @Test
-    void delTest() {
-        setUpDBData();
+    public void delTest() {
+        addTest();
 
         assertTrue(db.del("name", "VXIHXOTH JHOP"));
         assertEquals(1, db.getDatabaseSize());
     }
 
     @Test
-    void schTest() {
-        setUpDBData();
+    public void schTest() {
+        addTest();
 
         List<Employee> schResult = db.sch("name", "KYUMOK KIM");
         assertEquals(1, schResult.size());
@@ -73,8 +68,8 @@ class DatabaseTest {
     }
 
     @Test
-    void modTest() {
-        setUpDBData();
+    public void modTest() {
+        addTest();
 
         assertEquals(mockEmployee1.getName(), "KYUMOK KIM");
         assertTrue(db.mod("name", "KYUMOK KIM", "name", "KYUMOK LEE"));
