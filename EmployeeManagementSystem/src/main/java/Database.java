@@ -21,27 +21,27 @@ public class Database {
         return true;
     }
 
-    public boolean del(String colName, String colValue) {
-        for (Map.Entry<String, Employee> employee : employeeDB.entrySet()){
-            if (isMatched(employee.getValue(), colName, colValue))
-                employeeDB.remove(employee.getKey());
+    public boolean del(List<Employee> employeeList) {
+        for (Employee employee : employeeList){
+            employeeDB.remove(employee.getEmployeeNum());
         }
         return true;
     }
 
     public List<Employee> sch(String colName, String colValue) {
         List<Employee> resultEmployeeList = new ArrayList<>();
+
         for (Map.Entry<String, Employee> employee : employeeDB.entrySet()){
             if (isMatched(employee.getValue(), colName, colValue))
                 resultEmployeeList.add(employee.getValue());
         }
+
         return resultEmployeeList;
     }
 
-    public boolean mod(String colName, String colValue, String newColName, String newColValue) {
-        for (Map.Entry<String, Employee> employee : employeeDB.entrySet()){
-            if (isMatched(employee.getValue(), colName, colValue))
-                employeeDB.put(employee.getKey(), modColumn(employee.getValue(), newColName, newColValue));
+    public boolean mod(List<Employee> employeeList, String newColName, String newColValue) {
+        for (Employee employee : employeeList){
+            employeeDB.put(employee.getEmployeeNum(), modColumn(employee, newColName, newColValue));
         }
         return true;
     }
@@ -60,6 +60,7 @@ public class Database {
 
         if ("name".equals(newColName))
             name = newColValue;
+
         return new Employee(employeeNum, name, cl, phoneNum, birthday, CERTI);
     }
 }

@@ -60,7 +60,10 @@ public class DatabaseTest {
     public void delTest() {
         addTest();
 
-        assertTrue(db.del("name", "VXIHXOTH JHOP"));
+        List<Employee> schResult = db.sch("name", "KYUMOK KIM");
+        assertEquals(1, schResult.size());
+
+        assertTrue(db.del(schResult));
         assertEquals(1, db.getDatabaseSize());
     }
 
@@ -70,6 +73,7 @@ public class DatabaseTest {
 
         List<Employee> schResult = db.sch("name", "KYUMOK KIM");
         assertEquals(1, schResult.size());
+
         assertEquals("KYUMOK KIM", schResult.get(0).getName());
     }
 
@@ -77,7 +81,9 @@ public class DatabaseTest {
     public void modTest() {
         addTest();
 
-        assertEquals(mockEmployee1.getName(), "KYUMOK KIM");
-        assertTrue(db.mod("name", "KYUMOK KIM", "name", "KYUMOK LEE"));
+        List<Employee> schResult = db.sch("name", "KYUMOK KIM");
+        assertEquals(1, schResult.size());
+
+        assertTrue(db.mod(schResult, "name", "KYUMOK LEE"));
     }
 }
