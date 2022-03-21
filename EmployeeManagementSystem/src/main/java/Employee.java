@@ -3,7 +3,7 @@ public class Employee {
     private String name;
     private String cl;
     private String phoneNum;
-    private String birthday;
+    private String birthDay;
     private String CERTI;
 
     private String firstName;
@@ -12,14 +12,14 @@ public class Employee {
     private String lastNumber;
     private String birthYear;
     private String birthMonth;
-    private String birthDay;
+    private String birthDayAll;
 
     public Employee(String employeeNum, String name, String cl, String phoneNum, String birthday, String CERTI) {
         this.employeeNum = employeeNum;
         this.name = name;
         this.cl = cl;
         this.phoneNum = phoneNum;
-        this.birthDay = birthday;
+        this.birthDayAll = birthday;
         this.CERTI = CERTI;
 
         this.firstName = name.split(" ")[1];
@@ -47,8 +47,8 @@ public class Employee {
         return phoneNum;
     }
 
-    public String getBirthday(){
-        return birthday;
+    public String getBirthDayAll(){
+        return birthDayAll;
     }
 
     public String getCERTI(){
@@ -56,7 +56,7 @@ public class Employee {
     }
 
     public String toString(){
-        return employeeNum+","+name+","+cl+","+phoneNum+","+birthday+","+CERTI;
+        return employeeNum+","+name+","+cl+","+phoneNum+","+ birthDayAll +","+CERTI;
     }
 
     public String getFirstName(){
@@ -86,4 +86,31 @@ public class Employee {
     public String getBirthDay() {
         return birthDay;
     }
+
+
+    public void setEmployeeNum(String employeeNum) {
+        this.employeeNum = employeeNum;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCl(String cl) {
+        this.cl = cl;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public void setBirthdayALL(String birthday) {
+        this.birthDayAll = birthday;
+    }
+
+    public void setCERTI(String CERTI) {
+        this.CERTI = CERTI;
+    }
+
+
 }
