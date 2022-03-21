@@ -106,7 +106,7 @@ public class OptionHandlerTest {
     public void Option1_invalid_option_동작_테스트() {
         Option1 option1 = new Option1();
 
-        assertThrows(RuntimeException.class, () -> option1.process_option("DEL", "-l", testEmployeeList) );
+        assertThrows(IllegalArgumentException.class, () -> option1.process_option("DEL", "-l", testEmployeeList) );
     }
 
     @Test
@@ -215,18 +215,18 @@ public class OptionHandlerTest {
     public void Option2_invalid_option_동작_테스트() {
         Option2 option2 = new Option2();
 
-        assertThrows(RuntimeException.class, () -> option2.process_option("-y", testEmployeeList, "name", "JANG") );
-        assertThrows(RuntimeException.class, () -> option2.process_option("-y", testEmployeeList, "phoneNum", "9243") );
-        assertThrows(RuntimeException.class, () -> option2.process_option("-l", testEmployeeList, "birthday", "1970") );
+        assertThrows(IllegalArgumentException.class, () -> option2.process_option("-y", testEmployeeList, "name", "JANG") );
+        assertThrows(IllegalArgumentException.class, () -> option2.process_option("-y", testEmployeeList, "phoneNum", "9243") );
+        assertThrows(IllegalArgumentException.class, () -> option2.process_option("-l", testEmployeeList, "birthday", "1970") );
     }
 
     @Test
     public void Option2_invalid_column_동작_테스트() {
         Option2 option2 = new Option2();
 
-        assertThrows(RuntimeException.class, () -> option2.process_option("-l", testEmployeeList, "name_", "JANG") );
-        assertThrows(RuntimeException.class, () -> option2.process_option("-m", testEmployeeList, "phone_number", "9243") );
-        assertThrows(RuntimeException.class, () -> option2.process_option("-y", testEmployeeList, "birth_day", "1970") );
+        assertThrows(IllegalArgumentException.class, () -> option2.process_option("-l", testEmployeeList, "name_", "JANG") );
+        assertThrows(IllegalArgumentException.class, () -> option2.process_option("-m", testEmployeeList, "phone_number", "9243") );
+        assertThrows(IllegalArgumentException.class, () -> option2.process_option("-y", testEmployeeList, "birth_day", "1970") );
     }
 
 

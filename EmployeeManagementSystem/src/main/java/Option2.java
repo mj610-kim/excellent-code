@@ -7,7 +7,7 @@ public class Option2 {
         optionFilter = new Filter<Employee>();
     }
 
-    public List<Employee> process_option(String option, List<Employee> employeeList, String column, String condition) {
+    public List<Employee> process_option(String option, List<Employee> employeeList, String column, String condition) throws IllegalArgumentException {
         if (column.equals("name")) {
             if(option.equals("-f"))
                 return optionFilter.filter(employeeList, new FirstNameComparable(condition));

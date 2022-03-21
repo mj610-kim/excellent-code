@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Option1 {
-    public String process_option(String commandName, String option, List<Employee> employeeList) {
+    public String process_option(String commandName, String option, List<Employee> employeeList) throws IllegalArgumentException {
         if(employeeList.size() == 0) {
             return (commandName + "," + "NONE");
         }
