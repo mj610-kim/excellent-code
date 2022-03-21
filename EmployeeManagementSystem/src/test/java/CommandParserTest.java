@@ -32,7 +32,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void getCommandTest(){
+    public void getCommandTest() {
         assertEquals("ADD", cmdParser1.getCommand());
         assertEquals("DEL", cmdParser2.getCommand());
         assertEquals("MOD", cmdParser3.getCommand());
@@ -41,13 +41,13 @@ public class CommandParserTest {
     }
 
     @Test
-    public void getEmployeeTest(){
-        String birthday = cmdParser1.getEmployee().getBirthDay();
+    public void getEmployeeTest() {
+        String birthday = cmdParser1.getEmployee().getBirthDayALL();
         assertEquals("19980906", birthday);
     }
 
     @Test
-    public void getColumnDataTest(){
+    public void getColumnDataTest() {
         assertEquals("birthday", cmdParser2.getColumnData().get(0));
         assertEquals("19900906", cmdParser2.getColumnData().get(1));
 
@@ -65,7 +65,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void getOptionTest(){
+    public void getOptionTest() {
         assertEquals("-p", cmdParser3.getOption().get(0));
         assertEquals("-m", cmdParser4.getOption().get(1));
 

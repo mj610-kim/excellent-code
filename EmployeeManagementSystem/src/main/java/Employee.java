@@ -3,7 +3,7 @@ public class Employee {
     private String name;
     private String cl;
     private String phoneNum;
-    private String birthday;
+    private String birthDay;
     private String CERTI;
 
     private String firstName;
@@ -12,14 +12,14 @@ public class Employee {
     private String lastNumber;
     private String birthYear;
     private String birthMonth;
-    private String birthDay;
+    private String birthDayALL;
 
     public Employee(String employeeNum, String name, String cl, String phoneNum, String birthday, String CERTI) {
         this.employeeNum = employeeNum;
         this.name = name;
         this.cl = cl;
         this.phoneNum = phoneNum;
-        this.birthDay = birthday;
+        this.birthDayALL = birthday;
         this.CERTI = CERTI;
 
         this.firstName = name.split(" ")[1];
@@ -47,8 +47,8 @@ public class Employee {
         return phoneNum;
     }
 
-    public String getBirthday(){
-        return birthday;
+    public String getBirthDayALL(){
+        return birthDayALL;
     }
 
     public String getCERTI(){
@@ -56,7 +56,7 @@ public class Employee {
     }
 
     public String toString(){
-        return employeeNum+","+name+","+cl+","+phoneNum+","+birthday+","+CERTI;
+        return employeeNum+","+name+","+cl+","+phoneNum+","+birthDayALL+","+CERTI;
     }
 
     public String getFirstName(){
@@ -104,8 +104,8 @@ public class Employee {
         this.phoneNum = phoneNum;
     }
 
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
+    public void setBirthdayALL(String birthday) {
+        this.birthDayALL = birthday;
     }
 
     public void setCERTI(String CERTI) {
