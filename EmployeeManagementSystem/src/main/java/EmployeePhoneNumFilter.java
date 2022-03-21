@@ -1,22 +1,21 @@
 import java.util.List;
 
 public class EmployeePhoneNumFilter extends EmployeeFilter{
-    private final String middleNumberOption = "-m";
-    private final String lastNumberOption = "-l";
-
+    static private final String MIDDLE_NUMBER_OPTION = "-m";
+    static private final String LAST_NUMBER_OPTION = "-l";
 
     public boolean checkValidOption(String option) {
-        if (option.equals(middleNumberOption)) return true;
-        if (option.equals(lastNumberOption)) return true;
+        if (option.equals(MIDDLE_NUMBER_OPTION)) return true;
+        if (option.equals(LAST_NUMBER_OPTION)) return true;
 
         return false;
     }
 
     public List<Employee> process(String option, List<Employee> employeeList, String condition) {
-        if(option.equals(middleNumberOption))
+        if(option.equals(MIDDLE_NUMBER_OPTION))
             return optionFilter.filter(employeeList, new MiddleNumberComparable(condition));
 
-        if(option.equals(lastNumberOption))
+        if(option.equals(LAST_NUMBER_OPTION))
             return optionFilter.filter(employeeList, new LastNumberComparable(condition));
 
         return null;
