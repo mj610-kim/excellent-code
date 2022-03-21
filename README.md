@@ -23,6 +23,8 @@
 
 Java 8을 기준으로 개발한다.
 
+개발환경은 IntelliJ IDEA IDE를 기준으로 한다.
+
 ## <a name="branch-policy"></a>Branch policy
 
 Branch policy는 기본적으로 [git-flow](https://nvie.com/posts/a-successful-git-branching-model/) 방식을 따른다.
@@ -169,8 +171,6 @@ See also: #456, #789
 - https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit-header
 - https://pages.nist.gov/dioptra/dev-guide/contributing-commit-styleguide.html
 
----
-
 ## <a name="coding-style"></a>Coding style
 
 Coding style은 기본적으로 [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html)를 따른다.
@@ -179,11 +179,11 @@ Google Java Style Guide와 다른 점은 아래에 명시한다:
 
 ### Block indentation
 
-Block indentation은 `+2 spaces` 대신 `+4 spaces`로 한다
+Block indentation은 `+2 spaces` 대신 `+4 spaces`로 한다.
 
 ### Indent continuation lines
 
-Indent continuation은 `at least +4 spaces` 대신 `at least +8 spaces`로 한다
+Indent continuation은 `at least +4 spaces` 대신 `at least +8 spaces`로 한다.
 
 ## <a name="evaluation"></a>평가 방식
 
