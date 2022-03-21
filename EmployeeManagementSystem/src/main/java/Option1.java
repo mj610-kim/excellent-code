@@ -1,7 +1,9 @@
 import java.util.List;
 
 public class Option1 {
-    public String process_option(String commandName, String option, List<Employee> employeeList) throws IllegalArgumentException {
+    private final int maxPrintCnt = 5;
+
+    public String processOption(String commandName, String option, List<Employee> employeeList) throws IllegalArgumentException {
         if(employeeList.size() == 0) {
             return (commandName + "," + "NONE");
         }
@@ -9,8 +11,14 @@ public class Option1 {
         if(option.equals("-p")) {
             String resultString = "";
 
-            for (Employee employee : employeeList)
+            int printCnt = 0;
+
+            for (Employee employee : employeeList) {
                 resultString += (commandName + "," + employee.toString() + "\n");
+                printCnt++;
+
+                if(printCnt >= maxPrintCnt) break;
+            }
 
             return resultString;
         }
