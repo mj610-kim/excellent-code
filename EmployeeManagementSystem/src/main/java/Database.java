@@ -15,13 +15,13 @@ public class Database {
         return employeeDB.size();
     }
 
-    public Boolean add(List<Employee> employeeList) {
+    public boolean add(List<Employee> employeeList) {
         for (Employee employee : employeeList)
             employeeDB.put(employee.getEmployeeNum(), employee);
         return true;
     }
 
-    public Boolean del(String colName, String colValue) {
+    public boolean del(String colName, String colValue) {
         for (Map.Entry<String, Employee> employee : employeeDB.entrySet()){
             if (isMatched(employee.getValue(), colName, colValue))
                 employeeDB.remove(employee.getKey());
@@ -38,7 +38,7 @@ public class Database {
         return resultEmployeeList;
     }
 
-    public Boolean mod(String colName, String colValue, String newColName, String newColValue) {
+    public boolean mod(String colName, String colValue, String newColName, String newColValue) {
         for (Map.Entry<String, Employee> employee : employeeDB.entrySet()){
             if (isMatched(employee.getValue(), colName, colValue))
                 employeeDB.put(employee.getKey(), modColumn(employee.getValue(), newColName, newColValue));
@@ -46,7 +46,7 @@ public class Database {
         return true;
     }
 
-    private Boolean isMatched(Employee employee, String colName, String colValue) {
+    private boolean isMatched(Employee employee, String colName, String colValue) {
         return "name".equals(colName) && colValue.equals(employee.getName());
     }
 
