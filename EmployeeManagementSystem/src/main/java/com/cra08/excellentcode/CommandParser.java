@@ -40,12 +40,6 @@ public class CommandParser {
 
         String[] cmd = parseCommandLine(cmdLine);
 
-        final int nEmployeeColumn = 6;
-        final int validCmdLength = OPT3_POS + nEmployeeColumn + 1;
-        if(!isValidCmdLength(cmd, validCmdLength)) {
-            throw new IllegalArgumentException("Invalid input data");
-        }
-
         String employeeNum = cmd[OPT3_POS+1];
         String name = cmd[OPT3_POS+2];
         String cl = cmd[OPT3_POS+3];
@@ -60,21 +54,7 @@ public class CommandParser {
 
     public static ArrayList<String> getColumnData(String cmdLine) {
         String[] cmd = parseCommandLine(cmdLine);
-
-        final int shortCmdLength = 2;
-        final int longCmdLength = 4;
-        final int validShortCmdLength = OPT3_POS + shortCmdLength + 1;
-        final int validLongCmdLength = OPT3_POS + longCmdLength + 1;
-        if(!isValidCmdLength(cmd,shortCmdLength) && !isValidCmdLength(cmd,longCmdLength)) {
-            throw new IllegalArgumentException("Invalid input data");
-        }
-
         return new ArrayList<>(Arrays.asList(cmd).subList(OPT3_POS + 1, cmd.length));
-
-    }
-
-    public static boolean isValidCmdLength(String[] cmd, int cmdLength) {
-        return cmd.length == cmdLength;
     }
 }
 
