@@ -1,4 +1,6 @@
-package com.cra08.excellentcode;
+package com.cra08.excellentcode.column;
+
+import com.cra08.excellentcode.Employee;
 
 public class ColumnBirthday implements IColumn {
     @Override

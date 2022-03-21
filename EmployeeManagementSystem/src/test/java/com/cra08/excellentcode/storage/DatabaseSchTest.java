@@ -9,15 +9,15 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 import com.cra08.excellentcode.*;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import com.cra08.excellentcode.column.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
 public class DatabaseSchTest {
     private Database db;
-    private List<Employee> employeeList = new ArrayList<>();
 
     @Mock
     Employee mockEmployee1;

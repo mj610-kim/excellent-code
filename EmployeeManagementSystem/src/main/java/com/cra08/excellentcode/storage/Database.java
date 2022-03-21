@@ -1,7 +1,7 @@
 package com.cra08.excellentcode.storage;
 
 import com.cra08.excellentcode.Employee;
-import com.cra08.excellentcode.IColumn;
+import com.cra08.excellentcode.column.IColumn;
 
 import java.util.ArrayList;
 import java.util.HashMap;

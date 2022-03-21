@@ -1,11 +1,11 @@
 package com.cra08.excellentcode.storage;
 
 import com.cra08.excellentcode.*;
+import com.cra08.excellentcode.column.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -14,7 +14,6 @@ import static org.mockito.MockitoAnnotations.openMocks;
 
 public class DatabaseModTest {
     private Database db;
-    private List<Employee> employeeList = new ArrayList<>();
 
     @Mock
     Employee mockEmployee1;
