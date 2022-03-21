@@ -35,16 +35,23 @@ public class CommandHandler {
         OutputWriter localFileWriter = new LocalFileWriter(OUTPUT_FILE);
         localFileWriter.open();
 
-        while (true) {
-            String input = localFileReader.getNextLine();
-            if (input == null) {
-                localFileReader.close();
-                localFileWriter.close();
-                return;
+        try {
+            while (true) {
+                String input = localFileReader.getNextLine();
+                if (input == null) {
+                    localFileReader.close();
+                    localFileWriter.close();
+                    return;
+                }
+                String output = handleInput(input);
+                System.out.println("output: " + output);
+                if (output != null) {
+                    localFileWriter.setNextLine(output);
+                }
             }
-            String output = handleInput(input);
-            System.out.println("output: " + output);
-            localFileWriter.setNextLine(output);
+        } catch (Exception e) {
+            localFileReader.close();
+            localFileWriter.close();
         }
     }
 
@@ -53,7 +60,7 @@ public class CommandHandler {
         String cmd = CommandParser.getCommand(input);
         System.out.println("cmd: " + cmd);
 
-        String result = "TODO: implement this";
+        String result = null;
         switch (cmd) {
             case "ADD":
                 handleAddCmd(input);
