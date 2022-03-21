@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
+import com.cra08.excellentcode.Column;
 import com.cra08.excellentcode.Employee;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,24 @@ public class DatabaseTest {
 
     @Mock
     Employee mockEmployee2;
+
+    @Mock
+    Column mockColumnEmployeeNum;
+
+    @Mock
+    Column mockColumnName;
+
+    @Mock
+    Column mockColumnCl;
+
+    @Mock
+    Column mockColumnPhoneNum;
+
+    @Mock
+    Column mockColumnBirthday;
+
+    @Mock
+    Column mockColumnCerti;
 
 
     @Before
@@ -42,6 +61,14 @@ public class DatabaseTest {
         when(mockEmployee2.getPhoneNum()).thenReturn("010-3112-2609");
         when(mockEmployee2.getBirthDayAll()).thenReturn("19771211");
         when(mockEmployee2.getCerti()).thenReturn("ADV");
+
+
+        when(mockColumnEmployeeNum.isEmployeeNum()).thenReturn(true);
+        when(mockColumnName.isName()).thenReturn(true);
+        when(mockColumnCl.isCl()).thenReturn(true);
+        when(mockColumnPhoneNum.isPhoneNum()).thenReturn(true);
+        when(mockColumnBirthday.isBirthday()).thenReturn(true);
+        when(mockColumnCerti.isCerti()).thenReturn(true);
     }
 
     @Test
@@ -62,7 +89,7 @@ public class DatabaseTest {
     public void delTest() {
         addTest();
 
-        List<Employee> schResult = db.sch("name", "KYUMOK KIM");
+        List<Employee> schResult = db.sch(mockColumnName, "KYUMOK KIM");
         assertEquals(1, schResult.size());
 
         assertTrue(db.del(schResult));
@@ -73,7 +100,7 @@ public class DatabaseTest {
     public void schTestByEmployeeNum() {
         addTest();
 
-        List<Employee> schResult = db.sch("employeeNum", "18050301");
+        List<Employee> schResult = db.sch(mockColumnEmployeeNum, "18050301");
         System.out.println(schResult);
         assertEquals(1, schResult.size());
         assertEquals("18050301", schResult.get(0).getEmployeeNum());
@@ -83,7 +110,7 @@ public class DatabaseTest {
     public void schTestByName() {
         addTest();
 
-        List<Employee> schResult = db.sch("name", "KYUMOK KIM");
+        List<Employee> schResult = db.sch(mockColumnName, "KYUMOK KIM");
         assertEquals(1, schResult.size());
 
         assertEquals("KYUMOK KIM", schResult.get(0).getName());
@@ -93,7 +120,7 @@ public class DatabaseTest {
     public void schTestByCl() {
         addTest();
 
-        List<Employee> schResult = db.sch("cl", "CL2");
+        List<Employee> schResult = db.sch(mockColumnCl, "CL2");
         assertEquals(1, schResult.size());
 
         assertEquals("CL2", schResult.get(0).getCl());
@@ -103,7 +130,7 @@ public class DatabaseTest {
     public void schTestByPhoneNum() {
         addTest();
 
-        List<Employee> schResult = db.sch("phoneNum", "010-9777-6055");
+        List<Employee> schResult = db.sch(mockColumnPhoneNum, "010-9777-6055");
         assertEquals(1, schResult.size());
 
         assertEquals("010-9777-6055", schResult.get(0).getPhoneNum());
@@ -113,7 +140,7 @@ public class DatabaseTest {
     public void schTestByBirthDay() {
         addTest();
 
-        List<Employee> schResult = db.sch("birthday", "19980906");
+        List<Employee> schResult = db.sch(mockColumnBirthday, "19980906");
         assertEquals(1, schResult.size());
 
         assertEquals("19980906", schResult.get(0).getBirthDayAll());
@@ -123,7 +150,7 @@ public class DatabaseTest {
     public void schTestByCerti() {
         addTest();
 
-        List<Employee> schResult = db.sch("CERTI", "PRO");
+        List<Employee> schResult = db.sch(mockColumnCerti, "PRO");
         assertEquals(1, schResult.size());
 
         assertEquals("PRO", schResult.get(0).getCerti());
@@ -133,59 +160,59 @@ public class DatabaseTest {
     public void modTestEmployeeNum() {
         addTest();
 
-        List<Employee> schResult = db.sch("employeeNum", "18050301");
+        List<Employee> schResult = db.sch(mockColumnEmployeeNum, "18050301");
         assertEquals(1, schResult.size());
 
-        assertTrue(db.mod(schResult, "employeeNum", "18050301"));
+        assertTrue(db.mod(schResult, mockColumnEmployeeNum, "18050301"));
     }
 
     @Test
     public void modTestName() {
         addTest();
 
-        List<Employee> schResult = db.sch("name", "KYUMOK KIM");
+        List<Employee> schResult = db.sch(mockColumnName, "KYUMOK KIM");
         assertEquals(1, schResult.size());
 
-        assertTrue(db.mod(schResult, "name", "KYUMOK LEE"));
+        assertTrue(db.mod(schResult, mockColumnName, "KYUMOK LEE"));
     }
 
     @Test
     public void modTestCl() {
         addTest();
 
-        List<Employee> schResult = db.sch("cl", "CL2");
+        List<Employee> schResult = db.sch(mockColumnCl, "CL2");
         assertEquals(1, schResult.size());
 
-        assertTrue(db.mod(schResult, "cl", "CL2"));
+        assertTrue(db.mod(schResult, mockColumnCl, "CL2"));
     }
 
     @Test
     public void modTestPhoneNum() {
         addTest();
 
-        List<Employee> schResult = db.sch("phoneNum", "010-9777-6055");
+        List<Employee> schResult = db.sch(mockColumnPhoneNum, "010-9777-6055");
         assertEquals(1, schResult.size());
 
-        assertTrue(db.mod(schResult, "phoneNum", "010-9777-6055"));
+        assertTrue(db.mod(schResult, mockColumnPhoneNum, "010-9777-6055"));
     }
 
     @Test
     public void modTestBirthDay() {
         addTest();
 
-        List<Employee> schResult = db.sch("birthday", "19980906");
+        List<Employee> schResult = db.sch(mockColumnBirthday, "19980906");
         assertEquals(1, schResult.size());
 
-        assertTrue(db.mod(schResult, "birthday", "19980906"));
+        assertTrue(db.mod(schResult, mockColumnBirthday, "19980906"));
     }
 
     @Test
-    public void modTestCERTI() {
+    public void modTestCerti() {
         addTest();
 
-        List<Employee> schResult = db.sch("CERTI", "PRO");
+        List<Employee> schResult = db.sch(mockColumnCerti, "PRO");
         assertEquals(1, schResult.size());
 
-        assertTrue(db.mod(schResult, "CERTI", "PRO"));
+        assertTrue(db.mod(schResult, mockColumnCerti, "PRO"));
     }
 }
