@@ -9,6 +9,6 @@ public class ColumnBirthday implements IColumn {
     }
     @Override
     public boolean contains(Employee employee, String value) {
-        return employee.getBirthDay().contains(value);
+        return employee.getBirthDayAll().contains(value);
     }
 }
