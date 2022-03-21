@@ -11,7 +11,8 @@ import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 class DatabaseTest {
-    Database db;
+    private Database db;
+    private List<Employee> employeeList = new ArrayList<>();
 
     @Mock
     Employee mockEmployee1;
@@ -19,7 +20,6 @@ class DatabaseTest {
     @Mock
     Employee mockEmployee2;
 
-    List<Employee> employeeList = new ArrayList<>();
 
     @BeforeEach
     public void setUp() {

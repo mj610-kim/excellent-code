@@ -7,11 +7,11 @@ public class Database {
     // <employeeNum, Employee Object>
     private HashMap<String, Employee> employeeDB;
 
-    public Database(){
+    public Database() {
         employeeDB = new HashMap<>();
     }
 
-    public int getDatabaseSize(){
+    public int getDatabaseSize() {
         return employeeDB.size();
     }
 
