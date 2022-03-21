@@ -18,4 +18,6 @@ jobs:
         distribution: 'temurin'
         java-version: '8'
         cache: 'gradle'
-    - run: ./EmployeeManagementSystem/gradlew build --no-daemon
+    - name: Run gradle build task
+      working-directory: ./EmployeeManagementSystem
+      run: ./gradlew build --no-daemon
