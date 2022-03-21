@@ -15,7 +15,6 @@ public class Option2 {
         employeeBirthDayFilter = new EmployeeBirthDayFilter();
     }
 
-
     public List<Employee> processOption(String option, List<Employee> employeeList, String column,
             String condition) throws IllegalArgumentException {
 

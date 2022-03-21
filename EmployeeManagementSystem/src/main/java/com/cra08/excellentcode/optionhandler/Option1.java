@@ -8,6 +8,11 @@ public class Option1 {
     private final int maxPrintCnt = 5;
 
     public String processOption(String commandName, String option, List<Employee> employeeList) throws IllegalArgumentException {
+
+        if (option.equals("")) {
+            return (commandName + "," + employeeList.size());
+        }
+
         if (employeeList.size() == 0) {
             return (commandName + "," + "NONE");
         }
@@ -27,10 +32,6 @@ public class Option1 {
             }
 
             return resultString;
-        }
-
-        if (option.equals("")) {
-            return (commandName + "," + employeeList.size());
         }
 
         throw new IllegalArgumentException("Invalid option(" + option + ")");
