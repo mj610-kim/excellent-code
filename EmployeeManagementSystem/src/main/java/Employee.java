@@ -1,10 +1,11 @@
 public class Employee {
+
     private String employeeNum;
     private String name;
     private String cl;
     private String phoneNum;
     private String birthDay;
-    private String CERTI;
+    private String certi;
 
     private String firstName;
     private String lastName;
@@ -14,13 +15,13 @@ public class Employee {
     private String birthMonth;
     private String birthDayAll;
 
-    public Employee(String employeeNum, String name, String cl, String phoneNum, String birthday, String CERTI) {
+    public Employee(String employeeNum, String name, String cl, String phoneNum, String birthday, String certi) {
         this.employeeNum = employeeNum;
         this.name = name;
         this.cl = cl;
         this.phoneNum = phoneNum;
         this.birthDayAll = birthday;
-        this.CERTI = CERTI;
+        this.certi = certi;
 
         this.firstName = name.split(" ")[1];
         this.lastName = name.split(" ")[0];
@@ -31,39 +32,39 @@ public class Employee {
         this.birthDay = birthday.substring(6, 8);
     }
 
-    public String getEmployeeNum(){
+    public String getEmployeeNum() {
         return employeeNum;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getCl(){
+    public String getCl() {
         return cl;
     }
 
-    public String getPhoneNum(){
+    public String getPhoneNum() {
         return phoneNum;
     }
 
-    public String getBirthDayAll(){
+    public String getBirthDayAll() {
         return birthDayAll;
     }
 
-    public String getCERTI(){
-        return CERTI;
+    public String getCerti() {
+        return certi;
     }
 
-    public String toString(){
-        return employeeNum+","+name+","+cl+","+phoneNum+","+ birthDayAll +","+CERTI;
+    public String toString() {
+        return employeeNum + "," + name + "," + cl + "," + phoneNum + "," + birthDayAll + "," + certi;
     }
 
-    public String getFirstName(){
+    public String getFirstName() {
         return firstName;
     }
 
-    public String getLastName(){
+    public String getLastName() {
         return lastName;
     }
 
@@ -108,8 +109,8 @@ public class Employee {
         this.birthDayAll = birthday;
     }
 
-    public void setCERTI(String CERTI) {
-        this.CERTI = CERTI;
+    public void setCerti(String certi) {
+        this.certi = certi;
     }
 
 

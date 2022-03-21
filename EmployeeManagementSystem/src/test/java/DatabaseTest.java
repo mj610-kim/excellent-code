@@ -1,5 +1,4 @@
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -31,14 +30,14 @@ public class DatabaseTest {
         when(mockEmployee1.getCl()).thenReturn("CL2");
         when(mockEmployee1.getPhoneNum()).thenReturn("010-9777-6055");
         when(mockEmployee1.getBirthDayAll()).thenReturn("19980906");
-        when(mockEmployee1.getCERTI()).thenReturn("PRO");
+        when(mockEmployee1.getCerti()).thenReturn("PRO");
 
         when(mockEmployee2.getEmployeeNum()).thenReturn("15123099");
         when(mockEmployee2.getName()).thenReturn("VXIHXOTH JHOP");
         when(mockEmployee2.getCl()).thenReturn("CL3");
         when(mockEmployee2.getPhoneNum()).thenReturn("010-3112-2609");
         when(mockEmployee2.getBirthDayAll()).thenReturn("19771211");
-        when(mockEmployee2.getCERTI()).thenReturn("ADV");
+        when(mockEmployee2.getCerti()).thenReturn("ADV");
     }
 
     @Test
@@ -123,7 +122,7 @@ public class DatabaseTest {
         List<Employee> schResult = db.sch("CERTI", "PRO");
         assertEquals(1, schResult.size());
 
-        assertEquals("PRO", schResult.get(0).getCERTI());
+        assertEquals("PRO", schResult.get(0).getCerti());
     }
 
     @Test
