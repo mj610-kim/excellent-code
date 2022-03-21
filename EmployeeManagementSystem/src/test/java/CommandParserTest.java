@@ -52,6 +52,10 @@ public class CommandParserTest {
 
     @Test
     public void getOptionTest() {
+        assertEquals("",cmdParser.getOption(cmdLine1).get(0));
+        assertEquals("",cmdParser.getOption(cmdLine1).get(1));
+        assertEquals("",cmdParser.getOption(cmdLine1).get(2));
+
         assertEquals("-p", cmdParser.getOption(cmdLine3).get(0));
         assertEquals("-m", cmdParser.getOption(cmdLine4).get(1));
 

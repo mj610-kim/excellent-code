@@ -33,7 +33,13 @@ public class CommandParser {
 
 
     public static ArrayList<String> getOption(String cmdLine) {
-        return new ArrayList<>(Arrays.asList(parseCommandLine(cmdLine)).subList(OPT1_POS, OPT3_POS+1));
+        ArrayList<String> options = new ArrayList<>(Arrays.asList(parseCommandLine(cmdLine)).subList(OPT1_POS, OPT3_POS+1));
+
+        for(int i = 0 ; i < options.size() ; i++) {
+            options.set(i, options.get(i).replaceAll("\\p{Z}",""));
+        }
+
+        return options;
     }
 
     public static Employee getEmployee(String cmdLine) {
@@ -53,8 +59,14 @@ public class CommandParser {
     }
 
     public static ArrayList<String> getColumnData(String cmdLine) {
+
         String[] cmd = parseCommandLine(cmdLine);
-        return new ArrayList<>(Arrays.asList(cmd).subList(OPT3_POS + 1, cmd.length));
+        ArrayList<String> columnData = new ArrayList<>(Arrays.asList(cmd).subList(OPT3_POS + 1, cmd.length));
+
+        columnData.set(0, columnData.get(0).replaceAll("\\p{Z}",""));
+        if(columnData.size()==4) columnData.set(2, columnData.get(2).replaceAll("\\p{Z}",""));
+
+        return columnData;
     }
 }
 
