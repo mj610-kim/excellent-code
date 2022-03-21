@@ -45,56 +45,56 @@ public class LocalFileWriterTest {
 
     private File temporaryDirectory;
 
-    private OutputWriter localOutputWriterUnderTest;
+    private OutputWriter localFileWriterUnderTest;
 
     @Before
     public void setUp() throws IOException {
         temporaryDirectory = temporaryFolder.newFolder("LocalFileWriterTest");
-        localOutputWriterUnderTest = new LocalFileWriter(temporaryDirectory.getPath() + SAMPLE_OUTPUT_FILE_NAME);
+        localFileWriterUnderTest = new LocalFileWriter(temporaryDirectory.getPath() + SAMPLE_OUTPUT_FILE_NAME);
     }
 
     @After
     public void tearDown() {
-        localOutputWriterUnderTest.close();
-        localOutputWriterUnderTest = null;
+        localFileWriterUnderTest.close();
+        localFileWriterUnderTest = null;
     }
 
     @Test
     public void open() {
-        assertTrue(localOutputWriterUnderTest.open());
+        assertTrue(localFileWriterUnderTest.open());
     }
 
     @Test
     public void open_illegalFilePath() {
-        localOutputWriterUnderTest = new LocalFileWriter("!@#$%^&*()_");
-        assertFalse(localOutputWriterUnderTest.open());
+        localFileWriterUnderTest = new LocalFileWriter("!@#$%^&*()_+<>\\/'\"");
+        assertFalse(localFileWriterUnderTest.open());
     }
 
     @Test
     public void close() {
-        localOutputWriterUnderTest.open();
-        assertTrue(localOutputWriterUnderTest.close());
+        localFileWriterUnderTest.open();
+        assertTrue(localFileWriterUnderTest.close());
     }
 
     @Test
     public void close_fileAlreadyClosed() {
-        localOutputWriterUnderTest.open();
-        assertTrue(localOutputWriterUnderTest.close());
-        assertFalse(localOutputWriterUnderTest.close());
+        localFileWriterUnderTest.open();
+        assertTrue(localFileWriterUnderTest.close());
+        assertFalse(localFileWriterUnderTest.close());
     }
 
     @Test
     public void setNextLine() throws IOException {
-        localOutputWriterUnderTest.open();
+        localFileWriterUnderTest.open();
         writeOutput(SAMPLE_OUTPUT_FILE_LINES);
-        localOutputWriterUnderTest.close();
+        localFileWriterUnderTest.close();
 
         verifyFile(temporaryDirectory.getPath() + SAMPLE_OUTPUT_FILE_NAME, SAMPLE_OUTPUT_FILE_LINES);
     }
 
     private void writeOutput(String[] fileLines) {
         for (String line : fileLines) {
-            assertTrue(localOutputWriterUnderTest.setNextLine(line));
+            assertTrue(localFileWriterUnderTest.setNextLine(line));
         }
     }
 
