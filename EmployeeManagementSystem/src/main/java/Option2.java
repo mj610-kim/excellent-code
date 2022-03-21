@@ -1,9 +1,9 @@
 import java.util.List;
 
 public class Option2 {
-    private EmployeeNameFilter employeeNameFilter;
-    private EmployeePhoneNumFilter employeePhoneNumFilter;
-    private EmployeeBirthDayFilter employeeBirthDayFilter;
+    private final EmployeeNameFilter employeeNameFilter;
+    private final EmployeePhoneNumFilter employeePhoneNumFilter;
+    private final EmployeeBirthDayFilter employeeBirthDayFilter;
 
 
     public Option2() {

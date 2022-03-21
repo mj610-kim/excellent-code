@@ -1,27 +1,26 @@
 import java.util.List;
 
 public class EmployeeBirthDayFilter extends EmployeeFilter{
-    private final String birthYearOption = "-y";
-    private final String birthMonthOption = "-m";
-    private final String birthDayOption = "-d";
-
+    static private final String BIRTHYEAROPTION = "-y";
+    static private final String BIRTHMONTHOPTION = "-m";
+    static private final String BIRTHDAYOPTION = "-d";
 
     public boolean checkValidOption(String option) {
-        if (option.equals(birthYearOption)) return true;
-        if (option.equals(birthMonthOption)) return true;
-        if (option.equals(birthDayOption)) return true;
+        if (option.equals(BIRTHYEAROPTION)) return true;
+        if (option.equals(BIRTHMONTHOPTION)) return true;
+        if (option.equals(BIRTHDAYOPTION)) return true;
 
         return false;
     }
 
     public List<Employee> process(String option, List<Employee> employeeList, String condition) {
-        if(option.equals(birthYearOption))
+        if(option.equals(BIRTHYEAROPTION))
             return optionFilter.filter(employeeList, new BirthYearComparable(condition));
 
-        if(option.equals(birthMonthOption))
+        if(option.equals(BIRTHMONTHOPTION))
             return optionFilter.filter(employeeList, new BirthMonthComparable(condition));
 
-        if(option.equals(birthDayOption))
+        if(option.equals(BIRTHDAYOPTION))
             return optionFilter.filter(employeeList, new BirthDayComparable(condition));
 
         return null;
