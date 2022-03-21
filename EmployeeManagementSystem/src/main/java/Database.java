@@ -15,9 +15,8 @@ public class Database {
         return employeeDB.size();
     }
 
-    public boolean add(List<Employee> employeeList) {
-        for (Employee employee : employeeList)
-            employeeDB.put(employee.getEmployeeNum(), employee);
+    public boolean add(Employee employee) {
+        employeeDB.put(employee.getEmployeeNum(), employee);
         return true;
     }
 
@@ -47,7 +46,20 @@ public class Database {
     }
 
     private boolean isMatched(Employee employee, String colName, String colValue) {
-        return "name".equals(colName) && colValue.equals(employee.getName());
+        if ("employeeNum".equals(colName))
+            return employee.getEmployeeNum().contains(colValue);
+        else if ("name".equals(colName))
+            return employee.getName().contains(colValue);
+        else if ("cl".equals(colName))
+            return employee.getCl().contains(colValue);
+        else if ("phoneNum".equals(colName))
+            return employee.getPhoneNum().contains(colValue);
+        else if ("birthday".equals(colName))
+            return employee.getBirthDayAll().contains(colValue);
+        else if ("CERTI".equals(colName))
+            return employee.getCERTI().contains(colValue);
+
+        return false;
     }
 
     private Employee modColumn(Employee employee, String newColName, String newColValue) {
@@ -55,11 +67,21 @@ public class Database {
         String name = employee.getName();
         String cl = employee.getCl();
         String phoneNum = employee.getPhoneNum();
-        String birthday = employee.getBirthDay();
+        String birthday = employee.getBirthDayAll();
         String CERTI = employee.getCERTI();
 
-        if ("name".equals(newColName))
+        if ("employeeNum".equals(newColName))
+            employeeNum = newColValue;
+        else if ("name".equals(newColName))
             name = newColValue;
+        else if ("cl".equals(newColName))
+            cl = newColValue;
+        else if ("phoneNum".equals(newColName))
+            phoneNum = newColValue;
+        else if ("birthday".equals(newColName))
+            birthday = newColValue;
+        else if ("CERTI".equals(newColName))
+            CERTI = newColValue;
 
         return new Employee(employeeNum, name, cl, phoneNum, birthday, CERTI);
     }
