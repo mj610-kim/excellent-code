@@ -39,7 +39,6 @@ public class DatabaseTest {
         when(mockEmployee2.getPhoneNum()).thenReturn("010-3112-2609");
         when(mockEmployee2.getBirthDayAll()).thenReturn("19771211");
         when(mockEmployee2.getCERTI()).thenReturn("ADV");
-
     }
 
     @Test
