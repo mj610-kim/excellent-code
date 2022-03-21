@@ -14,7 +14,8 @@ public class OptionHandler {
         option2 = new Option2();
     }
 
-    public List<Employee> processOptions(String commandName, List<String> optionList, String column, String condition, List<Employee> employeeList) {
+    public List<Employee> processOptions(String commandName, List<String> optionList, String column, String condition,
+            List<Employee> employeeList) {
         //List<com.cra08.excellentcode.Employee> filteredEmployeeList = option3.processOption(optionList.get(2), employeeList, column, condition);
         List<Employee> filteredEmployeeList = option2.processOption(optionList.get(1), employeeList, column, condition);
         outputString = option1.processOption(commandName, optionList.get(0), filteredEmployeeList);

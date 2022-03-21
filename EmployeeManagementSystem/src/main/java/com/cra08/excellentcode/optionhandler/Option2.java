@@ -18,8 +18,9 @@ public class Option2 {
     public List<Employee> processOption(String option, List<Employee> employeeList, String column,
             String condition) throws IllegalArgumentException {
 
-        if (option.equals(""))
+        if (option.equals("")) {
             return employeeList;
+        }
 
         if (column.equals("name")) {
             if (!employeeNameFilter.checkValidOption(option)) {

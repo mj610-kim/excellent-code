@@ -6,6 +6,7 @@ import com.cra08.excellentcode.column.IColumn;
 import java.util.*;
 
 public class Database {
+
     private HashMap<String, Employee> unsortedEmployeeDB;
     TreeMap<String, Employee> employeeDB;
 
@@ -44,7 +45,7 @@ public class Database {
     }
 
     public boolean mod(List<Employee> employeeList, IColumn newColName, String newColValue) {
-        if (newColValue.equals("FB NTAWR")){
+        if (newColValue.equals("FB NTAWR")) {
             System.out.println(employeeDB);
         }
         for (Employee employee : employeeList) {
@@ -58,7 +59,7 @@ public class Database {
 
         Iterator<String> keyIterator = employeeDB.keySet().iterator();
 
-        while(keyIterator.hasNext()) {
+        while (keyIterator.hasNext()) {
             System.out.println(keyIterator.next());
         }
 
@@ -70,11 +71,11 @@ class SortEmployeeNum<T> implements Comparator<T> {
 
     @Override
     public int compare(T o1, T o2) {
-        String year1 = ((String)o1).substring(0, 2);
-        String year2 = ((String)o2).substring(0, 2);
+        String year1 = ((String) o1).substring(0, 2);
+        String year2 = ((String) o2).substring(0, 2);
 
-        String num1 = ((String)o1).substring(3);
-        String num2 = ((String)o2).substring(3);
+        String num1 = ((String) o1).substring(3);
+        String num2 = ((String) o2).substring(3);
 
         String calcYear1 = (year1.compareTo("21") < 0) ?
                 String.valueOf(Integer.parseInt(year1) + 31) :
@@ -85,11 +86,9 @@ class SortEmployeeNum<T> implements Comparator<T> {
 
         if (calcYear1.compareTo(calcYear2) < 0) {
             return -1;
-        }
-        else if (calcYear1.compareTo(calcYear2) == 0) {
+        } else if (calcYear1.compareTo(calcYear2) == 0) {
             return num2.compareTo(num1);
-        }
-        else {
+        } else {
             return 1;
         }
     }
