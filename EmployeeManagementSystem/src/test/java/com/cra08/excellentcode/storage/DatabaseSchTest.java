@@ -3,6 +3,7 @@ package com.cra08.excellentcode.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
@@ -14,7 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class DatabaseTest {
+public class DatabaseSchTest {
     private Database db;
     private List<Employee> employeeList = new ArrayList<>();
 
@@ -78,20 +79,61 @@ public class DatabaseTest {
     }
 
     @Test
-    public void addTest_FailCase() {
-        assertTrue(db.add(mockEmployee1));
-        assertTrue(db.add(mockEmployee2));
-        assertNotEquals(1, db.getDatabaseSize());
+    public void schTestByEmployeeNum() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnEmployeeNum, "18050301");
+        assertEquals(1, schResult.size());
+        assertEquals("18050301", schResult.get(0).getEmployeeNum());
     }
 
     @Test
-    public void delTest() {
+    public void schTestByName() {
         addTest();
 
         List<Employee> schResult = db.sch(mockColumnName, "KYUMOK KIM");
         assertEquals(1, schResult.size());
 
-        assertTrue(db.del(schResult));
-        assertEquals(1, db.getDatabaseSize());
+        assertEquals("KYUMOK KIM", schResult.get(0).getName());
+    }
+
+    @Test
+    public void schTestByCl() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnCl, "CL2");
+        assertEquals(1, schResult.size());
+
+        assertEquals("CL2", schResult.get(0).getCl());
+    }
+
+    @Test
+    public void schTestByPhoneNum() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnPhoneNum, "010-9777-6055");
+        assertEquals(1, schResult.size());
+
+        assertEquals("010-9777-6055", schResult.get(0).getPhoneNum());
+    }
+
+    @Test
+    public void schTestByBirthDay() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnBirthday, "19980906");
+        assertEquals(1, schResult.size());
+
+        assertEquals("19980906", schResult.get(0).getBirthDayAll());
+    }
+
+    @Test
+    public void schTestByCerti() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnCerti, "PRO");
+        assertEquals(1, schResult.size());
+
+        assertEquals("PRO", schResult.get(0).getCerti());
     }
 }

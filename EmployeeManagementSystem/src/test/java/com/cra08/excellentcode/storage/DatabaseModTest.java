@@ -1,20 +1,18 @@
 package com.cra08.excellentcode.storage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.when;
-import static org.mockito.MockitoAnnotations.openMocks;
-
 import com.cra08.excellentcode.*;
-
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-public class DatabaseTest {
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
+import static org.mockito.MockitoAnnotations.openMocks;
+
+public class DatabaseModTest {
     private Database db;
     private List<Employee> employeeList = new ArrayList<>();
 
@@ -78,20 +76,62 @@ public class DatabaseTest {
     }
 
     @Test
-    public void addTest_FailCase() {
-        assertTrue(db.add(mockEmployee1));
-        assertTrue(db.add(mockEmployee2));
-        assertNotEquals(1, db.getDatabaseSize());
+    public void modTestEmployeeNum() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnEmployeeNum, "18050301");
+        assertEquals(1, schResult.size());
+
+        assertTrue(db.mod(schResult, mockColumnEmployeeNum, "18050301"));
     }
 
     @Test
-    public void delTest() {
+    public void modTestName() {
         addTest();
 
         List<Employee> schResult = db.sch(mockColumnName, "KYUMOK KIM");
         assertEquals(1, schResult.size());
 
-        assertTrue(db.del(schResult));
-        assertEquals(1, db.getDatabaseSize());
+        assertTrue(db.mod(schResult, mockColumnName, "KYUMOK LEE"));
+    }
+
+    @Test
+    public void modTestCl() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnCl, "CL2");
+        assertEquals(1, schResult.size());
+
+        assertTrue(db.mod(schResult, mockColumnCl, "CL2"));
+    }
+
+    @Test
+    public void modTestPhoneNum() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnPhoneNum, "010-9777-6055");
+        assertEquals(1, schResult.size());
+
+        assertTrue(db.mod(schResult, mockColumnPhoneNum, "010-9777-6055"));
+    }
+
+    @Test
+    public void modTestBirthDay() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnBirthday, "19980906");
+        assertEquals(1, schResult.size());
+
+        assertTrue(db.mod(schResult, mockColumnBirthday, "19980906"));
+    }
+
+    @Test
+    public void modTestCerti() {
+        addTest();
+
+        List<Employee> schResult = db.sch(mockColumnCerti, "PRO");
+        assertEquals(1, schResult.size());
+
+        assertTrue(db.mod(schResult, mockColumnCerti, "PRO"));
     }
 }
