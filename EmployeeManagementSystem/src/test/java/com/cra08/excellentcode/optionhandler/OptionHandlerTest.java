@@ -115,7 +115,7 @@ public class OptionHandlerTest {
                                     "DEL,93916535,JANG YHFQ,CL3,010-1509-9243,19580525,PRO\n" +
                                     "DEL,07843022,SEO KFI,CL3,010-4837-6716,19810630,ADV\n" +
                                     "DEL,91351447,LIN PNQO,CL3,010-6095-6224,19710223,PRO\n" +
-                                    "DEL,93916536,JANH YHFR,CL3,010-1510-9244,19590626,PRO\n");
+                                    "DEL,93916536,JANH YHFR,CL3,010-1510-9244,19590626,PRO");
     }
 
     @Test
@@ -295,7 +295,7 @@ public class OptionHandlerTest {
 
         String resultString = optionHandler.toString();
         System.out.println(resultString);
-        assertEquals(resultString, "DEL,07843023,SEP KFJ,CL3,010-4838-6717,19820731,ADV\n");
+        assertEquals(resultString, "DEL,07843023,SEP KFJ,CL3,010-4838-6717,19820731,ADV");
     }
 
 
