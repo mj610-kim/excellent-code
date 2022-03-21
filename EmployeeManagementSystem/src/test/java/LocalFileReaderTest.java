@@ -62,6 +62,7 @@ public class LocalFileReaderTest {
 
     @After
     public void tearDown() {
+        localFileReaderUnderTest.close();
         localFileReaderUnderTest = null;
     }
 
