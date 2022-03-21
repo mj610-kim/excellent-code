@@ -55,6 +55,7 @@ public class LocalFileWriterTest {
 
     @After
     public void tearDown() {
+        localOutputWriterUnderTest.close();
         localOutputWriterUnderTest = null;
     }
 
