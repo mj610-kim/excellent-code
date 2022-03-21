@@ -12,13 +12,7 @@ public class CommandParser {
     }
 
     public ArrayList<String> getOption(){
-//        ArrayList<String> options = new ArrayList<> ();
-//        options.add(cmdLine[1]);
-//        options.add(cmdLine[2]);
-//        options.add(cmdLine[3]);
         return new ArrayList<>(Arrays.asList(cmdLine).subList(1, 3));
-
-//        return options;
     }
 
     public Employee getEmployee(){
