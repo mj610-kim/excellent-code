@@ -51,6 +51,12 @@ public class DatabaseTest {
     }
 
     @Test
+    public void addTest_FailCase(){
+        db.add(employeeList);
+        assertNotEquals(1, db.getDatabaseSize());
+    }
+
+    @Test
     public void delTest() {
         addTest();
 
