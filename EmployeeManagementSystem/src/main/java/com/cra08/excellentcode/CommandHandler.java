@@ -96,11 +96,13 @@ public class CommandHandler {
         String colVal = CommandParser.getColumnData(input).get(1);
         List<String> optionsList = CommandParser.getOption(input);
 
-        System.out.println("sColName: " + sColName + ", colVal: " + colVal + ", optionsList: " + Arrays.toString(optionsList.toArray()));
+        System.out.println("sColName: " + sColName + ", colVal: " + colVal
+                + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToDelete = database.sch(colName, colVal);
         OptionHandler optionHandler = new OptionHandler();
-        List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(cmd, optionsList, sColName, colVal, employeesToDelete);
+        List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(cmd, optionsList, sColName, colVal,
+                employeesToDelete);
 
         database.del(employeesToDeleteFiltered);
 
@@ -117,7 +119,8 @@ public class CommandHandler {
         String colVal = CommandParser.getColumnData(input).get(1);
         List<String> optionsList = CommandParser.getOption(input);
 
-        System.out.println("sColName: " + sColName + ", colVal: " + colVal + ", optionsList: " + Arrays.toString(optionsList.toArray()));
+        System.out.println("sColName: " + sColName + ", colVal: " + colVal
+                + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToSearch = database.sch(colName, colVal);
         OptionHandler optionHandler = new OptionHandler();
@@ -139,11 +142,14 @@ public class CommandHandler {
         String modifyColVal = CommandParser.getColumnData(input).get(3);
         List<String> optionsList = CommandParser.getOption(input);
 
-        System.out.println("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal + ", searchColName: " + sModifyColName + ", sModifyColName: " + modifyColVal + ", modifyColVal: " + Arrays.toString(optionsList.toArray()));
+        System.out.println("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal
+                + ", searchColName: " + sModifyColName + ", sModifyColName: " + modifyColVal
+                + ", modifyColVal: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToMod = database.sch(searchColName, searchColVal);
         OptionHandler optionHandler = new OptionHandler();
-        List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, sModifyColName, modifyColVal, employeesToMod);
+        List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, sModifyColName,
+                modifyColVal, employeesToMod);
 
         database.mod(employeesToModifyFiltered, modifyColName, modifyColVal);
 
