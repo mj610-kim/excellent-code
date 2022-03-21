@@ -23,12 +23,13 @@ public class Option1 {
             int printCnt = 0;
 
             for (Employee employee : employeeList) {
-                resultString += (commandName + "," + employee.toString() + "\n");
+                if (printCnt > 0) resultString += "\n";
+
+                resultString += (commandName + "," + employee.toString());
                 printCnt++;
 
-                if (printCnt >= maxPrintCnt) {
-                    break;
-                }
+                if (printCnt >= maxPrintCnt) break;
+
             }
 
             return resultString;
