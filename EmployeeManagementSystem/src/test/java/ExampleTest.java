@@ -1,22 +1,23 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 public class ExampleTest {
 
-    @BeforeEach
+    @Before
     public void setUp() {
         openMocks(this);
         System.out.println("setUp()");
     }
 
-    @AfterEach
+    @After
     public void tearDown() {
         System.out.println("tearDown()");
     }

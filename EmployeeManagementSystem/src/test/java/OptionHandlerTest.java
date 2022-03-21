@@ -1,13 +1,15 @@
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+
+import org.junit.Before;
+import org.junit.After;
+import org.junit.Test;
+
 import org.mockito.Mock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
@@ -21,17 +23,17 @@ public class OptionHandlerTest {
     @Mock
     Employee employee3;
 
-    List<Employee> test_employeeList;
+    List<Employee> testEmployeeList;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         openMocks(this);
         System.out.println("setUp()");
 
-        test_employeeList = new ArrayList<Employee>();
-        test_employeeList.add(employee1);
-        test_employeeList.add(employee2);
-        test_employeeList.add(employee3);
+        testEmployeeList = new ArrayList<Employee>();
+        testEmployeeList.add(employee1);
+        testEmployeeList.add(employee2);
+        testEmployeeList.add(employee3);
 
         when(employee1.toString()).thenReturn(new String("91351446,LIM PNQN,CL3,010-6094-6223,19700122,PRO"));
         when(employee1.getFirstName()).thenReturn(new String("PNQN"));
@@ -63,19 +65,25 @@ public class OptionHandlerTest {
 
 
     @Test
-    public void Option1_정상_동작_테스트() {
+    public void Option1_p옵션처리_정상_동작_테스트() {
         Option1 option1 = new Option1();
-        String result_str = "";
+        String resultString = "";
 
-        result_str = option1.process_option("DEL", "-p", test_employeeList);
-        System.out.println(result_str);
-        assertEquals(result_str, "DEL,91351446,LIM PNQN,CL3,010-6094-6223,19700122,PRO\n" +
+        resultString = option1.process_option("DEL", "-p", testEmployeeList);
+        System.out.println(resultString);
+        assertEquals(resultString, "DEL,91351446,LIM PNQN,CL3,010-6094-6223,19700122,PRO\n" +
                                     "DEL,93916535,JANG YHFQ,CL3,010-1509-9243,19580525,PRO\n" +
                                     "DEL,07843022,SEO KFI,CL3,010-4837-6716,19810630,ADV\n");
+    }
 
-        result_str = option1.process_option("DEL", "", test_employeeList);
-        System.out.println(result_str);
-        assertEquals(result_str, "DEL,3");
+    @Test
+    public void Option1_null옵션처리_정상_동작_테스트() {
+        Option1 option1 = new Option1();
+        String resultString = "";
+
+        resultString = option1.process_option("DEL", "", testEmployeeList);
+        System.out.println(resultString);
+        assertEquals(resultString, "DEL,3");
     }
 
     @Test
@@ -98,102 +106,131 @@ public class OptionHandlerTest {
     public void Option1_invalid_option_동작_테스트() {
         Option1 option1 = new Option1();
 
-        assertThrows(RuntimeException.class, () -> option1.process_option("DEL", "-l", test_employeeList) );
+        assertThrows(RuntimeException.class, () -> option1.process_option("DEL", "-l", testEmployeeList) );
     }
 
     @Test
-    public void Option2_정상_동작_테스트(){
+    public void Option2_name컬럼_f옵션처리_정상_동작_테스트() {
         Option2 option2 = new Option2();
-        List<Employee> filtered_employeeList;
+        List<Employee> filteredEmployeeList;
 
-        // name, -f 테스트
-        filtered_employeeList = option2.process_option("-f", test_employeeList, "name", "PNQN");
+        filteredEmployeeList = option2.process_option("-f", testEmployeeList, "name", "PNQN");
 
-        for (Employee employee : filtered_employeeList)
+        for (Employee employee : filteredEmployeeList)
             System.out.println(employee.toString());
 
-        assertEquals(filtered_employeeList.get(0), test_employeeList.get(0));
+        assertEquals(filteredEmployeeList.get(0), testEmployeeList.get(0));
+    }
 
-        // name, -l 테스트
-        filtered_employeeList = option2.process_option("-l", test_employeeList, "name", "JANG");
+    @Test
+    public void Option2_name컬럼_l옵션처리_정상_동작_테스트() {
+        Option2 option2 = new Option2();
+        List<Employee> filteredEmployeeList;
 
-        for (Employee employee : filtered_employeeList)
+        filteredEmployeeList = option2.process_option("-l", testEmployeeList, "name", "JANG");
+
+        for (Employee employee : filteredEmployeeList)
             System.out.println(employee.toString());
 
-        assertEquals(filtered_employeeList.get(0), test_employeeList.get(1));
+        assertEquals(filteredEmployeeList.get(0), testEmployeeList.get(1));
+    }
 
-        // PhoneNum, -m 테스트
-        filtered_employeeList = option2.process_option("-m", test_employeeList, "phoneNum", "6094");
+    @Test
+    public void Option2_phoneNum컬럼_m옵션처리_정상_동작_테스트() {
+        Option2 option2 = new Option2();
+        List<Employee> filteredEmployeeList;
 
-        for (Employee employee : filtered_employeeList)
+        filteredEmployeeList = option2.process_option("-m", testEmployeeList, "phoneNum", "6094");
+
+        for (Employee employee : filteredEmployeeList)
             System.out.println(employee.toString());
 
-        assertEquals(filtered_employeeList.get(0), test_employeeList.get(0));
+        assertEquals(filteredEmployeeList.get(0), testEmployeeList.get(0));
+    }
 
-        // PhoneNum, -l 테스트
-        filtered_employeeList = option2.process_option("-l", test_employeeList, "phoneNum", "9243");
+    @Test
+    public void Option2_phoneNum컬럼_l옵션처리_정상_동작_테스트() {
+        Option2 option2 = new Option2();
+        List<Employee> filteredEmployeeList;
 
-        for (Employee employee : filtered_employeeList)
+        filteredEmployeeList = option2.process_option("-l", testEmployeeList, "phoneNum", "9243");
+
+        for (Employee employee : filteredEmployeeList)
             System.out.println(employee.toString());
 
-        assertEquals(filtered_employeeList.get(0), test_employeeList.get(1));
+        assertEquals(filteredEmployeeList.get(0), testEmployeeList.get(1));
+    }
 
-        // birthday, -y 테스트
-        filtered_employeeList = option2.process_option("-y", test_employeeList, "birthday", "1970");
+    @Test
+    public void Option2_birthday컬럼_y옵션처리_정상_동작_테스트() {
+        Option2 option2 = new Option2();
+        List<Employee> filteredEmployeeList;
 
-        for (Employee employee : filtered_employeeList)
+        filteredEmployeeList = option2.process_option("-y", testEmployeeList, "birthday", "1970");
+
+        for (Employee employee : filteredEmployeeList)
             System.out.println(employee.toString());
 
-        assertEquals(filtered_employeeList.get(0), test_employeeList.get(0));
+        assertEquals(filteredEmployeeList.get(0), testEmployeeList.get(0));
+    }
 
-        // birthday, -y 테스트
-        filtered_employeeList = option2.process_option("-m", test_employeeList, "birthday", "05");
+    @Test
+    public void Option2_birthday컬럼_m옵션처리_정상_동작_테스트() {
+        Option2 option2 = new Option2();
+        List<Employee> filteredEmployeeList;
 
-        for (Employee employee : filtered_employeeList)
+        filteredEmployeeList = option2.process_option("-m", testEmployeeList, "birthday", "05");
+
+        for (Employee employee : filteredEmployeeList)
             System.out.println(employee.toString());
 
-        assertEquals(filtered_employeeList.get(0), test_employeeList.get(1));
+        assertEquals(filteredEmployeeList.get(0), testEmployeeList.get(1));
+    }
 
-        // birthday, -y 테스트
-        filtered_employeeList = option2.process_option("-d", test_employeeList, "birthday", "30");
+    @Test
+    public void Option2_birthday컬럼_d옵션처리_정상_동작_테스트() {
+        Option2 option2 = new Option2();
+        List<Employee> filteredEmployeeList;
 
-        for (Employee employee : filtered_employeeList)
+        filteredEmployeeList = option2.process_option("-d", testEmployeeList, "birthday", "30");
+
+        for (Employee employee : filteredEmployeeList)
             System.out.println(employee.toString());
 
-        assertEquals(filtered_employeeList.get(0), test_employeeList.get(2));
+        assertEquals(filteredEmployeeList.get(0), testEmployeeList.get(2));
     }
 
     @Test
     public void Option2_empty_employee_list_입력시_동작_테스트() {
         Option2 option2 = new Option2();
-        List<Employee> empty_employeeList = new ArrayList<Employee>();
-        List<Employee> filtered_employeeList;
+        List<Employee> emptyEmployeeList = new ArrayList<Employee>();
+        List<Employee> filteredEmployeeList;
 
-        filtered_employeeList = option2.process_option("-d", empty_employeeList, "birthday", "30");
+        filteredEmployeeList = option2.process_option("-d", emptyEmployeeList, "birthday", "30");
 
-        assertEquals(empty_employeeList, filtered_employeeList);
+        assertEquals(emptyEmployeeList, filteredEmployeeList);
     }
 
     @Test
     public void Option2_invalid_option_동작_테스트() {
         Option2 option2 = new Option2();
 
-        assertThrows(RuntimeException.class, () -> option2.process_option("-y", test_employeeList, "name", "JANG") );
-        assertThrows(RuntimeException.class, () -> option2.process_option("-y", test_employeeList, "phoneNum", "9243") );
-        assertThrows(RuntimeException.class, () -> option2.process_option("-l", test_employeeList, "birthday", "1970") );
+        assertThrows(RuntimeException.class, () -> option2.process_option("-y", testEmployeeList, "name", "JANG") );
+        assertThrows(RuntimeException.class, () -> option2.process_option("-y", testEmployeeList, "phoneNum", "9243") );
+        assertThrows(RuntimeException.class, () -> option2.process_option("-l", testEmployeeList, "birthday", "1970") );
     }
 
     @Test
     public void Option2_invalid_column_동작_테스트() {
         Option2 option2 = new Option2();
 
-        assertThrows(RuntimeException.class, () -> option2.process_option("-l", test_employeeList, "name_", "JANG") );
-        assertThrows(RuntimeException.class, () -> option2.process_option("-m", test_employeeList, "phone_number", "9243") );
-        assertThrows(RuntimeException.class, () -> option2.process_option("-y", test_employeeList, "birth_day", "1970") );
+        assertThrows(RuntimeException.class, () -> option2.process_option("-l", testEmployeeList, "name_", "JANG") );
+        assertThrows(RuntimeException.class, () -> option2.process_option("-m", testEmployeeList, "phone_number", "9243") );
+        assertThrows(RuntimeException.class, () -> option2.process_option("-y", testEmployeeList, "birth_day", "1970") );
     }
 
 
-    @AfterEach
+    @After
     public void tearDown() {
         System.out.println("tearDown()");
     }
