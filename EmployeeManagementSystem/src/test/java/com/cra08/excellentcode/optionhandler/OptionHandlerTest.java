@@ -118,7 +118,7 @@ public class OptionHandlerTest {
     }
 
     @Test
-    public void Option1_null옵션처리_정상_동작_테스트() {
+    public void Option1_empty옵션처리_정상_동작_테스트() {
         Option1 option1 = new Option1();
         String resultString = "";
 
@@ -268,6 +268,16 @@ public class OptionHandlerTest {
         assertThrows(IllegalArgumentException.class, () -> option2.processOption("-l", testEmployeeList, "name_", "JANG") );
         assertThrows(IllegalArgumentException.class, () -> option2.processOption("-m", testEmployeeList, "phone_number", "9243") );
         assertThrows(IllegalArgumentException.class, () -> option2.processOption("-y", testEmployeeList, "birth_day", "1970") );
+    }
+
+    @Test
+    public void Option2_empty옵션처리_정상_동작_테스트() {
+        Option2 option2 = new Option2();
+        List<Employee> filteredEmployeeList;
+
+        filteredEmployeeList = option2.processOption("", testEmployeeList, "birthday", "30");
+
+        assertEquals(testEmployeeList, filteredEmployeeList);
     }
 
 
