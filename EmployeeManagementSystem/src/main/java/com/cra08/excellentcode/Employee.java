@@ -25,8 +25,8 @@ public class Employee {
         this.birthDayAll = birthday;
         this.certi = certi;
 
-        this.firstName = name.split(" ")[1];
-        this.lastName = name.split(" ")[0];
+        this.firstName = name.split(" ")[0];
+        this.lastName = name.split(" ")[1];
         this.middleNumber = phoneNum.split("-")[1];
         this.lastNumber = phoneNum.split("-")[2];
         this.birthYear = birthday.substring(0, 4);
