@@ -39,7 +39,7 @@ public class DatabaseSortTest {
         when(mockEmployee1.getBirthDayAll()).thenReturn("19980906");
         when(mockEmployee1.getCerti()).thenReturn("PRO");
 
-        when(mockEmployee2.getEmployeeNum()).thenReturn("93916535");
+        when(mockEmployee2.getEmployeeNum()).thenReturn("91916535");
         when(mockEmployee2.getName()).thenReturn("VXIHXOTH JHOP");
         when(mockEmployee2.getCl()).thenReturn("CL3");
         when(mockEmployee2.getPhoneNum()).thenReturn("010-3112-2609");
@@ -67,13 +67,7 @@ public class DatabaseSortTest {
         assertTrue(db.add(mockEmployee2));
         assertTrue(db.add(mockEmployee3));
         assertTrue(db.add(mockEmployee4));
-        assertTrue(db.sort());
+        db.sort();
         assertEquals(4, db.getDatabaseSize());
-    }
-
-    @Test
-    public void sortTest() {
-        addTest();
-        assertTrue(db.sort());
     }
 }

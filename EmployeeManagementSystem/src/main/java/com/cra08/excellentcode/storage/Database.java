@@ -11,7 +11,8 @@ public class Database {
 
     public Database() {
         unsortedEmployeeDB = new HashMap<>();
-        employeeDB = new TreeMap<>();
+        //employeeDB = new TreeMap<>();
+        employeeDB = new TreeMap<>(new SortEmployeeNum<>());
     }
 
     public int getDatabaseSize() {
@@ -19,7 +20,7 @@ public class Database {
     }
 
     public boolean add(Employee employee) {
-        unsortedEmployeeDB.put(employee.getEmployeeNum(), employee);
+        employeeDB.put(employee.getEmployeeNum(), employee);
         return true;
     }
 
@@ -50,7 +51,8 @@ public class Database {
     }
 
     public boolean sort() {
-        employeeDB = new TreeMap<>(unsortedEmployeeDB);
+        System.out.println("sort");
+
         Iterator<String> keyIterator = employeeDB.keySet().iterator();
 
         while(keyIterator.hasNext()) {
@@ -58,5 +60,34 @@ public class Database {
         }
 
         return true;
+    }
+}
+
+class SortEmployeeNum<T> implements Comparator<T> {
+
+    @Override
+    public int compare(T o1, T o2) {
+        String year1 = ((String)o1).substring(0, 2);
+        String year2 = ((String)o2).substring(0, 2);
+
+        String num1 = ((String)o1).substring(3);
+        String num2 = ((String)o2).substring(3);
+
+        String calcYear1 = (year1.compareTo("21") < 0) ?
+                String.valueOf(Integer.parseInt(year1) + 31) :
+                String.valueOf(Integer.parseInt(year1) - 69);
+        String calcYear2 = (year2.compareTo("21") < 0) ?
+                String.valueOf(Integer.parseInt(year2) + 31) :
+                String.valueOf(Integer.parseInt(year2) - 69);
+
+        if (calcYear1.compareTo(calcYear2) < 0) {
+            return -1;
+        }
+        else if (calcYear1.compareTo(calcYear2) == 0) {
+            return num2.compareTo(num1);
+        }
+        else {
+            return 1;
+        }
     }
 }
