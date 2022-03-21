@@ -3,10 +3,10 @@ import java.util.Arrays;
 
 public class CommandParser {
 
-    final static int CMD_POS = 0;
-    final static int OPT1_POS = 1;
-    final static int OPT2_POS = 2;
-    final static int OPT3_POS = 3;
+    static final int CMD_POS = 0;
+    static final int OPT1_POS = 1;
+    static final int OPT2_POS = 2;
+    static final int OPT3_POS = 3;
 
     private static String[] parseCommandLine(String cmdLine) {
         return cmdLine.split(",");

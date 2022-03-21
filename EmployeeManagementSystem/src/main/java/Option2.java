@@ -2,10 +2,9 @@ import java.util.List;
 
 public class Option2 {
 
-    private EmployeeNameFilter employeeNameFilter;
-    private EmployeePhoneNumFilter employeePhoneNumFilter;
-    private EmployeeBirthDayFilter employeeBirthDayFilter;
-
+    private final EmployeeNameFilter employeeNameFilter;
+    private final EmployeePhoneNumFilter employeePhoneNumFilter;
+    private final EmployeeBirthDayFilter employeeBirthDayFilter;
 
     public Option2() {
         employeeNameFilter = new EmployeeNameFilter();
@@ -14,7 +13,8 @@ public class Option2 {
     }
 
 
-    public List<Employee> processOption(String option, List<Employee> employeeList, String column, String condition) throws IllegalArgumentException {
+    public List<Employee> processOption(String option, List<Employee> employeeList, String column,
+            String condition) throws IllegalArgumentException {
         if (column.equals("name")) {
             if (!employeeNameFilter.checkValidOption(option)) {
                 throw new IllegalArgumentException("Invalid name option(" + option + ")");

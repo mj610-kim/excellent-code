@@ -2,15 +2,14 @@ import java.util.List;
 
 public class EmployeeNameFilter extends EmployeeFilter {
 
-    private final String firstNameOption = "-f";
-    private final String lastNameOption = "-l";
-
+    private static final String FIRST_NAME_OPTION = "-f";
+    private static final String LAST_NAME_OPTION = "-l";
 
     public boolean checkValidOption(String option) {
-        if (option.equals(firstNameOption)) {
+        if (option.equals(FIRST_NAME_OPTION)) {
             return true;
         }
-        if (option.equals(lastNameOption)) {
+        if (option.equals(LAST_NAME_OPTION)) {
             return true;
         }
 
@@ -18,11 +17,11 @@ public class EmployeeNameFilter extends EmployeeFilter {
     }
 
     public List<Employee> process(String option, List<Employee> employeeList, String condition) {
-        if (option.equals(firstNameOption)) {
+        if (option.equals(FIRST_NAME_OPTION)) {
             return optionFilter.filter(employeeList, new FirstNameComparable(condition));
         }
 
-        if (option.equals(lastNameOption)) {
+        if (option.equals(LAST_NAME_OPTION)) {
             return optionFilter.filter(employeeList, new LastNameComparable(condition));
         }
 
