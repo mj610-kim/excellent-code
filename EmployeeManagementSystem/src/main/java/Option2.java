@@ -1,47 +1,36 @@
 import java.util.List;
 
 public class Option2 {
-    private Filter<Employee> optionFilter;
+    private EmployeeNameFilter employeeNameFilter;
+    private EmployeePhoneNumFilter employeePhoneNumFilter;
+    private EmployeeBirthDayFilter employeeBirthDayFilter;
+
 
     public Option2() {
-        optionFilter = new Filter<Employee>();
+        employeeNameFilter = new EmployeeNameFilter();
+        employeePhoneNumFilter = new EmployeePhoneNumFilter();
+        employeeBirthDayFilter = new EmployeeBirthDayFilter();
     }
 
-    public List<Employee> process_option(String option, List<Employee> employeeList, String column, String condition) throws IllegalArgumentException {
+
+    public List<Employee> processOption(String option, List<Employee> employeeList, String column, String condition) throws IllegalArgumentException {
         if (column.equals("name")) {
-            if(option.equals("-f"))
-                return optionFilter.filter(employeeList, new FirstNameComparable(condition));
+            if (!employeeNameFilter.checkValidOption(option)) throw new IllegalArgumentException("Invalid name option("+ option +")");
 
-            if(option.equals("-l"))
-                return optionFilter.filter(employeeList, new LastNameComparable(condition));
-
-            throw new IllegalArgumentException("Invalid name option("+ option +")");
+            return employeeNameFilter.process(option, employeeList, condition);
         }
 
         if (column.equals("phoneNum")) {
-            if(option.equals("-m"))
-                return optionFilter.filter(employeeList, new MiddleNumberComparable(condition));
+            if (!employeePhoneNumFilter.checkValidOption(option)) throw new IllegalArgumentException("Invalid phoneNum option("+ option +")");
 
-            if(option.equals("-l"))
-                return optionFilter.filter(employeeList, new LastNumberComparable(condition));
-
-            throw new IllegalArgumentException("Invalid phoneNum option("+ option +")");
+            return employeePhoneNumFilter.process(option, employeeList, condition);
         }
 
         if (column.equals("birthday")) {
-            if(option.equals("-y"))
-                return optionFilter.filter(employeeList, new BirthYearComparable(condition));
+            if (!employeeBirthDayFilter.checkValidOption(option)) throw new IllegalArgumentException("Invalid birthday option("+ option +")");
 
-            if(option.equals("-m"))
-                return optionFilter.filter(employeeList, new BirthMonthComparable(condition));
-
-
-            if(option.equals("-d"))
-                return optionFilter.filter(employeeList, new BirthDayComparable(condition));
-
-            throw new IllegalArgumentException("Invalid birthday option("+ option +")");
+            return employeeBirthDayFilter.process(option, employeeList, condition);
         }
-
 
         throw new IllegalArgumentException("Invalid column("+ column +")");
     }
