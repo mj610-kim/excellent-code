@@ -3,6 +3,7 @@
 ## Table of contents
 - [개발 환경](#development-environment)
 - [Brach policy](#branch-policy)
+- [PR policy](#pr-policy)
 - [Commit message policy](#commit-message-policy)
   - [General rules](#commit-message-general-rules)
   - [Format](#commit-message-format)
@@ -40,6 +41,14 @@ git-flow와 다른 점은 아래에 명시한다:
 
 ### `release` 브랜치는 사용하지 않는다
 Unit test는 `develop` TDD로 브랜치에서 계속 진행하며, integration test 등은 불필요하기 때문에 `release` 브랜치는 브랜치 정책에 불필요하고 복잡도만 증가한다. 그렇기 때문에 `release` 브랜치는 사용하지 않으며, `develop` 브랜치에서 바로 `main` 브랜치로 반영한다.
+
+## <a name="pr-policy"></a>PR policy
+
+PR을 머지하기 위해서 다음 조건을 모두 만족해야 한다:
+- `Collaborator` 3명 중 2명 이상이 approve함
+- 모든 CI/CD `Checks`가 pass함
+
+PR 머지 조건은 자동화로 enforce한다.
 
 ## <a name="commit-message-policy"></a>Commit message policy
 
