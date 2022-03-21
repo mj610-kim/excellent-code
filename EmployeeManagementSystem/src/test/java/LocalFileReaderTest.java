@@ -73,7 +73,7 @@ public class LocalFileReaderTest {
 
     @Test
     public void open_illegalFilePath() {
-        localFileReaderUnderTest = new LocalFileReader("!@#$%^&*()_+");
+        localFileReaderUnderTest = new LocalFileReader("!@#$%^&*()_+<>\\/'\"");
         assertFalse(localFileReaderUnderTest.open());
     }
 
