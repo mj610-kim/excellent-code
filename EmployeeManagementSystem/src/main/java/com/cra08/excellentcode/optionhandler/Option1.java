@@ -9,12 +9,12 @@ public class Option1 {
 
     public String processOption(String commandName, String option, List<Employee> employeeList) throws IllegalArgumentException {
 
-        if (option.equals("")) {
-            return (commandName + "," + employeeList.size());
-        }
-
         if (employeeList.size() == 0) {
             return (commandName + "," + "NONE");
+        }
+
+        if (option.equals("")) {
+            return (commandName + "," + employeeList.size());
         }
 
         if (option.equals("-p")) {
