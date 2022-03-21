@@ -86,4 +86,31 @@ public class Employee {
     public String getBirthDay() {
         return birthDay;
     }
+
+
+    public void setEmployeeNum(String employeeNum) {
+        this.employeeNum = employeeNum;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCl(String cl) {
+        this.cl = cl;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
+    public void setCERTI(String CERTI) {
+        this.CERTI = CERTI;
+    }
+
+
 }
