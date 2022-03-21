@@ -1,4 +1,5 @@
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.mock;
 
 import com.cra08.excellentcode.CommandParser;
@@ -11,6 +12,7 @@ public class CommandParserTest {
     String cmdLine2 = "DEL, , , ,birthday,19900906";
     String cmdLine3 = "MOD,-p,, ,name,KYUMOK KIM,name,KYUMOK LEE";
     String cmdLine4 = "MOD,-p,-m, ,birthday,09,cl,CL2";
+    String cmdLine5 = "MOE,-p,-m, ,birthday,09,cl,CL2";
 
     @Mock
     CommandParser cmdParser = mock(CommandParser.class);
@@ -21,7 +23,7 @@ public class CommandParserTest {
         assertEquals("DEL", cmdParser.getCommand(cmdLine2));
         assertEquals("MOD", cmdParser.getCommand(cmdLine3));
         assertEquals("MOD", cmdParser.getCommand(cmdLine4));
-
+        assertThrows(IllegalArgumentException.class, () -> cmdParser.getCommand(cmdLine5));
     }
 
     @Test
@@ -50,6 +52,10 @@ public class CommandParserTest {
 
     @Test
     public void getOptionTest() {
+        assertEquals("",cmdParser.getOption(cmdLine1).get(0));
+        assertEquals("",cmdParser.getOption(cmdLine1).get(1));
+        assertEquals("",cmdParser.getOption(cmdLine1).get(2));
+
         assertEquals("-p", cmdParser.getOption(cmdLine3).get(0));
         assertEquals("-m", cmdParser.getOption(cmdLine4).get(1));
 
