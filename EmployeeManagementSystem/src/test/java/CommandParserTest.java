@@ -1,14 +1,11 @@
-import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
-import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
-import static org.mockito.MockitoAnnotations.openMocks;
 
 public class CommandParserTest {
 
@@ -31,7 +28,7 @@ public class CommandParserTest {
 
     @Test
     public void getEmployeeTest() {
-        String birthday = cmdParser.getEmployee(cmdLine1).getBirthDayALL();
+        String birthday = cmdParser.getEmployee(cmdLine1).getBirthDayAll();
         assertEquals("19980906", birthday);
     }
 
