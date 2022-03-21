@@ -1,17 +1,17 @@
 package com.cra08.excellentcode.storage;
 
-import com.cra08.excellentcode.storage.Database;
-import com.cra08.excellentcode.Employee;
-import org.junit.Before;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.mockito.Mock;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
+
+import com.cra08.excellentcode.Employee;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
 
 public class DatabaseTest {
     private Database db;

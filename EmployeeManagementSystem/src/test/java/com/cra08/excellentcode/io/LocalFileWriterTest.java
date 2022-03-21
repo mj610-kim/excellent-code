@@ -5,8 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import com.cra08.excellentcode.io.LocalFileWriter;
-import com.cra08.excellentcode.io.OutputWriter;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

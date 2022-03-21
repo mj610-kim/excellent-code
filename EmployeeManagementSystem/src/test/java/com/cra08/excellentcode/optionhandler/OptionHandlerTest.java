@@ -2,21 +2,16 @@ package com.cra08.excellentcode.optionhandler;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
-
-import com.cra08.excellentcode.Employee;
-import com.cra08.excellentcode.optionhandler.Option1;
-import com.cra08.excellentcode.optionhandler.Option2;
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Test;
-
-import org.mockito.Mock;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
+
+import com.cra08.excellentcode.Employee;
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.mockito.Mock;
 
 public class OptionHandlerTest {
     @Mock
