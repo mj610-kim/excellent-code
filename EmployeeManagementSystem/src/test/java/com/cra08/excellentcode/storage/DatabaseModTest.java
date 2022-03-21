@@ -71,6 +71,7 @@ public class DatabaseModTest {
     public void addTest() {
         assertTrue(db.add(mockEmployee1));
         assertTrue(db.add(mockEmployee2));
+        assertTrue(db.sort());
         assertEquals(2, db.getDatabaseSize());
     }
 

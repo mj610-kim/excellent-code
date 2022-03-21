@@ -3,18 +3,15 @@ package com.cra08.excellentcode.storage;
 import com.cra08.excellentcode.Employee;
 import com.cra08.excellentcode.column.IColumn;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Database {
-
-    // <employeeNum, Employee Object>
-    private HashMap<String, Employee> employeeDB;
+    private HashMap<String, Employee> unsortedEmployeeDB;
+    TreeMap<String, Employee> employeeDB;
 
     public Database() {
-        employeeDB = new HashMap<>();
+        unsortedEmployeeDB = new HashMap<>();
+        employeeDB = new TreeMap<>();
     }
 
     public int getDatabaseSize() {
@@ -22,7 +19,7 @@ public class Database {
     }
 
     public boolean add(Employee employee) {
-        employeeDB.put(employee.getEmployeeNum(), employee);
+        unsortedEmployeeDB.put(employee.getEmployeeNum(), employee);
         return true;
     }
 
@@ -49,6 +46,17 @@ public class Database {
         for (Employee employee : employeeList) {
             employeeDB.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
         }
+        return true;
+    }
+
+    public boolean sort() {
+        employeeDB = new TreeMap<>(unsortedEmployeeDB);
+        Iterator<String> keyIterator = employeeDB.keySet().iterator();
+
+        while(keyIterator.hasNext()) {
+            System.out.println(keyIterator.next());
+        }
+
         return true;
     }
 }
