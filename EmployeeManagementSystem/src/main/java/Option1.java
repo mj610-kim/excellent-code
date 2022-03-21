@@ -1,14 +1,15 @@
 import java.util.List;
 
 public class Option1 {
+
     private final int maxPrintCnt = 5;
 
     public String processOption(String commandName, String option, List<Employee> employeeList) throws IllegalArgumentException {
-        if(employeeList.size() == 0) {
+        if (employeeList.size() == 0) {
             return (commandName + "," + "NONE");
         }
 
-        if(option.equals("-p")) {
+        if (option.equals("-p")) {
             String resultString = "";
 
             int printCnt = 0;
@@ -17,16 +18,18 @@ public class Option1 {
                 resultString += (commandName + "," + employee.toString() + "\n");
                 printCnt++;
 
-                if(printCnt >= maxPrintCnt) break;
+                if (printCnt >= maxPrintCnt) {
+                    break;
+                }
             }
 
             return resultString;
         }
 
-        if(option.equals("")) {
+        if (option.equals("")) {
             return (commandName + "," + employeeList.size());
         }
 
-        throw new IllegalArgumentException("Invalid option("+ option +")");
+        throw new IllegalArgumentException("Invalid option(" + option + ")");
     }
 }

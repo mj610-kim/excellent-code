@@ -1,6 +1,7 @@
 import java.util.List;
 
 public abstract class EmployeeFilter {
+
     protected Filter<Employee> optionFilter;
 
     public EmployeeFilter() {

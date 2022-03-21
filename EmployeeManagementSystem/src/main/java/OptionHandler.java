@@ -1,6 +1,7 @@
 import java.util.List;
 
 public class OptionHandler {
+
     private Option1 option1;
     private Option2 option2;
     String outputString;
