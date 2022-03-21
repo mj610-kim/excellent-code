@@ -10,38 +10,32 @@ import static org.mockito.Mockito.*;
 import static org.mockito.MockitoAnnotations.openMocks;
 
 public class CommandParserTest {
-    String cmdLine = "MOD,-p,-y, ,birthday,1990,name,KYUMOK LEE";
+    String[] cmdLines = new String[]{
+            "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055,19980906,PRO",
+            "DEL, , , ,birthday,19900906",
+            "MOD, , , ,name,KYUMOK KIM,name,KYUMOK LEE"
+    };
 
-    CommandParser cmdParser = mock(CommandParser.class);
-    Employee emp = mock(Employee.class);
+    CommandParser cmdParser = new CommandParser();
+
+    String cmdLine =  "DEL, , , ,birthday,19900906";
+    CommandParser cmdParser = new CommandParser();
+
     @Before
     public void setUp() {
-        openMocks(this);
-        when(cmdParser.getCommand()).thenReturn("MOD");
-        when(cmdParser.getEmployee()).thenReturn(emp);
-        when(emp.getBirthDay()).thenReturn("1990");
-        when(emp.getFirstName()).thenReturn("KYUMOK");
-        when(emp.getLastName()).thenReturn("LEE");
-    }
-
-
-    @Test
-    public void setCommandLineTest(){
         cmdParser.setCommandLine(cmdLine);
-        verify(cmdParser,times(1)).setCommandLine(anyString());
     }
-
 
     @Test
     public void getCommandTest(){
         String cmd = cmdParser.getCommand();
-        assertEquals(cmd, "MOD");
+        assertEquals("ADD", cmd);
     }
 
     @Test
     public void getEmployeeTest(){
         String birthday = cmdParser.getEmployee().getBirthDay();
-        assertEquals(birthday, "1990");
+        assertEquals("19980906", birthday);
     }
 
 
