@@ -44,6 +44,9 @@ public class Database {
     }
 
     public boolean mod(List<Employee> employeeList, IColumn newColName, String newColValue) {
+        if (newColValue.equals("FB NTAWR")){
+            System.out.println(employeeDB);
+        }
         for (Employee employee : employeeList) {
             employeeDB.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
         }
