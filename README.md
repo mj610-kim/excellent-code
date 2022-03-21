@@ -185,6 +185,10 @@ Block indentation은 `+2 spaces` 대신 `+4 spaces`로 한다
 
 Indent continuation은 `at least +4 spaces` 대신 `at least +8 spaces`로 한다
 
+### Column limit
+
+Column limit은 `100` 대신 `120`으로 한다.
+
 ## <a name="evaluation"></a>평가 방식
 
 평가 방식은 팀 프로젝트 PPT를 참고 부탁드립니다
