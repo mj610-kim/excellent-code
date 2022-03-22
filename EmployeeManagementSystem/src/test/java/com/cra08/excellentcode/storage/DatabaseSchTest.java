@@ -108,6 +108,17 @@ public class DatabaseSchTest {
     }
 
     @Test
+    public void schTestByLastName() {
+        addTest();
+
+        when(mockColumnName.matched(mockEmployee1, "KIM")).thenReturn(true);
+        List<Employee> schResult = db.sch(mockColumnName, "KIM");
+        assertEquals(1, schResult.size());
+
+        assertEquals("KYUMOK KIM", schResult.get(0).getName());
+    }
+
+    @Test
     public void schTestByCl() {
         addTest();
 
@@ -130,11 +141,66 @@ public class DatabaseSchTest {
     }
 
     @Test
-    public void schTestByBirthDay() {
+    public void schTestByMiddlePhoneNum() {
+        addTest();
+
+        when(mockColumnPhoneNum.matched(mockEmployee1, "9777")).thenReturn(true);
+        List<Employee> schResult = db.sch(mockColumnPhoneNum, "9777");
+        assertEquals(1, schResult.size());
+
+        assertEquals("010-9777-6055", schResult.get(0).getPhoneNum());
+    }
+
+    @Test
+    public void schTestByLastPhoneNum() {
+        addTest();
+
+        when(mockColumnPhoneNum.matched(mockEmployee1, "6055")).thenReturn(true);
+        List<Employee> schResult = db.sch(mockColumnPhoneNum, "6055");
+        assertEquals(1, schResult.size());
+
+        assertEquals("010-9777-6055", schResult.get(0).getPhoneNum());
+    }
+
+    @Test
+    public void schTestByBirthDayAll() {
         addTest();
 
         when(mockColumnBirthday.matched(mockEmployee1, "19980906")).thenReturn(true);
         List<Employee> schResult = db.sch(mockColumnBirthday, "19980906");
+        assertEquals(1, schResult.size());
+
+        assertEquals("19980906", schResult.get(0).getBirthDayAll());
+    }
+
+    @Test
+    public void schTestByBirthYear() {
+        addTest();
+
+        when(mockColumnBirthday.matched(mockEmployee1, "1998")).thenReturn(true);
+        List<Employee> schResult = db.sch(mockColumnBirthday, "1998");
+        assertEquals(1, schResult.size());
+
+        assertEquals("19980906", schResult.get(0).getBirthDayAll());
+    }
+
+    @Test
+    public void schTestByBirthMonth() {
+        addTest();
+
+        when(mockColumnBirthday.matched(mockEmployee1, "09")).thenReturn(true);
+        List<Employee> schResult = db.sch(mockColumnBirthday, "09");
+        assertEquals(1, schResult.size());
+
+        assertEquals("19980906", schResult.get(0).getBirthDayAll());
+    }
+
+    @Test
+    public void schTestByBirthDay() {
+        addTest();
+
+        when(mockColumnBirthday.matched(mockEmployee1, "06")).thenReturn(true);
+        List<Employee> schResult = db.sch(mockColumnBirthday, "06");
         assertEquals(1, schResult.size());
 
         assertEquals("19980906", schResult.get(0).getBirthDayAll());

@@ -17,6 +17,7 @@ public class ColumnPhoneNum implements IColumn {
 
     @Override
     public boolean matched(Employee employee, String value) {
-        return employee.getMiddleNumber().equals(value) || employee.getLastNumber().equals(value);
+        return employee.getPhoneNum().equals(value) || employee.getMiddleNumber().equals(value)
+                || employee.getLastNumber().equals(value);
     }
 }

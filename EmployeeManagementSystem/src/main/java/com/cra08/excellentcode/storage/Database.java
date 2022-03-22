@@ -41,7 +41,6 @@ public class Database {
         List<Employee> resultEmployeeList = new ArrayList<>();
 
         for (Map.Entry<String, Employee> employee : employeeDbLinkedHash.entrySet()) {
-            System.out.println(employee.getValue().getFirstName() + " " + colValue + " " + colName.matched(employee.getValue(), colValue));
             if (colName.matched(employee.getValue(), colValue)) {
                 resultEmployeeList.add(employee.getValue());
             }

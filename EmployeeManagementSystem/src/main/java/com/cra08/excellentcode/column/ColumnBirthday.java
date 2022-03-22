@@ -17,7 +17,7 @@ public class ColumnBirthday implements IColumn {
 
     @Override
     public boolean matched(Employee employee, String value) {
-        return employee.getBirthYear().equals(value) || employee.getBirthMonth().equals(value)
-                || employee.getBirthDay().equals(value);
+        return employee.getBirthDayAll().equals(value) || employee.getBirthYear().equals(value)
+                || employee.getBirthMonth().equals(value) || employee.getBirthDay().equals(value);
     }
 }
