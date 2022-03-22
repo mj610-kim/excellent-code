@@ -51,3 +51,14 @@ jobs:
         mode: addition
         tolerance: same
         output: out_mj.txt
+    - name: Run test (TM)
+      working-directory: ./EmployeeManagementSystem
+      run: ./gradlew run --no-daemon --args='input_tm.txt output_actual_tm.txt'
+    - name: Verify result (TM)
+      uses: LouisBrunner/diff-action@v0.1.2
+      with:
+        old: ./EmployeeManagementSystem/output_expected_tm.txt
+        new: ./EmployeeManagementSystem/output_actual_tm.txt
+        mode: addition
+        tolerance: same
+        output: out_tm.txt
