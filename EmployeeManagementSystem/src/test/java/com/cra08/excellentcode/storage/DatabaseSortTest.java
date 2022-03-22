@@ -6,8 +6,10 @@ import org.junit.Test;
 import org.mockito.Mock;
 
 import java.util.Iterator;
+import java.util.List;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
@@ -90,5 +92,55 @@ public class DatabaseSortTest {
         long endTime = System.currentTimeMillis();
         System.out.println(endTime - startTime);
         assertTrue(1000 > endTime - startTime);
+    }
+
+    @Test
+    public void sortTest() {
+        Employee employee1 = mock(Employee.class);
+        Employee employee2 = mock(Employee.class);
+        Employee employee3 = mock(Employee.class);
+        Employee employee4 = mock(Employee.class);
+        Employee employee5 = mock(Employee.class);
+        Employee employee6 = mock(Employee.class);
+        Employee employee7 = mock(Employee.class);
+        Employee employee8 = mock(Employee.class);
+        Employee employee9 = mock(Employee.class);
+        Employee employee10 = mock(Employee.class);
+
+        when(employee1.getEmployeeNum()).thenReturn("70101528");
+        when(employee2.getEmployeeNum()).thenReturn("70130884");
+        when(employee3.getEmployeeNum()).thenReturn("70129617");
+        when(employee4.getEmployeeNum()).thenReturn("70109080");
+        when(employee5.getEmployeeNum()).thenReturn("70120659");
+        when(employee6.getEmployeeNum()).thenReturn("21131253");
+        when(employee7.getEmployeeNum()).thenReturn("21130139");
+        when(employee8.getEmployeeNum()).thenReturn("21129546");
+        when(employee9.getEmployeeNum()).thenReturn("21129211");
+        when(employee10.getEmployeeNum()).thenReturn("21127551");
+
+        db.add(employee1);
+        db.add(employee2);
+        db.add(employee3);
+        db.add(employee4);
+        db.add(employee5);
+        db.add(employee6);
+        db.add(employee7);
+        db.add(employee8);
+        db.add(employee9);
+        db.add(employee10);
+
+        List<String> printResult = db.print();
+        System.out.println(printResult);
+
+        assertEquals( "70101528", printResult.get(0));
+        assertEquals( "70109080", printResult.get(1));
+        assertEquals( "70120659", printResult.get(2));
+        assertEquals( "70129617", printResult.get(3));
+        assertEquals( "70130884", printResult.get(4));
+        assertEquals( "21127551", printResult.get(5));
+        assertEquals( "21129211", printResult.get(6));
+        assertEquals( "21129546", printResult.get(7));
+        assertEquals( "21130139", printResult.get(8));
+        assertEquals( "21131253", printResult.get(9));
     }
 }
