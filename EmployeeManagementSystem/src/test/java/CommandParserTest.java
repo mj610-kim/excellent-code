@@ -2,7 +2,12 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 import com.cra08.excellentcode.CommandParser;
-import com.cra08.excellentcode.Employee;
+import com.cra08.excellentcode.option.BirthMonthOption;
+import com.cra08.excellentcode.option.EmptyOption;
+import com.cra08.excellentcode.option.IOption;
+import com.cra08.excellentcode.option.PrintOption;
+import java.util.ArrayList;
+import java.util.Arrays;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -58,16 +63,11 @@ public class CommandParserTest {
     }
 
     @Test
-    public void getOptionTest() {
-        assertEquals("",cmdParser.getOption(cmdLine1).get(0));
-        assertNotEquals(" ",cmdParser.getOption(cmdLine1).get(0));
-        assertEquals("",cmdParser.getOption(cmdLine1).get(1));
-        assertNotEquals(" ",cmdParser.getOption(cmdLine1).get(1));
-        assertEquals("",cmdParser.getOption(cmdLine1).get(2));
-        assertNotEquals(" ",cmdParser.getOption(cmdLine1).get(2));
-        assertEquals("-p", cmdParser.getOption(cmdLine3).get(0));
-        assertEquals("-m", cmdParser.getOption(cmdLine4).get(1));
-
+    public void getOptionsListTest() {
+        assertThrows(IllegalArgumentException.class, () -> CommandParser.getOptionsList(cmdLine1));
+        assertEquals(new ArrayList<IOption>(Arrays.asList(EmptyOption.getInstance(), EmptyOption.getInstance(), EmptyOption.getInstance())), CommandParser.getOptionsList(cmdLine2));
+        assertEquals(new ArrayList<IOption>(Arrays.asList(PrintOption.getInstance(), EmptyOption.getInstance(), EmptyOption.getInstance())), CommandParser.getOptionsList(cmdLine3));
+        assertEquals(new ArrayList<IOption>(Arrays.asList(PrintOption.getInstance(), BirthMonthOption.getInstance("09"), EmptyOption.getInstance())), CommandParser.getOptionsList(cmdLine4));
     }
 
 }

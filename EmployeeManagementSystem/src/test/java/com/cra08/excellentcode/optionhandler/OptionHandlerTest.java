@@ -110,7 +110,7 @@ public class OptionHandlerTest {
     @Test
     public void Option1_p옵션처리_정상_동작_테스트() {
         Option1 option1 = new Option1();
-        IOption option = new PrintOption();
+        IOption option = PrintOption.getInstance();
 
         String resultString = option1.processOption("DEL", option, testEmployeeList);
         System.out.println(resultString);
@@ -124,7 +124,7 @@ public class OptionHandlerTest {
     @Test
     public void Option1_empty옵션처리_정상_동작_테스트() {
         Option1 option1 = new Option1();
-        IOption option = new EmptyOption();
+        IOption option = EmptyOption.getInstance();
 
         String resultString = option1.processOption("DEL", option, testEmployeeList);
         System.out.println(resultString);
@@ -134,8 +134,8 @@ public class OptionHandlerTest {
     @Test
     public void Option1_empty_employee_list_입력시_동작_테스트() {
         Option1 option1 = new Option1();
-        IOption printOption = new PrintOption();
-        IOption emptyOption = new PrintOption();
+        IOption printOption = PrintOption.getInstance();
+        IOption emptyOption =  EmptyOption.getInstance();
 
         String result_str = "";
 
@@ -153,7 +153,7 @@ public class OptionHandlerTest {
     @Test
     public void Option1_invalid_option_동작_테스트() {
         Option1 option1 = new Option1();
-        IOption option = new FirstNameOption("test name");
+        IOption option = FirstNameOption.getInstance("test name");
 
         assertThrows(IllegalArgumentException.class, () -> option1.processOption("DEL", option, testEmployeeList) );
     }
@@ -163,7 +163,7 @@ public class OptionHandlerTest {
         Option2 option2 = new Option2();
         List<Employee> filteredEmployeeList;
         IColumn column = new ColumnName();
-        IOption option = new FirstNameOption("PNQN");
+        IOption option = FirstNameOption.getInstance("PNQN");
 
         filteredEmployeeList = option2.processOption(option, testEmployeeList, column);
 
@@ -178,7 +178,7 @@ public class OptionHandlerTest {
         Option2 option2 = new Option2();
         List<Employee> filteredEmployeeList;
         IColumn column = new ColumnName();
-        IOption option = new LastNameOption("JANG");
+        IOption option = LastNameOption.getInstance("JANG");
 
         filteredEmployeeList = option2.processOption(option, testEmployeeList, column);
 
@@ -193,7 +193,7 @@ public class OptionHandlerTest {
         Option2 option2 = new Option2();
         List<Employee> filteredEmployeeList;
         IColumn column = new ColumnPhoneNum();
-        IOption option = new MiddleNumberOption("6094");
+        IOption option = MiddleNumberOption.getInstance("6094");
 
         filteredEmployeeList = option2.processOption(option, testEmployeeList, column);
 
@@ -208,7 +208,7 @@ public class OptionHandlerTest {
         Option2 option2 = new Option2();
         List<Employee> filteredEmployeeList;
         IColumn column = new ColumnPhoneNum();
-        IOption option = new LastNumberOption( "9243");
+        IOption option = LastNumberOption.getInstance( "9243");
 
         filteredEmployeeList = option2.processOption(option, testEmployeeList, column);
 
@@ -223,7 +223,7 @@ public class OptionHandlerTest {
         Option2 option2 = new Option2();
         List<Employee> filteredEmployeeList;
         IColumn column = new ColumnBirthday();
-        IOption option = new BirthYearOption("1970");
+        IOption option = BirthYearOption.getInstance("1970");
 
         filteredEmployeeList = option2.processOption(option, testEmployeeList, column);
 
@@ -238,7 +238,7 @@ public class OptionHandlerTest {
         Option2 option2 = new Option2();
         List<Employee> filteredEmployeeList;
         IColumn column = new ColumnBirthday();
-        IOption option = new BirthMonthOption("05");
+        IOption option = BirthMonthOption.getInstance("05");
 
         filteredEmployeeList = option2.processOption(option, testEmployeeList, column);
 
@@ -253,7 +253,7 @@ public class OptionHandlerTest {
         Option2 option2 = new Option2();
         List<Employee> filteredEmployeeList;
         IColumn column = new ColumnBirthday();
-        IOption option = new BirthDayOption("30");
+        IOption option = BirthDayOption.getInstance("30");
 
         filteredEmployeeList = option2.processOption(option, testEmployeeList, column);
 
@@ -269,7 +269,7 @@ public class OptionHandlerTest {
         List<Employee> emptyEmployeeList = new ArrayList<Employee>();
         List<Employee> filteredEmployeeList;
         IColumn column = new ColumnBirthday();
-        IOption option = new BirthDayOption( "30");
+        IOption option = BirthDayOption.getInstance( "30");
 
         filteredEmployeeList = option2.processOption(option, emptyEmployeeList, column);
 
@@ -282,7 +282,7 @@ public class OptionHandlerTest {
         IColumn nameColumn = new ColumnName();
         IColumn phoneNumColumn = new ColumnPhoneNum();
         IColumn birthdayColumn = new ColumnBirthday();
-        IOption option = new BirthYearOption("1990");
+        IOption option = BirthYearOption.getInstance("1990");
 
 
         assertThrows(IllegalArgumentException.class, () -> option2.processOption(option, testEmployeeList, nameColumn) );
@@ -295,7 +295,7 @@ public class OptionHandlerTest {
         Option2 option2 = new Option2();
         List<Employee> filteredEmployeeList;
         IColumn column = new ColumnBirthday();
-        IOption option = new EmptyOption();
+        IOption option = EmptyOption.getInstance();
 
 
         filteredEmployeeList = option2.processOption(option, testEmployeeList, column);
@@ -308,9 +308,9 @@ public class OptionHandlerTest {
     @Test
     public void OptionHandler_정상_동작_테스트() {
         List<IOption> optionTypeList = new ArrayList<IOption>();
-        optionTypeList.add(new PrintOption());
-        optionTypeList.add(new FirstNameOption("KFJ"));
-        optionTypeList.add(new EmptyOption());
+        optionTypeList.add(PrintOption.getInstance());
+        optionTypeList.add(FirstNameOption.getInstance("KFJ"));
+        optionTypeList.add(EmptyOption.getInstance());
 
         IColumn column = new ColumnName();
         List<Employee> filteredEmployeeList = optionHandler.processOptions("DEL", optionTypeList, column, testEmployeeList);

@@ -40,7 +40,7 @@ public enum Cmd {
             String sColName = CommandParser.getColumnData(input).get(0);
             IColumn colName = getColumnType(sColName);
             String colVal = CommandParser.getColumnData(input).get(1);
-            List<IOption> optionsList = CommandParser.getOptionsList(input, colName, colVal);
+            List<IOption> optionsList = CommandParser.getOptionsList(input);
 
             printLog("sColName: " + sColName + ", colVal: " + colVal
                     + ", optionsList: " + Arrays.toString(optionsList.toArray()));
@@ -64,7 +64,7 @@ public enum Cmd {
             String sColName = CommandParser.getColumnData(input).get(0);
             IColumn colName = getColumnType(sColName);
             String colVal = CommandParser.getColumnData(input).get(1);
-            List<IOption> optionsList = CommandParser.getOptionsList(input, colName, colVal);
+            List<IOption> optionsList = CommandParser.getOptionsList(input);
 
             printLog("sColName: " + sColName + ", colVal: " + colVal
                     + ", optionsList: " + Arrays.toString(optionsList.toArray()));
@@ -88,7 +88,7 @@ public enum Cmd {
             String sModifyColName = CommandParser.getColumnData(input).get(2);
             IColumn modifyColName = getColumnType(sModifyColName);
             String modifyColVal = CommandParser.getColumnData(input).get(3);
-            List<IOption> optionsList = CommandParser.getOptionsList(input, searchColName, searchColVal);
+            List<IOption> optionsList = CommandParser.getOptionsList(input);
 
             printLog("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal
                     + ", sModifyColName: " + sModifyColName + ", modifyColVal: " + modifyColVal
@@ -106,7 +106,7 @@ public enum Cmd {
 
     public abstract String run(String input, Database database);
 
-    private static IColumn getColumnType(String sColName) {
+    public static IColumn getColumnType(String sColName) {
         switch (sColName) {
             case "employeeNum":
                 return ColumnEmployeeNum.getInstance();

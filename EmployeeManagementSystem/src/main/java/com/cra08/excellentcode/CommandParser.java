@@ -3,6 +3,9 @@ package com.cra08.excellentcode;
 import com.cra08.excellentcode.datatype.Cmd;
 
 import com.cra08.excellentcode.column.ColumnBirthday;
+import com.cra08.excellentcode.column.ColumnCerti;
+import com.cra08.excellentcode.column.ColumnCl;
+import com.cra08.excellentcode.column.ColumnEmployeeNum;
 import com.cra08.excellentcode.column.ColumnName;
 import com.cra08.excellentcode.column.ColumnPhoneNum;
 import com.cra08.excellentcode.column.IColumn;
@@ -45,57 +48,61 @@ public class CommandParser {
         return Arrays.stream(Cmd.values()).anyMatch(s -> s.name().equals(cmd));
     }
 
-    public static List<IOption> getOptionsList(String cmdLine, IColumn column, String compareString) {
+    public static List<IOption> getOptionsList(String cmdLine) {
         List<String> optionStringList = getOption(cmdLine);
+        String sColumn = getColumnData(cmdLine).get(0);
+        IColumn column = getColumnType(sColumn);
+        String compareString = CommandParser.getColumnData(cmdLine).get(1);
+
         List<IOption> optionTypeList = new ArrayList<IOption>();
 
         for (String optionString : optionStringList) {
             if (optionString.equals("")) {
-                optionTypeList.add(new EmptyOption());
+                optionTypeList.add(EmptyOption.getInstance());
                 continue;
             }
 
             if (optionString.equals("-p")) {
-                optionTypeList.add(new PrintOption());
+                optionTypeList.add(PrintOption.getInstance());
                 continue;
             }
 
             if (optionString.equals("-f")) {
-                optionTypeList.add(new FirstNameOption(compareString));
+                optionTypeList.add(FirstNameOption.getInstance(compareString));
                 continue;
             }
 
             if (optionString.equals("-l")) {
                 if (column instanceof ColumnName) {
-                    optionTypeList.add(new LastNameOption(compareString));
+                    optionTypeList.add(LastNameOption.getInstance(compareString));
                     continue;
                 }
 
                 if (column instanceof ColumnPhoneNum) {
-                    optionTypeList.add(new LastNumberOption(compareString));
+                    optionTypeList.add(LastNumberOption.getInstance(compareString));
                     continue;
                 }
             }
 
             if (optionString.equals("-m")) {
                 if (column instanceof ColumnPhoneNum) {
-                    optionTypeList.add(new MiddleNumberOption(compareString));
+                    optionTypeList.add(MiddleNumberOption.getInstance(compareString));
                     continue;
                 }
 
                 if (column instanceof ColumnBirthday) {
-                    optionTypeList.add(new BirthMonthOption(compareString));
+                    optionTypeList.add(BirthMonthOption.getInstance(compareString));
                     continue;
                 }
             }
 
             if (optionString.equals("-y")) {
-                optionTypeList.add(new BirthYearOption(compareString));
+                optionTypeList.add(BirthYearOption.getInstance(compareString));
                 continue;
             }
 
             if (optionString.equals("-d")) {
-                optionTypeList.add(new BirthDayOption(compareString));
+                optionTypeList.add(BirthDayOption.getInstance(compareString));
                 continue;
             }
 
@@ -105,8 +112,7 @@ public class CommandParser {
         return optionTypeList;
     }
 
-    // TODO: change access modifier to private, and update all test code
-    public static ArrayList<String> getOption(String cmdLine) {
+    private static ArrayList<String> getOption(String cmdLine) {
         ArrayList<String> options = new ArrayList<>(Arrays.asList(parseCommandLine(cmdLine))
                 .subList(OPT1_POS, OPT3_POS + 1));
 
@@ -115,6 +121,25 @@ public class CommandParser {
         }
 
         return options;
+    }
+
+    public static IColumn getColumnType(String sColName) {
+        switch (sColName) {
+            case "employeeNum":
+                return ColumnEmployeeNum.getInstance();
+            case "name":
+                return ColumnName.getInstance();
+            case "cl":
+                return ColumnCl.getInstance();
+            case "phoneNum":
+                return ColumnPhoneNum.getInstance();
+            case "birthday":
+                return ColumnBirthday.getInstance();
+            case "certi":
+                return ColumnCerti.getInstance();
+            default:
+                throw new IllegalArgumentException("Cannot parse column type from input: " + sColName);
+        }
     }
 
     public static Employee getEmployee(String cmdLine) {
