@@ -147,13 +147,14 @@ public class CommandHandler {
         List<String> optionsList = CommandParser.getOption(input);
 
         printLog("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal
-                + ", searchColName: " + sModifyColName + ", sModifyColName: " + modifyColVal
-                + ", modifyColVal: " + Arrays.toString(optionsList.toArray()));
+                + ", sModifyColName: " + sModifyColName + ", modifyColVal: " + modifyColVal
+                + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToMod = database.sch(searchColName, searchColVal);
 
-        List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, modifyColName,
-                modifyColVal, employeesToMod);
+        OptionHandler optionHandler = new OptionHandler();
+        List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, searchColName,
+                searchColVal, employeesToMod);
 
         database.mod(employeesToModifyFiltered, modifyColName, modifyColVal);
 

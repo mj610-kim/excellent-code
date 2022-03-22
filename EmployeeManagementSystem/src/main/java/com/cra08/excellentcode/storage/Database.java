@@ -57,14 +57,15 @@ public class Database {
         return true;
     }
 
-    public boolean print() {
+    public List<String> print() {
+        List<String> printResult = new ArrayList<>();
         Iterator<String> keyIterator = employeeDbTree.keySet().iterator();
 
         while (keyIterator.hasNext()) {
-            System.out.println(keyIterator.next());
+            printResult.add(keyIterator.next().toString());
         }
 
-        return true;
+        return printResult;
     }
 
     public void copyDB() {
@@ -89,17 +90,17 @@ class SortEmployeeNum<T> implements Comparator<T> {
         String num1 = ((String) o1).substring(3);
         String num2 = ((String) o2).substring(3);
 
-        String calcYear1 = (year1.compareTo("21") < 0) ?
+        String calcYear1 = (year1.compareTo("21") <= 0) ?
                 String.valueOf(Integer.parseInt(year1) + 31) :
                 String.valueOf(Integer.parseInt(year1) - 69);
-        String calcYear2 = (year2.compareTo("21") < 0) ?
+        String calcYear2 = (year2.compareTo("21") <= 0) ?
                 String.valueOf(Integer.parseInt(year2) + 31) :
                 String.valueOf(Integer.parseInt(year2) - 69);
 
         if (calcYear1.compareTo(calcYear2) < 0) {
             return -1;
         } else if (calcYear1.compareTo(calcYear2) == 0) {
-            return num2.compareTo(num1);
+            return num1.compareTo(num2);
         } else {
             return 1;
         }
