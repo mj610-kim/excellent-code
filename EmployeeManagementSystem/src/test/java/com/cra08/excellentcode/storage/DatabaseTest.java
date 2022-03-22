@@ -3,6 +3,7 @@ package com.cra08.excellentcode.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
@@ -74,7 +75,7 @@ public class DatabaseTest {
     public void addTest() {
         assertTrue(db.add(mockEmployee1));
         assertTrue(db.add(mockEmployee2));
-        assertTrue(db.sort());
+        db.copyDB();
         assertEquals(2, db.getDatabaseSize());
     }
 
@@ -82,7 +83,18 @@ public class DatabaseTest {
     public void addTest_FailCase() {
         assertTrue(db.add(mockEmployee1));
         assertTrue(db.add(mockEmployee2));
+        db.copyDB();
         assertNotEquals(1, db.getDatabaseSize());
+    }
+
+    @Test
+    public void addTest_NullCase() {
+        assertTrue(db.add(mockEmployee1));
+        assertTrue(db.add(mockEmployee2));
+        db.copyDB();
+
+        assertThrows(NullPointerException.class, () -> db.add(null));
+        assertEquals(2, db.getDatabaseSize());
     }
 
     @Test
