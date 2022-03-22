@@ -1,6 +1,8 @@
 package com.cra08.excellentcode.optionhandler;
 
 import com.cra08.excellentcode.Employee;
+import com.cra08.excellentcode.column.*;
+
 import java.util.List;
 
 public class Option2 {
@@ -15,14 +17,14 @@ public class Option2 {
         employeeBirthDayFilter = new EmployeeBirthDayFilter();
     }
 
-    public List<Employee> processOption(String option, List<Employee> employeeList, String column,
+    public List<Employee> processOption(String option, List<Employee> employeeList, IColumn column,
             String condition) throws IllegalArgumentException {
 
         if (option.equals("")) {
             return employeeList;
         }
 
-        if (column.equals("name")) {
+        if (column instanceof ColumnName){
             if (!employeeNameFilter.checkValidOption(option)) {
                 throw new IllegalArgumentException("Invalid name option(" + option + ")");
             }
@@ -30,7 +32,7 @@ public class Option2 {
             return employeeNameFilter.process(option, employeeList, condition);
         }
 
-        if (column.equals("phoneNum")) {
+        if (column instanceof ColumnPhoneNum) {
             if (!employeePhoneNumFilter.checkValidOption(option)) {
                 throw new IllegalArgumentException("Invalid phoneNum option(" + option + ")");
             }
@@ -38,7 +40,7 @@ public class Option2 {
             return employeePhoneNumFilter.process(option, employeeList, condition);
         }
 
-        if (column.equals("birthday")) {
+        if (column instanceof ColumnBirthday) {
             if (!employeeBirthDayFilter.checkValidOption(option)) {
                 throw new IllegalArgumentException("Invalid birthday option(" + option + ")");
             }

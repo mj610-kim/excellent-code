@@ -14,8 +14,8 @@ class BirthMonthComparable implements Comparable<Employee> {
     public int compareTo(Employee o) {
         if (o.getBirthMonth().equals(this.birthMonth)) {
             return 0;
-        } else {
-            return -1;
         }
+
+        return -1;
     }
 }

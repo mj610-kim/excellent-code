@@ -14,8 +14,8 @@ class BirthYearComparable implements Comparable<Employee> {
     public int compareTo(Employee o) {
         if (o.getBirthYear().equals(this.birthYear)) {
             return 0;
-        } else {
-            return -1;
         }
+
+        return -1;
     }
 }

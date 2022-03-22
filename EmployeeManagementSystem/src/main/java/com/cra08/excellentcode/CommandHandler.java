@@ -25,6 +25,8 @@ public class CommandHandler {
     private final String outputFile;
     private final Database database;
 
+    private static final OptionHandler optionHandler = new OptionHandler();
+
     public CommandHandler(String inputFile, String outputFile) {
         this.inputFile = inputFile;
         this.outputFile = outputFile;
@@ -102,8 +104,8 @@ public class CommandHandler {
                 + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToDelete = database.sch(colName, colVal);
-        OptionHandler optionHandler = new OptionHandler();
-        List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(cmd, optionsList, sColName, colVal,
+
+        List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(cmd, optionsList, colName, colVal,
                 employeesToDelete);
 
         database.del(employeesToDeleteFiltered);
@@ -125,8 +127,8 @@ public class CommandHandler {
                 + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToSearch = database.sch(colName, colVal);
-        OptionHandler optionHandler = new OptionHandler();
-        optionHandler.processOptions(cmd, optionsList, sColName, colVal, employeesToSearch);
+
+        optionHandler.processOptions(cmd, optionsList, colName, colVal, employeesToSearch);
 
         return optionHandler.toString();
     }
@@ -149,8 +151,8 @@ public class CommandHandler {
                 + ", modifyColVal: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToMod = database.sch(searchColName, searchColVal);
-        OptionHandler optionHandler = new OptionHandler();
-        List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, sModifyColName,
+
+        List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, modifyColName,
                 modifyColVal, employeesToMod);
 
         database.mod(employeesToModifyFiltered, modifyColName, modifyColVal);
