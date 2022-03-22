@@ -20,10 +20,9 @@ public class OptionHandler {
         //option3 = new Option3();
     }
 
-    public List<Employee> processOptions(String commandName, List<IOption> optionList, IColumn column, String condition,
-                                         List<Employee> employeeList) {
+    public List<Employee> processOptions(String commandName, List<IOption> optionList, IColumn column, List<Employee> employeeList) {
         //List<Employee> filteredEmployeeList = option3.processOption(optionList.get(2), employeeList, column, condition);
-        List<Employee> filteredEmployeeList = option2.processOption(optionList.get(1), employeeList, column, condition);
+        List<Employee> filteredEmployeeList = option2.processOption(optionList.get(1), employeeList, column);
         outputString = option1.processOption(commandName, optionList.get(0), filteredEmployeeList);
 
         return filteredEmployeeList;

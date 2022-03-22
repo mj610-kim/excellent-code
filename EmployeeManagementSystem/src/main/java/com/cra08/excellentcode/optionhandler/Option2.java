@@ -10,13 +10,12 @@ public class Option2 {
 
     private static final EmployeeFilter employeeFilter = new EmployeeFilter();
 
-    public List<Employee> processOption(IOption option, List<Employee> employeeList, IColumn column,
-                                        String condition) throws IllegalArgumentException {
+    public List<Employee> processOption(IOption option, List<Employee> employeeList, IColumn column) throws IllegalArgumentException {
 
         if (!option.isValidOption(column)) {
             throw new IllegalArgumentException("Invalid option(" + option + ")");
         }
 
-        return employeeFilter.process(option, employeeList, condition);
+        return employeeFilter.process(option, employeeList);
     }
 }

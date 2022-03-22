@@ -100,15 +100,14 @@ public class CommandHandler {
         String sColName = CommandParser.getColumnData(input).get(0);
         IColumn colName = getColumnType(sColName);
         String colVal = CommandParser.getColumnData(input).get(1);
-        List<IOption> optionsList = getOptionList(CommandParser.getOption(input), colName);
+        List<IOption> optionsList = getOptionList(CommandParser.getOption(input), colName, colVal);
 
         printLog("sColName: " + sColName + ", colVal: " + colVal
                 + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToDelete = database.sch(colName, colVal);
 
-        List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(cmd, optionsList, colName, colVal,
-                employeesToDelete);
+        List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(cmd, optionsList, colName, employeesToDelete);
 
         database.del(employeesToDeleteFiltered);
 
@@ -123,14 +122,14 @@ public class CommandHandler {
         String sColName = CommandParser.getColumnData(input).get(0);
         IColumn colName = getColumnType(sColName);
         String colVal = CommandParser.getColumnData(input).get(1);
-        List<IOption> optionsList = getOptionList(CommandParser.getOption(input), colName);
+        List<IOption> optionsList = getOptionList(CommandParser.getOption(input), colName, colVal);
 
         printLog("sColName: " + sColName + ", colVal: " + colVal
                 + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToSearch = database.sch(colName, colVal);
 
-        optionHandler.processOptions(cmd, optionsList, colName, colVal, employeesToSearch);
+        optionHandler.processOptions(cmd, optionsList, colName, employeesToSearch);
 
         return optionHandler.toString();
     }
@@ -146,7 +145,7 @@ public class CommandHandler {
         String sModifyColName = CommandParser.getColumnData(input).get(2);
         IColumn modifyColName = getColumnType(sModifyColName);
         String modifyColVal = CommandParser.getColumnData(input).get(3);
-        List<IOption> optionsList = getOptionList(CommandParser.getOption(input), searchColName);
+        List<IOption> optionsList = getOptionList(CommandParser.getOption(input), searchColName, searchColVal);
 
         printLog("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal
                 + ", sModifyColName: " + sModifyColName + ", modifyColVal: " + modifyColVal
@@ -155,8 +154,7 @@ public class CommandHandler {
         List<Employee> employeesToMod = database.sch(searchColName, searchColVal);
 
         OptionHandler optionHandler = new OptionHandler();
-        List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, searchColName,
-                searchColVal, employeesToMod);
+        List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, searchColName, employeesToMod);
 
         database.mod(employeesToModifyFiltered, modifyColName, modifyColVal);
 
@@ -182,7 +180,7 @@ public class CommandHandler {
         }
     }
 
-    private List<IOption> getOptionList(List<String> optionStringList, IColumn column ) {
+    private List<IOption> getOptionList(List<String> optionStringList, IColumn column, String compareString ) {
         List<IOption> optionTypeList = new ArrayList<IOption>();
 
         for (String optionString : optionStringList) {
@@ -197,41 +195,41 @@ public class CommandHandler {
             }
 
             if (optionString.equals("-f")) {
-                optionTypeList.add(new FirstNameOption());
+                optionTypeList.add(new FirstNameOption(compareString));
                 continue;
             }
 
             if (optionString.equals("-l")) {
                 if (column instanceof ColumnName){
-                    optionTypeList.add(new LastNameOption());
+                    optionTypeList.add(new LastNameOption(compareString));
                     continue;
                 }
 
                 if (column instanceof ColumnPhoneNum){
-                    optionTypeList.add(new LastNumberOption());
+                    optionTypeList.add(new LastNumberOption(compareString));
                     continue;
                 }
             }
 
             if (optionString.equals("-m")) {
                 if (column instanceof ColumnPhoneNum){
-                    optionTypeList.add(new MiddleNumberOption());
+                    optionTypeList.add(new MiddleNumberOption(compareString));
                     continue;
                 }
 
                 if (column instanceof ColumnBirthday){
-                    optionTypeList.add(new BirthMonthOption());
+                    optionTypeList.add(new BirthMonthOption(compareString));
                     continue;
                 }
             }
 
             if (optionString.equals("-y")) {
-                optionTypeList.add(new BirthYearOption());
+                optionTypeList.add(new BirthYearOption(compareString));
                 continue;
             }
 
             if (optionString.equals("-d")) {
-                optionTypeList.add(new BirthDayOption());
+                optionTypeList.add(new BirthDayOption(compareString));
                 continue;
             }
 
