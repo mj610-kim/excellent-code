@@ -44,7 +44,6 @@ public enum Cmd {
     DEL {
         @Override
         public String run(String input, Database database) {
-            String cmd = CommandParser.getCommand(input);
             List<String> employees = CommandParser.getColumnData(input);
             printLog("cmd: DEL, employees: " + Arrays.toString(employees.toArray()));
 
@@ -59,7 +58,7 @@ public enum Cmd {
             List<Employee> employeesToDelete = database.sch(colName, colVal);
             OptionHandler optionHandler = new OptionHandler();
 
-            List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(cmd, optionsList, colName, employeesToDelete);
+            List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(this.name(), optionsList, colName, employeesToDelete);
 
             database.del(employeesToDeleteFiltered);
 
@@ -69,7 +68,6 @@ public enum Cmd {
     SCH {
         @Override
         public String run(String input, Database database) {
-            String cmd = CommandParser.getCommand(input);
             List<String> employees = CommandParser.getColumnData(input);
             printLog("cmd: SCH, employees: " + Arrays.toString(employees.toArray()));
 
@@ -83,7 +81,7 @@ public enum Cmd {
 
             List<Employee> employeesToSearch = database.sch(colName, colVal);
             OptionHandler optionHandler = new OptionHandler();
-            optionHandler.processOptions(cmd, optionsList, colName, employeesToSearch);
+            optionHandler.processOptions(this.name(), optionsList, colName, employeesToSearch);
 
             return optionHandler.toString();
         }
@@ -91,7 +89,6 @@ public enum Cmd {
     MOD {
         @Override
         public String run(String input, Database database) {
-            String cmd = CommandParser.getCommand(input);
             List<String> employees = CommandParser.getColumnData(input);
             printLog("cmd: MOD, employees: " + Arrays.toString(employees.toArray()));
 
@@ -109,7 +106,7 @@ public enum Cmd {
 
             List<Employee> employeesToMod = database.sch(searchColName, searchColVal);
             OptionHandler optionHandler = new OptionHandler();
-            List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, searchColName, employeesToMod);
+            List<Employee> employeesToModifyFiltered = optionHandler.processOptions(this.name(), optionsList, searchColName, employeesToMod);
 
             database.mod(employeesToModifyFiltered, modifyColName, modifyColVal);
 
