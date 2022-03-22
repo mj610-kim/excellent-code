@@ -68,9 +68,7 @@ public class CommandParser {
         final int cmdOptionLen = OPT3_POS + 1;
         final int oneColumnDataLen = cmdOptionLen + 2;
         final int twoColumnDataLen = cmdOptionLen + 4;
-        boolean validDataLength = isValidDataLength(cmd, oneColumnDataLen)
-                                    || isValidDataLength(cmd, twoColumnDataLen);
-        if (!validDataLength) {
+        if (!isValidDataLength(cmd, oneColumnDataLen, twoColumnDataLen)) {
             throw new IllegalArgumentException("Invalid Data Length");
         }
 
@@ -88,11 +86,13 @@ public class CommandParser {
         return str.replaceAll("\\p{Z}", "");
     }
 
-
     public static boolean isValidDataLength(String[] cmd, int validLength) {
         return cmd.length == validLength;
     }
 
+    public static boolean isValidDataLength(String[] cmd, int validLength1, int validLength2) {
+        return isValidDataLength(cmd, validLength1) || isValidDataLength(cmd, validLength2);
+    }
 }
 
 
