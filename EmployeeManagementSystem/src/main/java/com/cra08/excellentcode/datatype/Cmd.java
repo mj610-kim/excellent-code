@@ -16,18 +16,8 @@ import com.cra08.excellentcode.column.ColumnCerti;
 import com.cra08.excellentcode.column.ColumnPhoneNum;
 
 import com.cra08.excellentcode.option.IOption;
-import com.cra08.excellentcode.option.EmptyOption;
-import com.cra08.excellentcode.option.FirstNameOption;
-import com.cra08.excellentcode.option.PrintOption;
-import com.cra08.excellentcode.option.LastNameOption;
-import com.cra08.excellentcode.option.MiddleNumberOption;
-import com.cra08.excellentcode.option.LastNumberOption;
-import com.cra08.excellentcode.option.BirthYearOption;
-import com.cra08.excellentcode.option.BirthMonthOption;
-import com.cra08.excellentcode.option.BirthDayOption;
 import com.cra08.excellentcode.optionhandler.OptionHandler;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,7 +40,7 @@ public enum Cmd {
             String sColName = CommandParser.getColumnData(input).get(0);
             IColumn colName = getColumnType(sColName);
             String colVal = CommandParser.getColumnData(input).get(1);
-            List<IOption> optionsList = getOptionList(CommandParser.getOption(input), colName, colVal);
+            List<IOption> optionsList = CommandParser.getOptionsList(input, colName, colVal);
 
             printLog("sColName: " + sColName + ", colVal: " + colVal
                     + ", optionsList: " + Arrays.toString(optionsList.toArray()));
@@ -74,7 +64,7 @@ public enum Cmd {
             String sColName = CommandParser.getColumnData(input).get(0);
             IColumn colName = getColumnType(sColName);
             String colVal = CommandParser.getColumnData(input).get(1);
-            List<IOption> optionsList = getOptionList(CommandParser.getOption(input), colName, colVal);
+            List<IOption> optionsList = CommandParser.getOptionsList(input, colName, colVal);
 
             printLog("sColName: " + sColName + ", colVal: " + colVal
                     + ", optionsList: " + Arrays.toString(optionsList.toArray()));
@@ -98,7 +88,7 @@ public enum Cmd {
             String sModifyColName = CommandParser.getColumnData(input).get(2);
             IColumn modifyColName = getColumnType(sModifyColName);
             String modifyColVal = CommandParser.getColumnData(input).get(3);
-            List<IOption> optionsList = getOptionList(CommandParser.getOption(input), searchColName, searchColVal);
+            List<IOption> optionsList = CommandParser.getOptionsList(input, searchColName, searchColVal);
 
             printLog("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal
                     + ", sModifyColName: " + sModifyColName + ", modifyColVal: " + modifyColVal
@@ -133,65 +123,6 @@ public enum Cmd {
             default:
                 throw new IllegalArgumentException("Cannot parse column type from input: " + sColName);
         }
-    }
-
-    private static List<IOption> getOptionList(List<String> optionStringList, IColumn column, String compareString ) {
-        List<IOption> optionTypeList = new ArrayList<IOption>();
-
-        for (String optionString : optionStringList) {
-            if (optionString.equals("")) {
-                optionTypeList.add(new EmptyOption());
-                continue;
-            }
-
-            if (optionString.equals("-p")) {
-                optionTypeList.add(new PrintOption());
-                continue;
-            }
-
-            if (optionString.equals("-f")) {
-                optionTypeList.add(new FirstNameOption(compareString));
-                continue;
-            }
-
-            if (optionString.equals("-l")) {
-                if (column instanceof ColumnName){
-                    optionTypeList.add(new LastNameOption(compareString));
-                    continue;
-                }
-
-                if (column instanceof ColumnPhoneNum){
-                    optionTypeList.add(new LastNumberOption(compareString));
-                    continue;
-                }
-            }
-
-            if (optionString.equals("-m")) {
-                if (column instanceof ColumnPhoneNum){
-                    optionTypeList.add(new MiddleNumberOption(compareString));
-                    continue;
-                }
-
-                if (column instanceof ColumnBirthday){
-                    optionTypeList.add(new BirthMonthOption(compareString));
-                    continue;
-                }
-            }
-
-            if (optionString.equals("-y")) {
-                optionTypeList.add(new BirthYearOption(compareString));
-                continue;
-            }
-
-            if (optionString.equals("-d")) {
-                optionTypeList.add(new BirthDayOption(compareString));
-                continue;
-            }
-
-            throw new IllegalArgumentException("Cannot parse option type from input: " + optionString);
-        }
-
-        return optionTypeList;
     }
 
     private static void printLog(String log) {

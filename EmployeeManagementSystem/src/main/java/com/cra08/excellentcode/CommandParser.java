@@ -2,6 +2,20 @@ package com.cra08.excellentcode;
 
 import com.cra08.excellentcode.datatype.Cmd;
 
+import com.cra08.excellentcode.column.ColumnBirthday;
+import com.cra08.excellentcode.column.ColumnName;
+import com.cra08.excellentcode.column.ColumnPhoneNum;
+import com.cra08.excellentcode.column.IColumn;
+import com.cra08.excellentcode.option.BirthDayOption;
+import com.cra08.excellentcode.option.BirthMonthOption;
+import com.cra08.excellentcode.option.BirthYearOption;
+import com.cra08.excellentcode.option.EmptyOption;
+import com.cra08.excellentcode.option.FirstNameOption;
+import com.cra08.excellentcode.option.IOption;
+import com.cra08.excellentcode.option.LastNameOption;
+import com.cra08.excellentcode.option.LastNumberOption;
+import com.cra08.excellentcode.option.MiddleNumberOption;
+import com.cra08.excellentcode.option.PrintOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +45,67 @@ public class CommandParser {
         return Arrays.stream(Cmd.values()).anyMatch(s -> s.name().equals(cmd));
     }
 
+    public static List<IOption> getOptionsList(String cmdLine, IColumn column, String compareString) {
+        List<String> optionStringList = getOption(cmdLine);
+        List<IOption> optionTypeList = new ArrayList<IOption>();
+
+        for (String optionString : optionStringList) {
+            if (optionString.equals("")) {
+                optionTypeList.add(new EmptyOption());
+                continue;
+            }
+
+            if (optionString.equals("-p")) {
+                optionTypeList.add(new PrintOption());
+                continue;
+            }
+
+            if (optionString.equals("-f")) {
+                optionTypeList.add(new FirstNameOption(compareString));
+                continue;
+            }
+
+            if (optionString.equals("-l")) {
+                if (column instanceof ColumnName) {
+                    optionTypeList.add(new LastNameOption(compareString));
+                    continue;
+                }
+
+                if (column instanceof ColumnPhoneNum) {
+                    optionTypeList.add(new LastNumberOption(compareString));
+                    continue;
+                }
+            }
+
+            if (optionString.equals("-m")) {
+                if (column instanceof ColumnPhoneNum) {
+                    optionTypeList.add(new MiddleNumberOption(compareString));
+                    continue;
+                }
+
+                if (column instanceof ColumnBirthday) {
+                    optionTypeList.add(new BirthMonthOption(compareString));
+                    continue;
+                }
+            }
+
+            if (optionString.equals("-y")) {
+                optionTypeList.add(new BirthYearOption(compareString));
+                continue;
+            }
+
+            if (optionString.equals("-d")) {
+                optionTypeList.add(new BirthDayOption(compareString));
+                continue;
+            }
+
+            throw new IllegalArgumentException("Cannot parse option type from input: " + optionString);
+        }
+
+        return optionTypeList;
+    }
+
+    // TODO: change access modifier to private, and update all test code
     public static ArrayList<String> getOption(String cmdLine) {
         ArrayList<String> options = new ArrayList<>(Arrays.asList(parseCommandLine(cmdLine))
                 .subList(OPT1_POS, OPT3_POS + 1));
