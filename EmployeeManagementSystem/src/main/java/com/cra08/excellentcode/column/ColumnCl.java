@@ -16,7 +16,7 @@ public class ColumnCl implements IColumn {
     }
 
     @Override
-    public boolean contains(Employee employee, String value) {
-        return employee.getCl().contains(value);
+    public boolean matched(Employee employee, String value) {
+        return employee.getCl().equals(value);
     }
 }

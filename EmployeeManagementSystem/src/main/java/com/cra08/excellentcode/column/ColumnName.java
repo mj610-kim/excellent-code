@@ -16,7 +16,7 @@ public class ColumnName implements IColumn {
     }
 
     @Override
-    public boolean contains(Employee employee, String value) {
-        return employee.getName().contains(value);
+    public boolean matched(Employee employee, String value) {
+        return employee.getFirstName().equals(value) || employee.getLastName().equals(value);
     }
 }

@@ -51,6 +51,8 @@ public class DatabaseSchTest {
 
         when(mockEmployee1.getEmployeeNum()).thenReturn("18050301");
         when(mockEmployee1.getName()).thenReturn("KYUMOK KIM");
+        when(mockEmployee1.getFirstName()).thenReturn("KYUMOK");
+        when(mockEmployee1.getLastName()).thenReturn("KIM");
         when(mockEmployee1.getCl()).thenReturn("CL2");
         when(mockEmployee1.getPhoneNum()).thenReturn("010-9777-6055");
         when(mockEmployee1.getBirthDayAll()).thenReturn("19980906");
@@ -63,12 +65,6 @@ public class DatabaseSchTest {
         when(mockEmployee2.getBirthDayAll()).thenReturn("19771211");
         when(mockEmployee2.getCerti()).thenReturn("ADV");
 
-        when(mockColumnEmployeeNum.contains(mockEmployee1, "18050301")).thenReturn(true);
-        when(mockColumnName.contains(mockEmployee1, "KYUMOK KIM")).thenReturn(true);
-        when(mockColumnCl.contains(mockEmployee1, "CL2")).thenReturn(true);
-        when(mockColumnPhoneNum.contains(mockEmployee1, "010-9777-6055")).thenReturn(true);
-        when(mockColumnBirthday.contains(mockEmployee1, "19980906")).thenReturn(true);
-        when(mockColumnCerti.contains(mockEmployee1, "PRO")).thenReturn(true);
     }
 
     @Test
@@ -83,6 +79,7 @@ public class DatabaseSchTest {
     public void schTestByEmployeeNum() {
         addTest();
 
+        when(mockColumnEmployeeNum.matched(mockEmployee1, "18050301")).thenReturn(true);
         List<Employee> schResult = db.sch(mockColumnEmployeeNum, "18050301");
         assertEquals(1, schResult.size());
         assertEquals("18050301", schResult.get(0).getEmployeeNum());
@@ -92,7 +89,19 @@ public class DatabaseSchTest {
     public void schTestByName() {
         addTest();
 
+        when(mockColumnName.matched(mockEmployee1, "KYUMOK KIM")).thenReturn(true);
         List<Employee> schResult = db.sch(mockColumnName, "KYUMOK KIM");
+        assertEquals(1, schResult.size());
+
+        assertEquals("KYUMOK KIM", schResult.get(0).getName());
+    }
+
+    @Test
+    public void schTestByFirstName() {
+        addTest();
+
+        when(mockColumnName.matched(mockEmployee1, "KYUMOK")).thenReturn(true);
+        List<Employee> schResult = db.sch(mockColumnName, "KYUMOK");
         assertEquals(1, schResult.size());
 
         assertEquals("KYUMOK KIM", schResult.get(0).getName());
@@ -102,6 +111,7 @@ public class DatabaseSchTest {
     public void schTestByCl() {
         addTest();
 
+        when(mockColumnCl.matched(mockEmployee1, "CL2")).thenReturn(true);
         List<Employee> schResult = db.sch(mockColumnCl, "CL2");
         assertEquals(1, schResult.size());
 
@@ -112,6 +122,7 @@ public class DatabaseSchTest {
     public void schTestByPhoneNum() {
         addTest();
 
+        when(mockColumnPhoneNum.matched(mockEmployee1, "010-9777-6055")).thenReturn(true);
         List<Employee> schResult = db.sch(mockColumnPhoneNum, "010-9777-6055");
         assertEquals(1, schResult.size());
 
@@ -122,6 +133,7 @@ public class DatabaseSchTest {
     public void schTestByBirthDay() {
         addTest();
 
+        when(mockColumnBirthday.matched(mockEmployee1, "19980906")).thenReturn(true);
         List<Employee> schResult = db.sch(mockColumnBirthday, "19980906");
         assertEquals(1, schResult.size());
 
@@ -132,6 +144,7 @@ public class DatabaseSchTest {
     public void schTestByCerti() {
         addTest();
 
+        when(mockColumnCerti.matched(mockEmployee1, "PRO")).thenReturn(true);
         List<Employee> schResult = db.sch(mockColumnCerti, "PRO");
         assertEquals(1, schResult.size());
 

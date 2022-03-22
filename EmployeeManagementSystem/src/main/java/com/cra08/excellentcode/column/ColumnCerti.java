@@ -16,7 +16,7 @@ public class ColumnCerti implements IColumn {
     }
 
     @Override
-    public boolean contains(Employee employee, String value) {
-        return employee.getCerti().contains(value);
+    public boolean matched(Employee employee, String value) {
+        return employee.getCerti().equals(value);
     }
 }
