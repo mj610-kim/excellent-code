@@ -1,16 +1,18 @@
 package com.cra08.excellentcode;
 
-import java.io.IOException;
-
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello, ExcellentCode team!");
-        CommandHandler commandHandler = new CommandHandler();
-        try {
-            commandHandler.run();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (args.length != 2) {
+            System.out.println("Unexpected argument count");
+            System.out.println("Exiting...");
+            return;
         }
+
+        String inputFile = args[0];
+        String outputFile = args[1];
+
+        CommandHandler commandHandler = new CommandHandler(inputFile, outputFile);
+        commandHandler.run();
     }
 }

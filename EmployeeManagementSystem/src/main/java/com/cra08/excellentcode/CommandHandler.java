@@ -13,26 +13,26 @@ import com.cra08.excellentcode.io.LocalFileWriter;
 import com.cra08.excellentcode.io.OutputWriter;
 import com.cra08.excellentcode.optionhandler.OptionHandler;
 import com.cra08.excellentcode.storage.Database;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class CommandHandler {
 
-    private static final String INPUT_FILE = "input.txt";
-    private static final String OUTPUT_FILE = "output.txt";
+    private final String inputFile;
+    private final String outputFile;
+    private final Database database;
 
-    private Database database;
-
-    public CommandHandler() {
-        database = new Database();
+    public CommandHandler(String inputFile, String outputFile) {
+        this.inputFile = inputFile;
+        this.outputFile = outputFile;
+        this.database = new Database();
     }
 
-    public void run() throws IOException {
-        InputReader localFileReader = new LocalFileReader(INPUT_FILE);
+    public void run() {
+        InputReader localFileReader = new LocalFileReader(inputFile);
         localFileReader.open();
 
-        OutputWriter localFileWriter = new LocalFileWriter(OUTPUT_FILE);
+        OutputWriter localFileWriter = new LocalFileWriter(outputFile);
         localFileWriter.open();
 
         try {
