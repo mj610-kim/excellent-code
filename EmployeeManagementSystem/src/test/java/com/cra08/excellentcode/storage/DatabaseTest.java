@@ -64,7 +64,7 @@ public class DatabaseTest {
         when(mockEmployee2.getCerti()).thenReturn("ADV");
 
         when(mockColumnEmployeeNum.contains(mockEmployee1, "18050301")).thenReturn(true);
-
+        when(mockColumnName.contains(mockEmployee1, "KYUMOK KIM")).thenReturn(true);
         when(mockColumnCl.contains(mockEmployee1, "CL2")).thenReturn(true);
         when(mockColumnPhoneNum.contains(mockEmployee1, "010-9777-6055")).thenReturn(true);
         when(mockColumnBirthday.contains(mockEmployee1, "19980906")).thenReturn(true);
@@ -75,7 +75,7 @@ public class DatabaseTest {
     public void addTest() {
         assertTrue(db.add(mockEmployee1));
         assertTrue(db.add(mockEmployee2));
-        assertTrue(db.print());
+        db.copyDB();
         assertEquals(2, db.getDatabaseSize());
     }
 
@@ -83,6 +83,7 @@ public class DatabaseTest {
     public void addTest_FailCase() {
         assertTrue(db.add(mockEmployee1));
         assertTrue(db.add(mockEmployee2));
+        db.copyDB();
         assertNotEquals(1, db.getDatabaseSize());
     }
 
@@ -90,6 +91,7 @@ public class DatabaseTest {
     public void addTest_NullCase() {
         assertTrue(db.add(mockEmployee1));
         assertTrue(db.add(mockEmployee2));
+        db.copyDB();
 
         assertThrows(NullPointerException.class, () -> db.add(null));
         assertEquals(2, db.getDatabaseSize());
@@ -99,7 +101,6 @@ public class DatabaseTest {
     public void delTest() {
         addTest();
 
-        when(mockColumnName.contains(mockEmployee1, "KYUMOK KIM")).thenReturn(true);
         List<Employee> schResult = db.sch(mockColumnName, "KYUMOK KIM");
         assertEquals(1, schResult.size());
 

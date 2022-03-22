@@ -6,17 +6,17 @@ import com.cra08.excellentcode.column.IColumn;
 import java.util.*;
 
 public class Database {
-    private TreeMap<String, Employee> employeeDB;
-    private LinkedHashMap<String, Employee> employeeDBPerf;
+    private TreeMap<String, Employee> employeeDbTree;
+    private LinkedHashMap<String, Employee> employeeDbLinkedHash;
     private boolean isAddFinished = false;
 
     public Database() {
-        employeeDBPerf = new LinkedHashMap<>();
-        employeeDB = new TreeMap<>(new SortEmployeeNum<>());
+        employeeDbLinkedHash = new LinkedHashMap<>();
+        employeeDbTree = new TreeMap<>(new SortEmployeeNum<>());
     }
 
     public int getDatabaseSize() {
-        return employeeDB.size();
+        return employeeDbLinkedHash.size();
     }
 
     public boolean add(Employee employee) {
@@ -24,14 +24,14 @@ public class Database {
             throw new NullPointerException("employee object is null...");
         }
 
-        employeeDB.put(employee.getEmployeeNum(), employee);
+        employeeDbTree.put(employee.getEmployeeNum(), employee);
         return true;
     }
 
     public boolean del(List<Employee> employeeList) {
         setAddFinished();
         for (Employee employee : employeeList) {
-            employeeDBPerf.remove(employee.getEmployeeNum());
+            employeeDbLinkedHash.remove(employee.getEmployeeNum());
         }
         return true;
     }
@@ -40,7 +40,7 @@ public class Database {
         setAddFinished();
         List<Employee> resultEmployeeList = new ArrayList<>();
 
-        for (Map.Entry<String, Employee> employee : employeeDBPerf.entrySet()) {
+        for (Map.Entry<String, Employee> employee : employeeDbLinkedHash.entrySet()) {
             if (colName.contains(employee.getValue(), colValue)) {
                 resultEmployeeList.add(employee.getValue());
             }
@@ -52,13 +52,13 @@ public class Database {
     public boolean mod(List<Employee> employeeList, IColumn newColName, String newColValue) {
         setAddFinished();
         for (Employee employee : employeeList) {
-            employeeDBPerf.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
+            employeeDbLinkedHash.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
         }
         return true;
     }
 
     public boolean print() {
-        Iterator<String> keyIterator = employeeDB.keySet().iterator();
+        Iterator<String> keyIterator = employeeDbTree.keySet().iterator();
 
         while (keyIterator.hasNext()) {
             System.out.println(keyIterator.next());
@@ -67,10 +67,8 @@ public class Database {
         return true;
     }
 
-    private void copyDB() {
-        for (Map.Entry<String, Employee> employee : employeeDB.entrySet()) {
-            employeeDBPerf.put(employee.getKey(), employee.getValue());
-        }
+    public void copyDB() {
+        employeeDbLinkedHash.putAll(employeeDbTree);
     }
 
     private void setAddFinished() {
