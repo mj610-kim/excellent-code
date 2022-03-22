@@ -45,7 +45,9 @@ Unit test는 `develop` TDD로 브랜치에서 계속 진행하며, integration t
 ## <a name="pr-policy"></a>PR policy
 
 PR을 머지하기 위해서 다음 조건을 모두 만족해야 한다:
+
 - `Collaborator` 3명 중 2명 이상이 approve함
+- 모든 conversation을 resolve함
 - 모든 CI/CD `Checks`가 pass함
 
 PR 머지 조건은 자동화로 enforce한다.
