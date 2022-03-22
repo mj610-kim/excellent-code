@@ -59,19 +59,19 @@ public class DatabaseModTest {
         when(mockEmployee2.getBirthDayAll()).thenReturn("19771211");
         when(mockEmployee2.getCerti()).thenReturn("ADV");
 
-        when(mockColumnEmployeeNum.contains(mockEmployee1, "18050301")).thenReturn(true);
-        when(mockColumnName.contains(mockEmployee1, "KYUMOK KIM")).thenReturn(true);
-        when(mockColumnCl.contains(mockEmployee1, "CL2")).thenReturn(true);
-        when(mockColumnPhoneNum.contains(mockEmployee1, "010-9777-6055")).thenReturn(true);
-        when(mockColumnBirthday.contains(mockEmployee1, "19980906")).thenReturn(true);
-        when(mockColumnCerti.contains(mockEmployee1, "PRO")).thenReturn(true);
+        when(mockColumnEmployeeNum.matched(mockEmployee1, "18050301")).thenReturn(true);
+        when(mockColumnName.matched(mockEmployee1, "KYUMOK KIM")).thenReturn(true);
+        when(mockColumnCl.matched(mockEmployee1, "CL2")).thenReturn(true);
+        when(mockColumnPhoneNum.matched(mockEmployee1, "010-9777-6055")).thenReturn(true);
+        when(mockColumnBirthday.matched(mockEmployee1, "19980906")).thenReturn(true);
+        when(mockColumnCerti.matched(mockEmployee1, "PRO")).thenReturn(true);
     }
 
     @Test
     public void addTest() {
         assertTrue(db.add(mockEmployee1));
         assertTrue(db.add(mockEmployee2));
-        assertTrue(db.sort());
+        db.copyDB();
         assertEquals(2, db.getDatabaseSize());
     }
 

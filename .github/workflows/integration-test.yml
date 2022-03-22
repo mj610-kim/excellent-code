@@ -1,0 +1,75 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Integration test
+
+on: [pull_request]
+
+jobs:
+  run_test_cases:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '8'
+        cache: 'gradle'
+    - name: Run test (sample)
+      working-directory: ./EmployeeManagementSystem
+      run: ./gradlew run --no-daemon --args='input_20_20.txt output_actual_20_20.txt'
+    - name: Verify result (sample)
+      uses: LouisBrunner/diff-action@v0.1.2
+      with:
+        old: ./EmployeeManagementSystem/output_expected_20_20.txt
+        new: ./EmployeeManagementSystem/output_actual_20_20.txt
+        mode: addition
+        tolerance: same
+        output: out_20_20.txt
+    - name: Run test (HJ)
+      working-directory: ./EmployeeManagementSystem
+      run: ./gradlew run --no-daemon --args='input_hj.txt output_actual_hj.txt'
+    - name: Verify result (HJ)
+      uses: LouisBrunner/diff-action@v0.1.2
+      with:
+        old: ./EmployeeManagementSystem/output_expected_hj.txt
+        new: ./EmployeeManagementSystem/output_actual_hj.txt
+        mode: addition
+        tolerance: same
+        output: out_hj.txt
+    - name: Run test (MJ)
+      working-directory: ./EmployeeManagementSystem
+      run: ./gradlew run --no-daemon --args='input_mj.txt output_actual_mj.txt'
+    - name: Verify result (MJ)
+      uses: LouisBrunner/diff-action@v0.1.2
+      with:
+        old: ./EmployeeManagementSystem/output_expected_mj.txt
+        new: ./EmployeeManagementSystem/output_actual_mj.txt
+        mode: addition
+        tolerance: same
+        output: out_mj.txt
+    - name: Run test (SJ)
+      working-directory: ./EmployeeManagementSystem
+      run: ./gradlew run --no-daemon --args='input_sj.txt output_actual_sj.txt'
+    - name: Verify result (SJ)
+      uses: LouisBrunner/diff-action@v0.1.2
+      with:
+        old: ./EmployeeManagementSystem/output_expected_sj.txt
+        new: ./EmployeeManagementSystem/output_actual_sj.txt
+        mode: addition
+        tolerance: same
+        output: out_sj.txt
+    - name: Run test (TM)
+      working-directory: ./EmployeeManagementSystem
+      run: ./gradlew run --no-daemon --args='input_tm.txt output_actual_tm.txt'
+    - name: Verify result (TM)
+      uses: LouisBrunner/diff-action@v0.1.2
+      with:
+        old: ./EmployeeManagementSystem/output_expected_tm.txt
+        new: ./EmployeeManagementSystem/output_actual_tm.txt
+        mode: addition
+        tolerance: same
+        output: out_tm.txt

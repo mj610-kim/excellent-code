@@ -89,13 +89,13 @@ public enum Cmd {
             List<String> optionsList = CommandParser.getOption(input);
 
             printLog("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal
-                    + ", searchColName: " + sModifyColName + ", sModifyColName: " + modifyColVal
-                    + ", modifyColVal: " + Arrays.toString(optionsList.toArray()));
+                    + ", sModifyColName: " + sModifyColName + ", modifyColVal: " + modifyColVal
+                    + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
             List<Employee> employeesToMod = database.sch(searchColName, searchColVal);
             OptionHandler optionHandler = new OptionHandler();
-            List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, sModifyColName,
-                    modifyColVal, employeesToMod);
+            List<Employee> employeesToModifyFiltered = optionHandler.processOptions(cmd, optionsList, sSearchColName,
+                    searchColVal, employeesToMod);
 
             database.mod(employeesToModifyFiltered, modifyColName, modifyColVal);
 
