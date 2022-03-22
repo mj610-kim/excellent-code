@@ -2,6 +2,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 import com.cra08.excellentcode.CommandParser;
+import com.cra08.excellentcode.Employee;
 import org.junit.Test;
 import org.mockito.Mock;
 
@@ -11,7 +12,8 @@ public class CommandParserTest {
     String cmdLine2 = "DEL, , , ,birthday,19900906";
     String cmdLine3 = "MOD,-p,, ,name,KYUMOK KIM,name,KYUMOK LEE";
     String cmdLine4 = "MOD,-p,-m, ,birthday,09,cl,CL2";
-    String cmdLine5 = "MOE,-p,-m, ,birthday,09,cl,CL2";
+    String invalidCmdLine = "MOE,-p,-m, ,birthday,09,cl,CL2";
+    String invalidDataLength = "ADD, , , ,18050301,KYUMOK KIM,CL2,010-9777-6055";
 
     @Mock
     CommandParser cmdParser = mock(CommandParser.class);
@@ -22,13 +24,14 @@ public class CommandParserTest {
         assertEquals("DEL", cmdParser.getCommand(cmdLine2));
         assertEquals("MOD", cmdParser.getCommand(cmdLine3));
         assertEquals("MOD", cmdParser.getCommand(cmdLine4));
-        assertThrows(IllegalArgumentException.class, () -> cmdParser.getCommand(cmdLine5));
+        assertThrows(IllegalArgumentException.class, () -> cmdParser.getCommand(invalidCmdLine));
     }
 
     @Test
     public void getEmployeeTest() {
         String birthday = cmdParser.getEmployee(cmdLine1).getBirthDayAll();
         assertEquals("19980906", birthday);
+        assertThrows(IllegalArgumentException.class, () -> cmdParser.getEmployee(invalidDataLength));
     }
 
     @Test
