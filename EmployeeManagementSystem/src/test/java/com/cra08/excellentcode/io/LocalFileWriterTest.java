@@ -3,6 +3,7 @@ package com.cra08.excellentcode.io;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
@@ -92,6 +93,11 @@ public class LocalFileWriterTest {
         localFileWriterUnderTest.close();
 
         verifyFile(temporaryDirectory.getPath() + SAMPLE_OUTPUT_FILE_NAME, SAMPLE_OUTPUT_FILE_LINES);
+    }
+
+    @Test
+    public void setNextLine_beforeOpening() {
+        assertThrows(NullPointerException.class, () -> localFileWriterUnderTest.setNextLine(SAMPLE_OUTPUT_FILE_LINES[0]));
     }
 
     private void writeOutput(String[] fileLines) {
