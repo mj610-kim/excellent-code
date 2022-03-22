@@ -143,4 +143,108 @@ public class DatabaseSortTest {
         assertEquals( "21130139", printResult.get(8));
         assertEquals( "21131253", printResult.get(9));
     }
+
+    @Test
+    public void sortTest2() {
+        Employee employee0 = mock(Employee.class);
+        Employee employee1 = mock(Employee.class);
+        Employee employee2 = mock(Employee.class);
+        Employee employee3 = mock(Employee.class);
+        Employee employee4 = mock(Employee.class);
+        Employee employee5 = mock(Employee.class);
+        Employee employee6 = mock(Employee.class);
+        Employee employee7 = mock(Employee.class);
+        Employee employee8 = mock(Employee.class);
+        Employee employee9 = mock(Employee.class);
+        Employee employee10 = mock(Employee.class);
+        Employee employee11 = mock(Employee.class);
+        Employee employee12 = mock(Employee.class);
+        Employee employee13 = mock(Employee.class);
+        Employee employee14 = mock(Employee.class);
+
+        when(employee0.getEmployeeNum()).thenReturn("69000001");
+        when(employee1.getEmployeeNum()).thenReturn("69000002");
+        when(employee2.getEmployeeNum()).thenReturn("69000003");
+
+        when(employee3.getEmployeeNum()).thenReturn("89000001");
+        when(employee4.getEmployeeNum()).thenReturn("89000002");
+        when(employee5.getEmployeeNum()).thenReturn("89000003");
+
+        when(employee6.getEmployeeNum()).thenReturn("09000001");
+        when(employee7.getEmployeeNum()).thenReturn("09000002");
+        when(employee8.getEmployeeNum()).thenReturn("09000003");
+
+        when(employee9.getEmployeeNum()).thenReturn("11000001");
+        when(employee10.getEmployeeNum()).thenReturn("11000002");
+        when(employee11.getEmployeeNum()).thenReturn("11000003");
+
+        when(employee12.getEmployeeNum()).thenReturn("21000001");
+        when(employee13.getEmployeeNum()).thenReturn("21000002");
+        when(employee14.getEmployeeNum()).thenReturn("21000003");
+
+        db.add(employee1);
+        db.add(employee12);
+        db.add(employee6);
+        db.add(employee10);
+        db.add(employee3);
+        db.add(employee2);
+        db.add(employee7);
+        db.add(employee5);
+        db.add(employee8);
+        db.add(employee0);
+        db.add(employee13);
+        db.add(employee11);
+        db.add(employee9);
+        db.add(employee4);
+        db.add(employee14);
+
+        List<String> printResult = db.print();
+        System.out.println(printResult);
+
+        assertEquals( "69000001", printResult.get(0));
+        assertEquals( "69000002", printResult.get(1));
+        assertEquals( "69000003", printResult.get(2));
+        assertEquals( "89000001", printResult.get(3));
+        assertEquals( "89000002", printResult.get(4));
+        assertEquals( "89000003", printResult.get(5));
+        assertEquals( "09000001", printResult.get(6));
+        assertEquals( "09000002", printResult.get(7));
+        assertEquals( "09000003", printResult.get(8));
+        assertEquals( "11000001", printResult.get(9));
+        assertEquals( "11000002", printResult.get(10));
+        assertEquals( "11000003", printResult.get(11));
+        assertEquals( "21000001", printResult.get(12));
+        assertEquals( "21000002", printResult.get(13));
+        assertEquals( "21000003", printResult.get(14));
+    }
+
+    @Test
+    public void sortTest3() {
+        Employee employee1 = mock(Employee.class);
+        Employee employee2 = mock(Employee.class);
+        Employee employee3 = mock(Employee.class);
+        Employee employee4 = mock(Employee.class);
+        Employee employee5 = mock(Employee.class);
+
+        when(employee1.getEmployeeNum()).thenReturn("15122555");
+        when(employee2.getEmployeeNum()).thenReturn("10119921");
+        when(employee3.getEmployeeNum()).thenReturn("04102919");
+        when(employee4.getEmployeeNum()).thenReturn("73100202");
+        when(employee5.getEmployeeNum()).thenReturn("16132569");
+
+        db.add(employee1);
+        db.add(employee2);
+        db.add(employee3);
+        db.add(employee4);
+        db.add(employee5);
+
+        List<String> printResult = db.print();
+        System.out.println(printResult);
+
+        assertEquals( "73100202", printResult.get(0));
+        assertEquals( "04102919", printResult.get(1));
+        assertEquals( "10119921", printResult.get(2));
+        assertEquals( "15122555", printResult.get(3));
+        assertEquals( "16132569", printResult.get(4));
+    }
 }
