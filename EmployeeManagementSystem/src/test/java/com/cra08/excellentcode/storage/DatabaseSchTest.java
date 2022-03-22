@@ -75,7 +75,6 @@ public class DatabaseSchTest {
     public void addTest() {
         assertTrue(db.add(mockEmployee1));
         assertTrue(db.add(mockEmployee2));
-        assertTrue(db.print());
         db.copyDB();
         assertEquals(2, db.getDatabaseSize());
     }
