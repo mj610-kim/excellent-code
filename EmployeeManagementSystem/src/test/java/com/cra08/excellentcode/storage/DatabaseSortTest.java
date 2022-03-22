@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
-import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -69,7 +68,7 @@ public class DatabaseSortTest {
         assertTrue(db.add(mockEmployee2));
         assertTrue(db.add(mockEmployee3));
         assertTrue(db.add(mockEmployee4));
-        db.copyDB();
+        assertTrue(db.copyDB());
         assertEquals(4, db.getDatabaseSize());
     }
 
@@ -80,7 +79,7 @@ public class DatabaseSortTest {
             db.add(new Employee(employeeNum, "TTT KKK", "CL2",
                     "010-1234-5678", "19900101", "PRO"));
         }
-        db.copyDB();
+        assertTrue(db.copyDB());
         System.out.println(db.getDatabaseSize());
         assertEquals(100000, db.getDatabaseSize());
     }
