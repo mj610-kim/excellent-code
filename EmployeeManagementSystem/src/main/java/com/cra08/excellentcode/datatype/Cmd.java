@@ -8,12 +8,6 @@ import com.cra08.excellentcode.Employee;
 import com.cra08.excellentcode.storage.Database;
 
 import com.cra08.excellentcode.column.IColumn;
-import com.cra08.excellentcode.column.ColumnCl;
-import com.cra08.excellentcode.column.ColumnEmployeeNum;
-import com.cra08.excellentcode.column.ColumnName;
-import com.cra08.excellentcode.column.ColumnBirthday;
-import com.cra08.excellentcode.column.ColumnCerti;
-import com.cra08.excellentcode.column.ColumnPhoneNum;
 
 import com.cra08.excellentcode.option.IOption;
 import com.cra08.excellentcode.optionhandler.OptionHandler;
@@ -38,7 +32,7 @@ public enum Cmd {
             printLog("cmd: DEL, employees: " + Arrays.toString(employees.toArray()));
 
             String sColName = CommandParser.getColumnData(input).get(0);
-            IColumn colName = getColumnType(sColName);
+            IColumn colName = CommandParser.getColumnType(sColName);
             String colVal = CommandParser.getColumnData(input).get(1);
             List<IOption> optionsList = CommandParser.getOptionsList(input);
 
@@ -48,7 +42,8 @@ public enum Cmd {
             List<Employee> employeesToDelete = database.sch(colName, colVal);
             OptionHandler optionHandler = new OptionHandler();
 
-            List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(this.name(), optionsList, colName, employeesToDelete);
+            List<Employee> employeesToDeleteFiltered = optionHandler.processOptions(this.name(), optionsList, colName,
+                    employeesToDelete);
 
             database.del(employeesToDeleteFiltered);
 
@@ -62,7 +57,7 @@ public enum Cmd {
             printLog("cmd: SCH, employees: " + Arrays.toString(employees.toArray()));
 
             String sColName = CommandParser.getColumnData(input).get(0);
-            IColumn colName = getColumnType(sColName);
+            IColumn colName = CommandParser.getColumnType(sColName);
             String colVal = CommandParser.getColumnData(input).get(1);
             List<IOption> optionsList = CommandParser.getOptionsList(input);
 
@@ -83,10 +78,10 @@ public enum Cmd {
             printLog("cmd: MOD, employees: " + Arrays.toString(employees.toArray()));
 
             String sSearchColName = CommandParser.getColumnData(input).get(0);
-            IColumn searchColName = getColumnType(sSearchColName);
+            IColumn searchColName = CommandParser.getColumnType(sSearchColName);
             String searchColVal = CommandParser.getColumnData(input).get(1);
             String sModifyColName = CommandParser.getColumnData(input).get(2);
-            IColumn modifyColName = getColumnType(sModifyColName);
+            IColumn modifyColName = CommandParser.getColumnType(sModifyColName);
             String modifyColVal = CommandParser.getColumnData(input).get(3);
             List<IOption> optionsList = CommandParser.getOptionsList(input);
 
@@ -96,7 +91,8 @@ public enum Cmd {
 
             List<Employee> employeesToMod = database.sch(searchColName, searchColVal);
             OptionHandler optionHandler = new OptionHandler();
-            List<Employee> employeesToModifyFiltered = optionHandler.processOptions(this.name(), optionsList, searchColName, employeesToMod);
+            List<Employee> employeesToModifyFiltered = optionHandler.processOptions(this.name(), optionsList,
+                    searchColName, employeesToMod);
 
             database.mod(employeesToModifyFiltered, modifyColName, modifyColVal);
 
@@ -105,25 +101,6 @@ public enum Cmd {
     };
 
     public abstract String run(String input, Database database);
-
-    public static IColumn getColumnType(String sColName) {
-        switch (sColName) {
-            case "employeeNum":
-                return ColumnEmployeeNum.getInstance();
-            case "name":
-                return ColumnName.getInstance();
-            case "cl":
-                return ColumnCl.getInstance();
-            case "phoneNum":
-                return ColumnPhoneNum.getInstance();
-            case "birthday":
-                return ColumnBirthday.getInstance();
-            case "certi":
-                return ColumnCerti.getInstance();
-            default:
-                throw new IllegalArgumentException("Cannot parse column type from input: " + sColName);
-        }
-    }
 
     private static void printLog(String log) {
         if (IS_DEBUG_MODE) {
