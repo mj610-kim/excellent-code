@@ -13,6 +13,7 @@ import com.cra08.excellentcode.io.LocalFileWriter;
 import com.cra08.excellentcode.io.OutputWriter;
 import com.cra08.excellentcode.optionhandler.OptionHandler;
 import com.cra08.excellentcode.storage.Database;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,48 +37,47 @@ public class CommandHandler {
         localFileWriter.open();
 
         try {
-            while (true) {
-                String input = localFileReader.getNextLine();
-                if (input == null) {
-                    localFileReader.close();
-                    localFileWriter.close();
-                    return;
-                }
-                String output = handleInput(input);
-                System.out.println("output: " + output);
-                if (output != null) {
-                    localFileWriter.setNextLine(output);
-                }
-            }
-        } catch (Exception e) {
+            runCore(localFileReader, localFileWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
             localFileReader.close();
             localFileWriter.close();
+        }
+    }
+
+    public void runCore(InputReader inputReader, OutputWriter outputWriter) throws IOException {
+        while (true) {
+            String input = inputReader.getNextLine();
+            if (input == null) {
+                return;
+            }
+
+            String output = handleInput(input);
+            System.out.println("output: " + output);
+            if (output != null) {
+                outputWriter.setNextLine(output);
+            }
         }
     }
 
     private String handleInput(String input) {
         System.out.println("input: " + input);
         String cmd = CommandParser.getCommand(input);
-        System.out.println("cmd: " + cmd);
 
-        String result = null;
         switch (cmd) {
             case "ADD":
                 handleAddCmd(input);
-                break;
+                return null;
             case "DEL":
-                result = handleDelCmd(input);
-                break;
+                return handleDelCmd(input);
             case "SCH":
-                result = handleSchCmd(input);
-                break;
+                return handleSchCmd(input);
             case "MOD":
-                result = handleModCmd(input);
-                break;
-
+                return handleModCmd(input);
+            default:
+                throw new IllegalArgumentException("Unexpected cmd...");
         }
-
-        return result;
     }
 
     private void handleAddCmd(String input) {
