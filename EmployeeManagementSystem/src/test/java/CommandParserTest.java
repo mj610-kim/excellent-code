@@ -1,5 +1,4 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 
 import com.cra08.excellentcode.CommandParser;
@@ -53,9 +52,11 @@ public class CommandParserTest {
     @Test
     public void getOptionTest() {
         assertEquals("",cmdParser.getOption(cmdLine1).get(0));
+        assertNotEquals(" ",cmdParser.getOption(cmdLine1).get(0));
         assertEquals("",cmdParser.getOption(cmdLine1).get(1));
+        assertNotEquals(" ",cmdParser.getOption(cmdLine1).get(1));
         assertEquals("",cmdParser.getOption(cmdLine1).get(2));
-
+        assertNotEquals(" ",cmdParser.getOption(cmdLine1).get(2));
         assertEquals("-p", cmdParser.getOption(cmdLine3).get(0));
         assertEquals("-m", cmdParser.getOption(cmdLine4).get(1));
 
