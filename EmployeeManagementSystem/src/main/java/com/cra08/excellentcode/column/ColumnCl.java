@@ -3,6 +3,11 @@ package com.cra08.excellentcode.column;
 import com.cra08.excellentcode.Employee;
 
 public class ColumnCl implements IColumn {
+    private static ColumnCl columnCl = new ColumnCl();
+
+    public static ColumnCl getInstance() {
+        return columnCl;
+    }
 
     @Override
     public Employee setValue(Employee employee, String value) {

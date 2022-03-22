@@ -161,17 +161,17 @@ public class CommandHandler {
     private IColumn getColumnType(String sColName) {
         switch (sColName) {
             case "employeeNum":
-                return new ColumnEmployeeNum();
+                return ColumnEmployeeNum.getInstance();
             case "name":
-                return new ColumnName();
+                return ColumnName.getInstance();
             case "cl":
-                return new ColumnCl();
+                return ColumnCl.getInstance();
             case "phoneNum":
-                return new ColumnPhoneNum();
+                return ColumnPhoneNum.getInstance();
             case "birthday":
-                return new ColumnBirthday();
+                return ColumnBirthday.getInstance();
             case "certi":
-                return new ColumnCerti();
+                return ColumnCerti.getInstance();
             default:
                 throw new IllegalArgumentException("Cannot parse column type from input: " + sColName);
         }
