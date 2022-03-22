@@ -6,36 +6,41 @@ import com.cra08.excellentcode.column.IColumn;
 import java.util.*;
 
 public class Database {
-
-    private HashMap<String, Employee> unsortedEmployeeDB;
-    TreeMap<String, Employee> employeeDB;
+    private TreeMap<String, Employee> employeeDbTree;
+    private LinkedHashMap<String, Employee> employeeDbLinkedHash;
+    private boolean isAddFinished = false;
 
     public Database() {
-        unsortedEmployeeDB = new HashMap<>();
-        //employeeDB = new TreeMap<>();
-        employeeDB = new TreeMap<>(new SortEmployeeNum<>());
+        employeeDbLinkedHash = new LinkedHashMap<>();
+        employeeDbTree = new TreeMap<>(new SortEmployeeNum<>());
     }
 
     public int getDatabaseSize() {
-        return employeeDB.size();
+        return employeeDbLinkedHash.size();
     }
 
     public boolean add(Employee employee) {
-        employeeDB.put(employee.getEmployeeNum(), employee);
+        if (employee == null) {
+            throw new NullPointerException("employee object is null...");
+        }
+
+        employeeDbTree.put(employee.getEmployeeNum(), employee);
         return true;
     }
 
     public boolean del(List<Employee> employeeList) {
+        setAddFinished();
         for (Employee employee : employeeList) {
-            employeeDB.remove(employee.getEmployeeNum());
+            employeeDbLinkedHash.remove(employee.getEmployeeNum());
         }
         return true;
     }
 
     public List<Employee> sch(IColumn colName, String colValue) {
+        setAddFinished();
         List<Employee> resultEmployeeList = new ArrayList<>();
 
-        for (Map.Entry<String, Employee> employee : employeeDB.entrySet()) {
+        for (Map.Entry<String, Employee> employee : employeeDbLinkedHash.entrySet()) {
             if (colName.contains(employee.getValue(), colValue)) {
                 resultEmployeeList.add(employee.getValue());
             }
@@ -45,25 +50,32 @@ public class Database {
     }
 
     public boolean mod(List<Employee> employeeList, IColumn newColName, String newColValue) {
-        if (newColValue.equals("FB NTAWR")) {
-            System.out.println(employeeDB);
-        }
+        setAddFinished();
         for (Employee employee : employeeList) {
-            employeeDB.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
+            employeeDbLinkedHash.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
         }
         return true;
     }
 
-    public boolean sort() {
-        System.out.println("sort");
-
-        Iterator<String> keyIterator = employeeDB.keySet().iterator();
+    public boolean print() {
+        Iterator<String> keyIterator = employeeDbTree.keySet().iterator();
 
         while (keyIterator.hasNext()) {
             System.out.println(keyIterator.next());
         }
 
         return true;
+    }
+
+    public void copyDB() {
+        employeeDbLinkedHash.putAll(employeeDbTree);
+    }
+
+    private void setAddFinished() {
+        if (!isAddFinished) {
+            isAddFinished = true;
+            copyDB();
+        }
     }
 }
 
