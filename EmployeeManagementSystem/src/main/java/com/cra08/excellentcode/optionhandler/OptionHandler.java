@@ -2,6 +2,7 @@ package com.cra08.excellentcode.optionhandler;
 
 import com.cra08.excellentcode.Employee;
 import com.cra08.excellentcode.column.IColumn;
+import com.cra08.excellentcode.option.IOption;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class OptionHandler {
         //option3 = new Option3();
     }
 
-    public List<Employee> processOptions(String commandName, List<String> optionList, IColumn column, String condition,
+    public List<Employee> processOptions(String commandName, List<IOption> optionList, IColumn column, String condition,
                                          List<Employee> employeeList) {
         //List<Employee> filteredEmployeeList = option3.processOption(optionList.get(2), employeeList, column, condition);
         List<Employee> filteredEmployeeList = option2.processOption(optionList.get(1), employeeList, column, condition);

@@ -11,9 +11,11 @@ import com.cra08.excellentcode.io.InputReader;
 import com.cra08.excellentcode.io.LocalFileReader;
 import com.cra08.excellentcode.io.LocalFileWriter;
 import com.cra08.excellentcode.io.OutputWriter;
+import com.cra08.excellentcode.option.*;
 import com.cra08.excellentcode.optionhandler.OptionHandler;
 import com.cra08.excellentcode.storage.Database;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -98,7 +100,7 @@ public class CommandHandler {
         String sColName = CommandParser.getColumnData(input).get(0);
         IColumn colName = getColumnType(sColName);
         String colVal = CommandParser.getColumnData(input).get(1);
-        List<String> optionsList = CommandParser.getOption(input);
+        List<IOption> optionsList = getOptionList(CommandParser.getOption(input), colName);
 
         printLog("sColName: " + sColName + ", colVal: " + colVal
                 + ", optionsList: " + Arrays.toString(optionsList.toArray()));
@@ -121,7 +123,7 @@ public class CommandHandler {
         String sColName = CommandParser.getColumnData(input).get(0);
         IColumn colName = getColumnType(sColName);
         String colVal = CommandParser.getColumnData(input).get(1);
-        List<String> optionsList = CommandParser.getOption(input);
+        List<IOption> optionsList = getOptionList(CommandParser.getOption(input), colName);
 
         printLog("sColName: " + sColName + ", colVal: " + colVal
                 + ", optionsList: " + Arrays.toString(optionsList.toArray()));
@@ -144,7 +146,7 @@ public class CommandHandler {
         String sModifyColName = CommandParser.getColumnData(input).get(2);
         IColumn modifyColName = getColumnType(sModifyColName);
         String modifyColVal = CommandParser.getColumnData(input).get(3);
-        List<String> optionsList = CommandParser.getOption(input);
+        List<IOption> optionsList = getOptionList(CommandParser.getOption(input), searchColName);
 
         printLog("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal
                 + ", sModifyColName: " + sModifyColName + ", modifyColVal: " + modifyColVal
@@ -178,6 +180,65 @@ public class CommandHandler {
             default:
                 throw new IllegalArgumentException("Cannot parse column type from input: " + sColName);
         }
+    }
+
+    private List<IOption> getOptionList(List<String> optionStringList, IColumn column ) {
+        List<IOption> optionTypeList = new ArrayList<IOption>();
+
+        for (String optionString : optionStringList) {
+            if (optionString.equals("")) {
+                optionTypeList.add(new EmptyOption());
+                continue;
+            }
+
+            if (optionString.equals("-p")) {
+                optionTypeList.add(new PrintOption());
+                continue;
+            }
+
+            if (optionString.equals("-f")) {
+                optionTypeList.add(new FirstNameOption());
+                continue;
+            }
+
+            if (optionString.equals("-l")) {
+                if (column instanceof ColumnName){
+                    optionTypeList.add(new LastNameOption());
+                    continue;
+                }
+
+                if (column instanceof ColumnPhoneNum){
+                    optionTypeList.add(new LastNumberOption());
+                    continue;
+                }
+            }
+
+            if (optionString.equals("-m")) {
+                if (column instanceof ColumnPhoneNum){
+                    optionTypeList.add(new MiddleNumberOption());
+                    continue;
+                }
+
+                if (column instanceof ColumnBirthday){
+                    optionTypeList.add(new BirthMonthOption());
+                    continue;
+                }
+            }
+
+            if (optionString.equals("-y")) {
+                optionTypeList.add(new BirthYearOption());
+                continue;
+            }
+
+            if (optionString.equals("-d")) {
+                optionTypeList.add(new BirthDayOption());
+                continue;
+            }
+
+            throw new IllegalArgumentException("Cannot parse option type from input: " + optionString);
+        }
+
+        return optionTypeList;
     }
 
     private void printLog(String log) {
