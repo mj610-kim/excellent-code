@@ -5,9 +5,7 @@
 
 name: Integration test
 
-on:
-  pull_request:
-    types: [opened, edited, reopened]
+on: [pull_request]
 
 jobs:
   run_test_cases:
