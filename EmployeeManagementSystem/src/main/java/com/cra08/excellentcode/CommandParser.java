@@ -16,7 +16,6 @@ public class CommandParser {
     }
 
     public static String getCommand(String cmdLine) throws IllegalArgumentException {
-
         String cmd = parseCommandLine(cmdLine)[CMD_POS];
 
         if (!isValidCommand(cmd)) {
@@ -44,7 +43,6 @@ public class CommandParser {
     }
 
     public static Employee getEmployee(String cmdLine) {
-
         String[] cmd = parseCommandLine(cmdLine);
 
         final int employeeVarCnt = 6;
@@ -64,13 +62,18 @@ public class CommandParser {
         return employee;
     }
 
-    public static boolean isValidDataLength(String[] cmd, int validLength) {
-        return cmd.length == validLength;
-    }
-
     public static ArrayList<String> getColumnData(String cmdLine) {
-
         String[] cmd = parseCommandLine(cmdLine);
+
+        final int cmdOptionLen = OPT3_POS + 1;
+        final int oneColumnDataLen = cmdOptionLen + 2;
+        final int twoColumnDataLen = cmdOptionLen + 4;
+        boolean validDataLength = isValidDataLength(cmd, oneColumnDataLen)
+                                    || isValidDataLength(cmd, twoColumnDataLen);
+        if (!validDataLength) {
+            throw new IllegalArgumentException("Invalid Data Length");
+        }
+
         ArrayList<String> columnData = new ArrayList<>(Arrays.asList(cmd).subList(OPT3_POS + 1, cmd.length));
 
         columnData.set(0, removeBlanks(columnData.get(0)));
@@ -84,6 +87,12 @@ public class CommandParser {
     public static String removeBlanks(String str) {
         return str.replaceAll("\\p{Z}", "");
     }
+
+
+    public static boolean isValidDataLength(String[] cmd, int validLength) {
+        return cmd.length == validLength;
+    }
+
 }
 
 
