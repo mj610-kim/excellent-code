@@ -1,0 +1,33 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Integration test
+
+on:
+  pull_request:
+    types: [opened, edited, reopened]
+
+jobs:
+  run_test_cases:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: '8'
+        cache: 'gradle'
+    - name: Run test (sample)
+      working-directory: ./EmployeeManagementSystem
+      run: ./gradlew run --no-daemon --args='input_20_20.txt output_actual_20_20.txt'
+    - name: Verify result (sample)
+      uses: LouisBrunner/diff-action@v0.1.2
+      with:
+        old: ./EmployeeManagementSystem/output_expected_20_20.txt
+        new: ./EmployeeManagementSystem/output_actual_20_20.txt
+        mode: addition
+        tolerance: same
+        output: out_20_20.txt
