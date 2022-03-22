@@ -19,84 +19,86 @@ import java.util.List;
 
 public class CommandHandler {
 
-    private static final String INPUT_FILE = "input.txt";
-    private static final String OUTPUT_FILE = "output.txt";
+    private static final boolean IS_DEBUG_MODE = true;
 
-    private Database database;
+    private final String inputFile;
+    private final String outputFile;
+    private final Database database;
 
-    public CommandHandler() {
-        database = new Database();
+    public CommandHandler(String inputFile, String outputFile) {
+        this.inputFile = inputFile;
+        this.outputFile = outputFile;
+        this.database = new Database();
     }
 
-    public void run() throws IOException {
-        InputReader localFileReader = new LocalFileReader(INPUT_FILE);
+    public void run() {
+        InputReader localFileReader = new LocalFileReader(inputFile);
         localFileReader.open();
 
-        OutputWriter localFileWriter = new LocalFileWriter(OUTPUT_FILE);
+        OutputWriter localFileWriter = new LocalFileWriter(outputFile);
         localFileWriter.open();
 
         try {
-            while (true) {
-                String input = localFileReader.getNextLine();
-                if (input == null) {
-                    localFileReader.close();
-                    localFileWriter.close();
-                    return;
-                }
-                String output = handleInput(input);
-                System.out.println("output: " + output);
-                if (output != null) {
-                    localFileWriter.setNextLine(output);
-                }
-            }
-        } catch (Exception e) {
+            runCore(localFileReader, localFileWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
             localFileReader.close();
             localFileWriter.close();
         }
     }
 
-    private String handleInput(String input) {
-        System.out.println("input: " + input);
-        String cmd = CommandParser.getCommand(input);
-        System.out.println("cmd: " + cmd);
+    public void runCore(InputReader inputReader, OutputWriter outputWriter) throws IOException {
+        while (true) {
+            String input = inputReader.getNextLine();
+            if (input == null) {
+                return;
+            }
 
-        String result = null;
+            String output = handleInput(input);
+            printLog("output: " + output);
+            if (output != null) {
+                outputWriter.setNextLine(output);
+            }
+        }
+    }
+
+    private String handleInput(String input) {
+        printLog("input: " + input);
+        String cmd = CommandParser.getCommand(input);
+
         switch (cmd) {
             case "ADD":
                 handleAddCmd(input);
-                break;
+                return null;
             case "DEL":
-                result = handleDelCmd(input);
-                break;
+                return handleDelCmd(input);
             case "SCH":
-                result = handleSchCmd(input);
-                break;
+                return handleSchCmd(input);
             case "MOD":
-                result = handleModCmd(input);
-                break;
-
+                return handleModCmd(input);
+            default:
+                throw new IllegalArgumentException("Unexpected cmd...");
         }
-
-        return result;
     }
 
     private void handleAddCmd(String input) {
         Employee employee = CommandParser.getEmployee(input);
-        System.out.println("employee: " + employee);
+        printLog("cmd: ADD, employee: " + employee);
         database.add(employee);
     }
 
     private String handleDelCmd(String input) {
         String cmd = CommandParser.getCommand(input);
         List<String> employees = CommandParser.getColumnData(input);
-        System.out.println("employee: " + Arrays.toString(employees.toArray()));
+        printLog("cmd: DEL, employees: " + Arrays.toString(employees.toArray()));
 
         String sColName = CommandParser.getColumnData(input).get(0);
         IColumn colName = getColumnType(sColName);
         String colVal = CommandParser.getColumnData(input).get(1);
         List<String> optionsList = CommandParser.getOption(input);
 
-        System.out.println("sColName: " + sColName + ", colVal: " + colVal
+        printLog("sColName: " + sColName + ", colVal: " + colVal
                 + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToDelete = database.sch(colName, colVal);
@@ -112,14 +114,14 @@ public class CommandHandler {
     private String handleSchCmd(String input) {
         String cmd = CommandParser.getCommand(input);
         List<String> employees = CommandParser.getColumnData(input);
-        System.out.println("employee: " + Arrays.toString(employees.toArray()));
+        printLog("cmd: SCH, employees: " + Arrays.toString(employees.toArray()));
 
         String sColName = CommandParser.getColumnData(input).get(0);
         IColumn colName = getColumnType(sColName);
         String colVal = CommandParser.getColumnData(input).get(1);
         List<String> optionsList = CommandParser.getOption(input);
 
-        System.out.println("sColName: " + sColName + ", colVal: " + colVal
+        printLog("sColName: " + sColName + ", colVal: " + colVal
                 + ", optionsList: " + Arrays.toString(optionsList.toArray()));
 
         List<Employee> employeesToSearch = database.sch(colName, colVal);
@@ -132,7 +134,7 @@ public class CommandHandler {
     private String handleModCmd(String input) {
         String cmd = CommandParser.getCommand(input);
         List<String> employees = CommandParser.getColumnData(input);
-        System.out.println("employee: " + Arrays.toString(employees.toArray()));
+        printLog("cmd: MOD, employees: " + Arrays.toString(employees.toArray()));
 
         String sSearchColName = CommandParser.getColumnData(input).get(0);
         IColumn searchColName = getColumnType(sSearchColName);
@@ -142,7 +144,7 @@ public class CommandHandler {
         String modifyColVal = CommandParser.getColumnData(input).get(3);
         List<String> optionsList = CommandParser.getOption(input);
 
-        System.out.println("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal
+        printLog("sSearchColName: " + sSearchColName + ", searchColVal: " + searchColVal
                 + ", searchColName: " + sModifyColName + ", sModifyColName: " + modifyColVal
                 + ", modifyColVal: " + Arrays.toString(optionsList.toArray()));
 
@@ -172,6 +174,12 @@ public class CommandHandler {
                 return new ColumnCerti();
             default:
                 throw new IllegalArgumentException("Cannot parse column type from input: " + sColName);
+        }
+    }
+
+    private void printLog(String log) {
+        if (IS_DEBUG_MODE) {
+            System.out.println(log);
         }
     }
 }
