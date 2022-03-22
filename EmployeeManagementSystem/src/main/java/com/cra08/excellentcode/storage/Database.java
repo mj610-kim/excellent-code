@@ -41,7 +41,7 @@ public class Database {
         List<Employee> resultEmployeeList = new ArrayList<>();
 
         for (Map.Entry<String, Employee> employee : employeeDbLinkedHash.entrySet()) {
-            if (colName.contains(employee.getValue(), colValue)) {
+            if (colName.matched(employee.getValue(), colValue)) {
                 resultEmployeeList.add(employee.getValue());
             }
         }
@@ -87,22 +87,17 @@ class SortEmployeeNum<T> implements Comparator<T> {
         String year1 = ((String) o1).substring(0, 2);
         String year2 = ((String) o2).substring(0, 2);
 
-        String num1 = ((String) o1).substring(3);
-        String num2 = ((String) o2).substring(3);
+        int num1 = Integer.parseInt(((String) o1).substring(2));
+        int num2 = Integer.parseInt(((String) o2).substring(2));
 
-        String calcYear1 = (year1.compareTo("21") <= 0) ?
-                String.valueOf(Integer.parseInt(year1) + 31) :
-                String.valueOf(Integer.parseInt(year1) - 69);
-        String calcYear2 = (year2.compareTo("21") <= 0) ?
-                String.valueOf(Integer.parseInt(year2) + 31) :
-                String.valueOf(Integer.parseInt(year2) - 69);
+        int calcYear1 = (year1.compareTo("21") <= 0) ?
+                Integer.parseInt(year1) + 31 : Integer.parseInt(year1) - 69;
+        int calcYear2 = (year2.compareTo("21") <= 0) ?
+                Integer.parseInt(year2) + 31 : Integer.parseInt(year2) - 69;
 
-        if (calcYear1.compareTo(calcYear2) < 0) {
-            return -1;
-        } else if (calcYear1.compareTo(calcYear2) == 0) {
-            return num1.compareTo(num2);
-        } else {
-            return 1;
+        if (calcYear1 == calcYear2) {
+            return num1 - num2;
         }
+        return calcYear1 - calcYear2;
     }
 }

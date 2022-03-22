@@ -3,6 +3,11 @@ package com.cra08.excellentcode.column;
 import com.cra08.excellentcode.Employee;
 
 public class ColumnName implements IColumn {
+    private static ColumnName columnName = new ColumnName();
+
+    public static ColumnName getInstance() {
+        return columnName;
+    }
 
     @Override
     public Employee setValue(Employee employee, String value) {
@@ -11,7 +16,8 @@ public class ColumnName implements IColumn {
     }
 
     @Override
-    public boolean contains(Employee employee, String value) {
-        return employee.getName().contains(value);
+    public boolean matched(Employee employee, String value) {
+        return employee.getName().equals(value) || employee.getFirstName().equals(value)
+                || employee.getLastName().equals(value);
     }
 }
