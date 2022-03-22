@@ -3,6 +3,7 @@ package com.cra08.excellentcode.io;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -100,6 +101,11 @@ public class LocalFileReaderTest {
             assertEquals(line, localFileReaderUnderTest.getNextLine());
         }
         assertNull(localFileReaderUnderTest.getNextLine());
+    }
+
+    @Test
+    public void getNextLine_beforeOpening() {
+        assertThrows(NullPointerException.class, () -> localFileReaderUnderTest.getNextLine());
     }
 
     private void createTemporaryInputFile(String folderName, String fileName) throws IOException {

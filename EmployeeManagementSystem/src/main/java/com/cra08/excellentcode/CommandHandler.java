@@ -5,8 +5,10 @@ import com.cra08.excellentcode.io.InputReader;
 import com.cra08.excellentcode.io.LocalFileReader;
 import com.cra08.excellentcode.io.LocalFileWriter;
 import com.cra08.excellentcode.io.OutputWriter;
+import com.cra08.excellentcode.optionhandler.OptionHandler;
 import com.cra08.excellentcode.storage.Database;
 import java.io.IOException;
+
 
 public class CommandHandler {
 
@@ -15,6 +17,8 @@ public class CommandHandler {
     private final String inputFile;
     private final String outputFile;
     private final Database database;
+
+    private static final OptionHandler optionHandler = new OptionHandler();
 
     public CommandHandler(String inputFile, String outputFile) {
         this.inputFile = inputFile;
@@ -56,6 +60,7 @@ public class CommandHandler {
 
     private String handleInput(String input) {
         printLog("input: " + input);
+
         String sCmd = CommandParser.getCommand(input);
         Cmd cmd = Cmd.valueOf(sCmd);
         return cmd.run(input, database);

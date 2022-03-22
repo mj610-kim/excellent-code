@@ -6,8 +6,8 @@ import com.cra08.excellentcode.column.IColumn;
 import java.util.*;
 
 public class Database {
-    private TreeMap<String, Employee> employeeDbTree;
-    private LinkedHashMap<String, Employee> employeeDbLinkedHash;
+    private final TreeMap<String, Employee> employeeDbTree;
+    private final LinkedHashMap<String, Employee> employeeDbLinkedHash;
     private boolean isAddFinished = false;
 
     public Database() {
@@ -30,10 +30,15 @@ public class Database {
 
     public boolean del(List<Employee> employeeList) {
         setAddFinished();
+
+        int removedCnt = 0;
         for (Employee employee : employeeList) {
-            employeeDbLinkedHash.remove(employee.getEmployeeNum());
+            if (employeeDbLinkedHash.containsKey(employee.getEmployeeNum())) {
+                employeeDbLinkedHash.remove(employee.getEmployeeNum());
+                removedCnt++;
+            }
         }
-        return true;
+        return employeeList.size() == removedCnt;
     }
 
     public List<Employee> sch(IColumn colName, String colValue) {
@@ -51,25 +56,26 @@ public class Database {
 
     public boolean mod(List<Employee> employeeList, IColumn newColName, String newColValue) {
         setAddFinished();
+
+        int modCnt = 0;
         for (Employee employee : employeeList) {
-            employeeDbLinkedHash.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
+            if (employeeDbLinkedHash.containsKey(employee.getEmployeeNum())) {
+                employeeDbLinkedHash.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
+                modCnt++;
+            }
         }
-        return true;
+        return employeeList.size() == modCnt;
     }
 
     public List<String> print() {
         List<String> printResult = new ArrayList<>();
-        Iterator<String> keyIterator = employeeDbTree.keySet().iterator();
-
-        while (keyIterator.hasNext()) {
-            printResult.add(keyIterator.next().toString());
-        }
-
+        printResult.addAll(employeeDbTree.keySet());
         return printResult;
     }
 
-    public void copyDB() {
+    public boolean copyDB() {
         employeeDbLinkedHash.putAll(employeeDbTree);
+        return employeeDbTree.size() == employeeDbLinkedHash.size();
     }
 
     private void setAddFinished() {
