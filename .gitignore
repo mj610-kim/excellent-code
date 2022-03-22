@@ -139,3 +139,6 @@ gradle-app.setting
 # ==================================
 
 EmployeeManagementSystem/.idea/jarRepositories.xml
+EmployeeManagementSystem/input.txt
+EmployeeManagementSystem/output.txt
+
