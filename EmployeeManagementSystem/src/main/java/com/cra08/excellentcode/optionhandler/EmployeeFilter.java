@@ -1,17 +1,19 @@
 package com.cra08.excellentcode.optionhandler;
 
 import com.cra08.excellentcode.Employee;
+import com.cra08.excellentcode.option.IOption;
+
 import java.util.List;
 
-public abstract class EmployeeFilter {
+public class EmployeeFilter {
 
-    protected Filter<Employee> optionFilter;
+    private Filter<Employee> optionFilter;
 
     public EmployeeFilter() {
         optionFilter = new Filter<Employee>();
     }
 
-    public abstract boolean checkValidOption(String option);
-
-    public abstract List<Employee> process(String option, List<Employee> employeeList, String condition);
+    public List<Employee> process(IOption option, List<Employee> employeeList) {
+        return optionFilter.filter(employeeList, option);
+    }
 }
