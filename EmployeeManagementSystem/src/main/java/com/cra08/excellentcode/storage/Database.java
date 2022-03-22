@@ -6,8 +6,9 @@ import com.cra08.excellentcode.column.IColumn;
 import java.util.*;
 
 public class Database {
-    TreeMap<String, Employee> employeeDB;
-    LinkedHashMap<String, Employee> employeeDBPerf;
+    private TreeMap<String, Employee> employeeDB;
+    private LinkedHashMap<String, Employee> employeeDBPerf;
+    private boolean isAddFinished = false;
 
     public Database() {
         employeeDBPerf = new LinkedHashMap<>();
@@ -28,16 +29,18 @@ public class Database {
     }
 
     public boolean del(List<Employee> employeeList) {
+        setAddFinished();
         for (Employee employee : employeeList) {
-            employeeDB.remove(employee.getEmployeeNum());
+            employeeDBPerf.remove(employee.getEmployeeNum());
         }
         return true;
     }
 
     public List<Employee> sch(IColumn colName, String colValue) {
+        setAddFinished();
         List<Employee> resultEmployeeList = new ArrayList<>();
 
-        for (Map.Entry<String, Employee> employee : employeeDB.entrySet()) {
+        for (Map.Entry<String, Employee> employee : employeeDBPerf.entrySet()) {
             if (colName.contains(employee.getValue(), colValue)) {
                 resultEmployeeList.add(employee.getValue());
             }
@@ -47,8 +50,9 @@ public class Database {
     }
 
     public boolean mod(List<Employee> employeeList, IColumn newColName, String newColValue) {
+        setAddFinished();
         for (Employee employee : employeeList) {
-            employeeDB.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
+            employeeDBPerf.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
         }
         return true;
     }
@@ -63,9 +67,16 @@ public class Database {
         return true;
     }
 
-    public void copyDB() {
+    private void copyDB() {
         for (Map.Entry<String, Employee> employee : employeeDB.entrySet()) {
             employeeDBPerf.put(employee.getKey(), employee.getValue());
+        }
+    }
+
+    private void setAddFinished() {
+        if (!isAddFinished) {
+            isAddFinished = true;
+            copyDB();
         }
     }
 }
