@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="EmployeeManagementSystem:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/EmployeeManagementSystem_jar</output-path>
+    <root id="archive" name="EmployeeManagementSystem.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="EmployeeManagementSystem.main" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy-agent/1.12.7/8b23f1a6afed2b787102a3625c1cfddc56b17a73/byte-buddy-agent-1.12.7.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.objenesis/objenesis/3.2/7fadf57620c8b8abdf7519533e5527367cb51f09/objenesis-3.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.mockito/mockito-core/4.3.1/b35c904ac218ca833935e5fccc0aaaaf38225de3/mockito-core-4.3.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.hamcrest/hamcrest-core/1.3/42a25dc3219429f0e5d060061f71acb49bf010a0/hamcrest-core-1.3.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/junit/junit/4.13.2/8ac9e16d933b6fb43bc7f576336b8f4d7eb5ba12/junit-4.13.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.bytebuddy/byte-buddy/1.12.7/e2a08a3fae74979ee76a8dd67cfd37958874e0fb/byte-buddy-1.12.7.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

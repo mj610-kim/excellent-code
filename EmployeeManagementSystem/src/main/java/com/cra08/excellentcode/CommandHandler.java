@@ -19,7 +19,7 @@ import java.util.List;
 
 public class CommandHandler {
 
-    private static final boolean IS_DEBUG_MODE = true;
+    private static final boolean IS_DEBUG_MODE = false;
 
     private final String inputFile;
     private final String outputFile;
