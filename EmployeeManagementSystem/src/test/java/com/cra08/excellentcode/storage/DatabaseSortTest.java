@@ -67,7 +67,37 @@ public class DatabaseSortTest {
         assertTrue(db.add(mockEmployee2));
         assertTrue(db.add(mockEmployee3));
         assertTrue(db.add(mockEmployee4));
-        db.sort();
+        db.print();
         assertEquals(4, db.getDatabaseSize());
+    }
+
+    @Test
+    public void addMaxDataTest() {
+        for (int i = 0; i < 100000; i++) {
+            String employeeNum = String.valueOf(21000000 + i);
+            db.add(new Employee(employeeNum, "TTT KKK", "CL2",
+                    "010-1234-5678", "19900101", "PRO"));
+        }
+        assertEquals(100000, db.getDatabaseSize());
+    }
+
+    @Test
+    public void addMaxDataTimeoutTest() {
+        long startTime = System.currentTimeMillis();
+        addMaxDataTest();
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime - startTime);
+        assertTrue(1000 > endTime - startTime);
+    }
+
+    @Test
+    public void copyDBTest() {
+        addMaxDataTest();
+
+        long startTime = System.currentTimeMillis();
+        db.copyDB();
+        long endTime = System.currentTimeMillis();
+        System.out.println(endTime - startTime);
+        assertTrue(1000 > endTime - startTime);
     }
 }

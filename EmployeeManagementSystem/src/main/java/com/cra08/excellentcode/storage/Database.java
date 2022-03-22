@@ -6,13 +6,11 @@ import com.cra08.excellentcode.column.IColumn;
 import java.util.*;
 
 public class Database {
-
-    private HashMap<String, Employee> unsortedEmployeeDB;
     TreeMap<String, Employee> employeeDB;
+    LinkedHashMap<String, Employee> employeeDBPerf;
 
     public Database() {
-        unsortedEmployeeDB = new HashMap<>();
-        //employeeDB = new TreeMap<>();
+        employeeDBPerf = new LinkedHashMap<>();
         employeeDB = new TreeMap<>(new SortEmployeeNum<>());
     }
 
@@ -21,6 +19,10 @@ public class Database {
     }
 
     public boolean add(Employee employee) {
+        if (employee == null) {
+            throw new NullPointerException("employee object is null...");
+        }
+
         employeeDB.put(employee.getEmployeeNum(), employee);
         return true;
     }
@@ -45,18 +47,13 @@ public class Database {
     }
 
     public boolean mod(List<Employee> employeeList, IColumn newColName, String newColValue) {
-        if (newColValue.equals("FB NTAWR")) {
-            System.out.println(employeeDB);
-        }
         for (Employee employee : employeeList) {
             employeeDB.put(employee.getEmployeeNum(), newColName.setValue(employee, newColValue));
         }
         return true;
     }
 
-    public boolean sort() {
-        System.out.println("sort");
-
+    public boolean print() {
         Iterator<String> keyIterator = employeeDB.keySet().iterator();
 
         while (keyIterator.hasNext()) {
@@ -64,6 +61,12 @@ public class Database {
         }
 
         return true;
+    }
+
+    public void copyDB() {
+        for (Map.Entry<String, Employee> employee : employeeDB.entrySet()) {
+            employeeDBPerf.put(employee.getKey(), employee.getValue());
+        }
     }
 }
 

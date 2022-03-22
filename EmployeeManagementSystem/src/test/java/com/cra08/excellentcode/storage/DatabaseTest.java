@@ -3,6 +3,7 @@ package com.cra08.excellentcode.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.openMocks;
 
@@ -63,7 +64,7 @@ public class DatabaseTest {
         when(mockEmployee2.getCerti()).thenReturn("ADV");
 
         when(mockColumnEmployeeNum.contains(mockEmployee1, "18050301")).thenReturn(true);
-        when(mockColumnName.contains(mockEmployee1, "KYUMOK KIM")).thenReturn(true);
+
         when(mockColumnCl.contains(mockEmployee1, "CL2")).thenReturn(true);
         when(mockColumnPhoneNum.contains(mockEmployee1, "010-9777-6055")).thenReturn(true);
         when(mockColumnBirthday.contains(mockEmployee1, "19980906")).thenReturn(true);
@@ -74,7 +75,7 @@ public class DatabaseTest {
     public void addTest() {
         assertTrue(db.add(mockEmployee1));
         assertTrue(db.add(mockEmployee2));
-        assertTrue(db.sort());
+        assertTrue(db.print());
         assertEquals(2, db.getDatabaseSize());
     }
 
@@ -86,9 +87,19 @@ public class DatabaseTest {
     }
 
     @Test
+    public void addTest_NullCase() {
+        assertTrue(db.add(mockEmployee1));
+        assertTrue(db.add(mockEmployee2));
+
+        assertThrows(NullPointerException.class, () -> db.add(null));
+        assertEquals(2, db.getDatabaseSize());
+    }
+
+    @Test
     public void delTest() {
         addTest();
 
+        when(mockColumnName.contains(mockEmployee1, "KYUMOK KIM")).thenReturn(true);
         List<Employee> schResult = db.sch(mockColumnName, "KYUMOK KIM");
         assertEquals(1, schResult.size());
 
