@@ -3,11 +3,23 @@ package com.cra08.excellentcode.option;
 import com.cra08.excellentcode.Employee;
 import com.cra08.excellentcode.column.ColumnBirthday;
 import com.cra08.excellentcode.column.IColumn;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BirthYearOption extends IOption {
+
+    public static Map<String, BirthYearOption> sMe = new HashMap<String, BirthYearOption>();
+
     private String birthYear;
 
-    public BirthYearOption(String birthYear) {
+    public static BirthYearOption getInstance(String birthYear) {
+        if (!sMe.containsKey(birthYear)) {
+            sMe.put(birthYear, new BirthYearOption(birthYear));
+        }
+        return sMe.get(birthYear);
+    }
+
+    private BirthYearOption(String birthYear) {
         this.birthYear = birthYear;
     }
 

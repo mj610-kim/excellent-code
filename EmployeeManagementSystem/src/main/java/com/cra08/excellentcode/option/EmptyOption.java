@@ -5,6 +5,14 @@ import com.cra08.excellentcode.column.IColumn;
 
 public class EmptyOption extends IOption {
 
+    private static final EmptyOption sMe = new EmptyOption();
+
+    public static EmptyOption getInstance() {
+        return sMe;
+    }
+
+    private EmptyOption() {}
+
     @Override
     public int compareTo(Employee o) {
         return 0;
