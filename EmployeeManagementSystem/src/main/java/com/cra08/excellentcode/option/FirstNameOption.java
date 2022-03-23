@@ -3,11 +3,23 @@ package com.cra08.excellentcode.option;
 import com.cra08.excellentcode.Employee;
 import com.cra08.excellentcode.column.ColumnName;
 import com.cra08.excellentcode.column.IColumn;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FirstNameOption extends IOption {
+
+    public static Map<String, FirstNameOption> sMe = new HashMap<String, FirstNameOption>();
+
     private String firstName;
 
-    public FirstNameOption(String firstName) {
+    public static FirstNameOption getInstance(String firstName) {
+        if (!sMe.containsKey(firstName)) {
+            sMe.put(firstName, new FirstNameOption(firstName));
+        }
+        return sMe.get(firstName);
+    }
+
+    private FirstNameOption(String firstName) {
         this.firstName = firstName;
     }
 
