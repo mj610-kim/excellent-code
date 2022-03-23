@@ -1,5 +1,7 @@
 package com.cra08.excellentcode;
 
+import com.cra08.excellentcode.datatype.Cmd;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,10 +28,8 @@ public class CommandParser {
     }
 
     public static boolean isValidCommand(String cmd) {
-        List<String> validCommands = Arrays.asList("ADD", "DEL", "SCH", "MOD");
-        return validCommands.stream().anyMatch(s -> s.equals(cmd));
+        return Arrays.stream(Cmd.values()).anyMatch(s -> s.name().equals(cmd));
     }
-
 
     public static ArrayList<String> getOption(String cmdLine) {
         ArrayList<String> options = new ArrayList<>(Arrays.asList(parseCommandLine(cmdLine))
